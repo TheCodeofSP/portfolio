@@ -1,343 +1,570 @@
 {
+  "ui": {
+    "loading": "Chargement du contenu...",
+    "errorPrefix": "Erreur :"
+  },
   "home": {
-    "title": "Sandrine PHAM",
-    "subtitle": "Développeuse web",
-    "content": "Avec une approche full code, je crée et développe des applications web sur-mesure, optimisées, maintenables et alignées avec les objectifs de vos projets.",
-    "accroche": "Prêts à concrétiser vos Ambitions ?",
-    "slogan": "Coder avec précision,",
-    "slogan2": "créer avec intuition. "
+    "seo": {
+      "title": "The Code of SP — Développeuse web freelance | Création de sites web sur-mesure",
+      "description": "Sandrine, développeuse web freelance. Je conçois des sites web sur-mesure, modernes et performants, pensés pour valoriser ton activité et répondre à tes besoins."
+    },
+    "eyebrow": "Créer un site web clair, crédible et adapté à ton projet",
+    "title": "Sandrine, Développeuse web freelance | Création de sites web sur-mesure",
+    "subtitle": "Je conçois des interfaces web modernes, structurées et pensées pour valoriser ton activité.",
+    "content": "Je t’accompagne dans la création de sites et d’interfaces web sur-mesure, avec une attention particulière portée à la lisibilité, à l’expérience utilisateur et à la cohérence globale du projet.",
+    "accroche": "Un projet web à construire ensemble ?",
+    "slogan": "Code tes AMBITIONS !",
+    "cta": {
+      "label": "Discutons de ton projet",
+      "href": "/contact",
+      "note": "Site vitrine, interface web ou besoin sur-mesure : construisons une solution claire, adaptée et durable."
+    },
+    "secondaryCta": {
+      "label": "Voir les projets",
+      "href": "/projects"
+    },
+    "highlights": {
+      "title": "Quelques repères",
+      "cards": [
+        {
+          "number": "10+",
+          "title": "Projets conçus et développés",
+          "description": "Des réalisations menées de la structure à l’interface, pour créer des expériences web lisibles, utiles et cohérentes.",
+          "ariaLabel": "Plus de dix projets conçus et développés"
+        },
+        {
+          "number": "3",
+          "title": "Projets récents représentatifs",
+          "description": "Des projets professionnels et personnels qui reflètent ma manière actuelle de concevoir un site ou une application web.",
+          "ariaLabel": "Trois projets récents représentatifs"
+        },
+        {
+          "number": "5",
+          "title": "Technologies clés",
+          "description": "HTML, CSS/SCSS, JavaScript, React et APIs pour construire des interfaces modernes, évolutives et adaptées à des besoins concrets.",
+          "ariaLabel": "Cinq technologies clés maîtrisées"
+        }
+      ]
+    },
+    "process": {
+      "eyebrow": "Process de collaboration",
+      "title": "Un projet structuré, de l’idée à la mise en ligne",
+      "intro": "Je travaille avec un cadre clair pour que chaque étape soit comprise, validée et utile à l’avancement de ton projet.",
+      "ctaNote": "De la première prise de contact jusqu’à la livraison, tu sais où on va et comment on y va.",
+      "steps": [
+        {
+          "number": "01",
+          "title": "Découverte",
+          "description": "Premier échange, analyse du besoin et call découverte pour comprendre ton projet, tes objectifs et tes priorités."
+        },
+        {
+          "number": "02",
+          "title": "Cadrage",
+          "description": "Je définis le périmètre du projet, les pages, les fonctionnalités, le planning et les conditions de collaboration."
+        },
+        {
+          "number": "03",
+          "title": "Préparation",
+          "description": "On pose des bases solides avec la collecte des contenus, l’arborescence, la navigation et la structure SEO."
+        },
+        {
+          "number": "04",
+          "title": "Création",
+          "description": "Je conçois l’univers visuel puis je développe un site responsive, cohérent et pensé pour l’utilisateur."
+        },
+        {
+          "number": "05",
+          "title": "Vérification",
+          "description": "Le site est testé, ajusté et validé pour assurer une expérience fluide et professionnelle."
+        },
+        {
+          "number": "06",
+          "title": "Mise en ligne",
+          "description": "Je mets le site en ligne, je te transmets les accès et je clôture le projet proprement."
+        }
+      ]
+    },
+    "trust": {
+      "eyebrow": "Un cadre rassurant",
+      "items": [
+        "Réponse sous 24 à 48h ouvrées",
+        "Des échanges clairs à chaque étape",
+        "Un site sur-mesure pensé pour ton besoin"
+      ]
+    },
+    "availability": {
+      "eyebrow": "Disponibilité actuelle",
+      "status": "Disponible pour de nouveaux projets",
+      "details": "Je peux actuellement étudier de nouvelles demandes et voir avec toi si le projet correspond à mon planning et à ton besoin.",
+      "meta": [
+        "Réponse sous 24 à 48h ouvrées",
+        "Premier échange pour cadrer le besoin",
+        "Planning confirmé avant démarrage"
+      ]
+    }
   },
-
-  "highlights": {
-    "title": "En quelques chiffres",
-    "cards": [
-      {
-        "number": "1+",
-        "title": "Année d'expérience front-end",
-        "description": "Une pratique quotidienne du développement pour concevoir des interfaces fiables et performantes.",
-        "ariaLabel": "Plus d'une année d'expérience en développement front-end"
-      },
-      {
-        "number": "10",
-        "title": "Projets réalisés",
-        "description": "Des solutions conçues avec précision, sens du détail et souci constant de l’utilisateur.",
-        "ariaLabel": "Dix projets réalisés"
-      },
-      {
-        "number": "5",
-        "title": "Technologies maîtrisées",
-        "description": "Des outils modernes — HTML, CSS/SCSS, JavaScript, React, APIs — pour créer des interfaces durables.",
-        "ariaLabel": "Cinq technologies maîtrisées"
-      }
-    ]
-  },
-
   "about": {
-    "title": "À propos de moi",
-    "subtitle": "De la logistique au développement web",
+    "seo": {
+      "title": "À propos — Sandrine PHAM | Développeuse web freelance",
+      "description": "Découvre le parcours, la méthode de travail et l’approche de Sandrine PHAM, développeuse web freelance spécialisée dans la création de sites web sur-mesure, structurés et pensés en collaboration."
+    },
+    "title": "À propos",
+    "subtitle": "Une approche structurée, collaborative et pensée pour des projets web sur-mesure",
     "sections": [
       {
-        "subtitle": "Mon histoire",
+        "subtitle": "Mon parcours",
+        "intro": "Je suis Sandrine, développeuse web freelance.",
+        "highlight": "Forte de 10 ans d’expérience en supply chain et logistique dans des environnements exigeants, j’apporte à chaque projet web rigueur, organisation et sens des priorités.",
         "content": [
-          "Je suis Sandrine Pham,",
-          "Après mes études dans le transport et la logistique, j’ai rapidement intégré mon premier poste dès l’obtention de ma licence, et j’y ai développé une solide expertise en supply chain et approvisionnement dans des environnements variés — industriel, aéronautique et BTP.",
-          "Avec le temps, j’ai souhaité donner une nouvelle orientation à ma carrière pour l’aligner avec mes passions : la créativité, la rigueur et la résolution de problèmes.",
-          "J’ai consacré un an à réfléchir, entreprendre un bilan de compétences et explorer mes envies professionnelles. Cela m’a naturellement menée vers le développement web, un domaine stimulant et en constante évolution.",
-          "Le développement web est devenu une évidence : une discipline exigeante, dynamique et ouverte à tous les secteurs, où je peux créer, apprendre et évoluer selon mes ambitions.",
-          "Aujourd’hui, je suis développeuse front-end, et je m’épanouis pleinement en créant des interfaces fiables, élégantes et intuitives, en collaborant et en progressant chaque jour."
+          "Le développement web s’est imposé à moi comme un métier à la fois logique, créatif et concret, où chaque projet demande de comprendre un besoin, de construire une solution et de la faire évoluer avec justesse.",
+          "Aujourd’hui, je conçois des interfaces claires, modernes et cohérentes, avec une attention particulière portée à la structure, à l’expérience utilisateur et à la qualité du rendu."
         ]
       },
       {
-        "subtitle": "Ma philosophie",
+        "subtitle": "Ma méthode de travail",
         "content": [
-          "Créer pour les autres est ma motivation principale. J’aime comprendre une vision, la challenger et la transformer en un projet concret et utile.",
-          "La rigueur reste essentielle, mais le web y ajoute une dimension passionnante : la liberté d’innover, d’apprendre et de créer sans limites.",
-          "Je place une grande importance sur l’organisation, la clarté des process et la collaboration, en m’inspirant des méthodes agiles et du Kanban pour assurer un suivi transparent et une création de valeur continue.",
-          "Ma philosophie est simple : travailler sérieusement, créer avec intention, et chercher chaque jour à faire mieux qu’hier."
-        ],
-        "philosophyPoints": [
+          "Je travaille dans une logique de collaboration continue : on pose ensemble les bases du projet, on clarifie les objectifs, puis on avance étape par étape.",
+          "J’utilise une approche inspirée du Kanban, car elle permet de garder un cadre clair tout en laissant de la place aux ajustements. Rien n’est figé trop tôt : le projet évolue, s’affine et se construit avec méthode.",
+          "Cette manière de travailler permet d’avoir une vision plus fluide de l’avancement, de mieux prioriser et de garder un échange simple et transparent du début à la fin.",
+          "Mon objectif n’est pas seulement de développer un site, mais de construire avec toi une solution web cohérente, utile et adaptée à ton univers."
+        ]
+      },
+      {
+        "subtitle": "Mes commandements",
+        "intro": "Quelques règles simples qui guident ma manière de travailler — entre sérieux, curiosité… et une petite tradition personnelle.",
+        "commandments": [
           {
-            "label": "Rigueur & Clarté",
-            "description": "Concevoir des interfaces fiables, élégantes et structurées, pensées pour durer."
+            "title": "🧠 L’IA restera un outil",
+            "description": "Elle peut accélérer certaines tâches ou ouvrir des pistes, mais les décisions, la réflexion et la cohérence d’un projet doivent toujours rester humaines."
           },
           {
-            "label": "Création & Adaptabilité",
-            "description": "Réaliser chaque projet avec intention et flexibilité, guidée par la curiosité et l’innovation."
+            "title": "🤝 Respect et honnêteté seront non négociables",
+            "description": "Une collaboration réussie repose sur des échanges clairs, une communication simple et une relation de confiance."
           },
           {
-            "label": "Collaboration Authentique",
-            "description": "Avancer ensemble avec transparence, respect et ambition, pour un travail harmonieux et efficace."
+            "title": "🚀 Curiosité et progression guideront le travail",
+            "description": "Chercher à comprendre, apprendre en continu et améliorer les choses fait partie intégrante du métier."
           },
           {
-            "label": "Amélioration Continue",
-            "description": "Toujours apprendre, expérimenter et progresser, avec enthousiasme et motivation."
+            "title": "🍔 Chaque projet livré devra être célébré",
+            "description": "Parce qu’un projet terminé mérite toujours un moment de satisfaction… et parfois un Happy Meal."
+          },
+          {
+            "title": "🏆 Les jouets Happy Meal deviendront des trophées",
+            "description": "Une tradition personnelle un peu étrange, mais qui rappelle que chaque projet mené à bien est une victoire."
+          }
+        ]
+      },
+      {
+        "subtitle": "Pour mieux me connaître",
+        "intro": "Au-delà de ma présentation, ces trois espaces permettent de découvrir différentes facettes de mon univers : mon quotidien de développeuse, ce qui m’inspire en dehors du code et l’ensemble de mon parcours professionnel.",
+        "links": [
+          {
+            "title": "Le quotidien",
+            "subtitle": "INSTAGRAM",
+            "description": "Je partage les coulisses de mon activité : mon apprentissage du développement web, mes réflexions sur le métier et les petites victoires du quotidien.",
+            "label": "📸 Découvrir les coulisses",
+            "url": "https://instagram.com/thecodeofsp",
+            "type": "instagram"
+          },
+          {
+            "title": "Hors écran",
+            "subtitle": "QUIZ",
+
+            "description": "Un format ludique pour découvrir mes centres d’intérêt, mes inspirations et ce qui nourrit ma curiosité en dehors du développement.",
+            "label": "🎯 Faire le quiz",
+            "url": "/quiz",
+            "type": "quiz"
+          },
+          {
+            "title": "Le parcours",
+            "subtitle": "LINKEDIN",
+            "description": "Tu peux y retrouver l’ensemble de mon parcours professionnel, y compris mes expériences avant le développement web et l’évolution de mon chemin.",
+            "label": "💼 Voir mon parcours complet",
+            "url": "https://www.linkedin.com/in/sandrinepham69132b145/",
+            "type": "linkedin"
           }
         ]
       }
     ]
   },
-
-  "experience": {
-    "title": "Expériences professionnelles",
-    "subtitle": "Retour sur mes expériences professionnelles",
-    "content": [
+  "contact": {
+    "seo": {
+      "title": "Contact — Sandrine PHAM | Développeuse web freelance",
+      "description": "Contacte Sandrine PHAM, développeuse web freelance, pour discuter de la création de ton site web, d’un projet sur-mesure ou d’une collaboration."
+    },
+    "hero": {
+      "pageTitle": "Contact",
+      "title": "Parlons de ton projet",
+      "paragraphs": [
+        "Tu as un site vitrine à créer, une interface à développer ou un projet web à faire évoluer ? Écris-moi via ce formulaire.",
+        "J’accorde une attention particulière à chaque demande, avec une approche claire, structurée et collaborative."
+      ]
+    },
+    "form": {
+      "name": {
+        "label": "Nom",
+        "placeholder": "Ton nom"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "ton@email.com"
+      },
+      "subject": {
+        "label": "Sujet",
+        "placeholder": "Sujet de ton message"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Décris-moi ton besoin, ton projet ou ta demande..."
+      },
+      "privacy": {
+        "labelBefore": "J’ai lu la ",
+        "linkLabel": "politique de confidentialité",
+        "linkUrl": "/privacy",
+        "labelAfter": " et j’accepte que mes données soient utilisées pour traiter ma demande."
+      },
+      "submit": {
+        "idle": "Envoyer le message",
+        "loading": "Envoi en cours..."
+      },
+      "hint": "Réponse généralement rapide et personnalisée."
+    },
+    "success": {
+      "pageTitle": "Contact",
+      "title": "Merci pour ton message ✨",
+      "message": "J’ai bien reçu ta demande. Je te répondrai dès que possible."
+    },
+    "validation": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "privacy": "Confidentialité"
+    }
+  },
+  "skills": {
+    "seo": {
+      "title": "Compétences — Sandrine PHAM | Développeuse web freelance",
+      "description": "Découvre les compétences de Sandrine PHAM, développeuse web freelance : création de sites web, front-end React, intégration, accessibilité, SEO, APIs et montée en compétences full-stack JavaScript."
+    },
+    "title": "Compétences",
+    "subtitle": "Des compétences techniques au service de sites web clairs, modernes, évolutifs et pensés pour des besoins concrets",
+    "intro": [
+      "Je conçois des interfaces web modernes, accessibles et cohérentes, avec une attention particulière portée à la structure, à l’expérience utilisateur et à la qualité du rendu.",
+      "Mon approche repose sur un socle front-end solide, enrichi par une montée en compétences full-stack JavaScript pour mieux comprendre et construire un projet web dans son ensemble."
+    ],
+    "sections": [
       {
-        "title": "Assistante d’achats / Approvisionneuse",
-        "company": "Actemium",
-        "logo": "/images/logo/Actemium.svg",
-        "companyUrl": "https://www.actemium.fr/",
-        "lieu": "Laxou (54), FR",
-        "period": "Avril 2022 - Décembre 2022",
-        "tasks": [
-          "Optimisation des achats et négociation efficace avec les fournisseurs.",
-          "Mise en place de stratégies adaptées aux projets pour garantir la disponibilité des ressources.",
-          "Suivi précis des commandes pour assurer un flux logistique fluide."
+        "type": "services",
+        "title": "Ce que je peux réaliser",
+        "items": [
+          {
+            "title": "Sites vitrines sur-mesure",
+            "description": "Créer un site clair, moderne et cohérent avec ton identité pour présenter ton activité, tes services ou ton univers."
+          },
+          {
+            "title": "Interfaces web dynamiques",
+            "description": "Développer des interfaces fluides et interactives qui améliorent l’expérience utilisateur et rendent la navigation plus intuitive."
+          },
+          {
+            "title": "Intégration responsive",
+            "description": "Concevoir des pages adaptées à tous les écrans, du mobile au desktop, avec une attention portée à la lisibilité et au confort d’usage."
+          },
+          {
+            "title": "Connexion à des données et services",
+            "description": "Intégrer des APIs et afficher des contenus dynamiques pour enrichir les fonctionnalités d’un site ou d’une application web."
+          },
+          {
+            "title": "Évolution et optimisation",
+            "description": "Améliorer un projet existant, retravailler l’interface, clarifier la structure ou renforcer la qualité technique globale."
+          }
         ]
       },
       {
-        "title": "Gestionnaire de stock",
-        "company": "Gédimat",
-        "logo": "/images/logo/Gedimat.png",
-        "companyUrl": "https://www.gedimat.fr/",
-        "lieu": "Sorinières (44), FR",
-        "period": "Octobre 2020 - Août 2021",
-        "tasks": [
-          "Analyse proactive des inventaires pour anticiper les besoins.",
-          "Gestion logistique efficace et coordination entre sites.",
-          "Participation à l’amélioration continue des process pour plus d’efficacité."
+        "type": "stack",
+        "title": "Mon socle technique",
+        "items": [
+          {
+            "name": "HTML",
+            "logo": "/images/logo/HTML.svg",
+            "category": "Structure",
+            "description": "Pour construire des pages sémantiques, bien organisées et accessibles."
+          },
+          {
+            "name": "CSS",
+            "logo": "/images/logo/CSS.svg",
+            "category": "Mise en forme",
+            "description": "Pour créer des interfaces soignées, lisibles et adaptées à tous les supports."
+          },
+          {
+            "name": "SCSS",
+            "logo": "/images/logo/Sass.svg",
+            "category": "Organisation des styles",
+            "description": "Pour structurer les styles de manière modulaire, maintenable et évolutive."
+          },
+          {
+            "name": "JavaScript",
+            "logo": "/images/logo/Javascript.svg",
+            "category": "Interaction",
+            "description": "Pour rendre les interfaces dynamiques, réactives et plus vivantes."
+          },
+          {
+            "name": "React",
+            "logo": "/images/logo/ReactJS.svg",
+            "category": "Front-end",
+            "description": "Pour développer des interfaces modernes, composables et performantes."
+          },
+          {
+            "name": "Redux Toolkit",
+            "logo": "/images/logo/Redux.svg",
+            "category": "Gestion d’état",
+            "description": "Pour organiser les données d’une application de façon claire et robuste."
+          },
+          {
+            "name": "API REST",
+            "logo": "/images/logo/API.svg",
+            "category": "Communication",
+            "description": "Pour connecter un site ou une application à des services et des données externes."
+          },
+          {
+            "name": "Node.js",
+            "logo": "/images/logo/Node.js.svg",
+            "category": "Back-end",
+            "description": "Pour exécuter JavaScript côté serveur et participer à la construction d’une logique full-stack."
+          },
+          {
+            "name": "Express",
+            "logo": "/images/logo/Node.js.svg",
+            "category": "API back-end",
+            "description": "Pour créer des routes, structurer un serveur et construire des APIs simples et efficaces."
+          },
+          {
+            "name": "MongoDB",
+            "logo": "/images/logo/MongoDB.svg",
+            "category": "Base de données",
+            "description": "Pour stocker et manipuler des données avec une structure souple orientée documents."
+          },
+          {
+            "name": "Swagger",
+            "logo": "/images/logo/API.svg",
+            "category": "Documentation API",
+            "description": "Pour documenter les endpoints et clarifier le fonctionnement d’une API."
+          },
+          {
+            "name": "SEO",
+            "logo": "/images/logo/SEO.svg",
+            "category": "Visibilité",
+            "description": "Pour poser de bonnes bases techniques et éditoriales en faveur du référencement naturel."
+          },
+          {
+            "name": "Accessibilité",
+            "logo": "/images/logo/Accessibility.svg",
+            "category": "Expérience utilisateur",
+            "description": "Pour rendre le web plus clair, plus confortable et plus utilisable pour tous."
+          },
+          {
+            "name": "Tests unitaires",
+            "logo": "/images/logo/TestUnitaire.svg",
+            "category": "Qualité",
+            "description": "Pour sécuriser certaines logiques et renforcer la fiabilité du code."
+          }
         ]
       },
       {
-        "title": "Approvisionneuse région",
-        "company": "Point P",
-        "logo": "/images/logo/PointP.png",
-        "companyUrl": "https://www.pointp.fr/",
-        "lieu": "Vertou (44), FR",
-        "period": "Janvier 2020 - Octobre 2020",
-        "tasks": [
-          "Gestion des approvisionnements gros œuvre avec rigueur et précision.",
-          "Analyse des besoins pour éviter les ruptures et garantir la satisfaction client.",
-          "Interface efficace entre les équipes ventes, achats et fournisseurs."
+        "type": "tools",
+        "title": "Outils que j’utilise",
+        "items": [
+          {
+            "name": "Git",
+            "logo": "/images/logo/Git.svg"
+          },
+          {
+            "name": "GitHub",
+            "logo": "/images/logo/GitHub.svg"
+          },
+          {
+            "name": "GitHub Pages",
+            "logo": "/images/logo/GithubPages.svg"
+          },
+          {
+            "name": "Vercel",
+            "logo": "/images/logo/Vercel.svg"
+          },
+          {
+            "name": "VS Code",
+            "logo": "/images/logo/VSCode.svg"
+          },
+          {
+            "name": "Figma",
+            "logo": "/images/logo/Figma.svg"
+          },
+          {
+            "name": "Canva",
+            "logo": "/images/logo/Canva.svg"
+          },
+          {
+            "name": "Postman",
+            "logo": "/images/logo/Postman.svg"
+          },
+          {
+            "name": "Lighthouse",
+            "logo": "/images/logo/Lighthouse.svg"
+          },
+          {
+            "name": "Google Analytics",
+            "logo": "/images/logo/GoogleAnalytics.svg"
+          },
+          {
+            "name": "Chrome DevTools",
+            "logo": "/images/logo/ChromeDevtools.svg"
+          }
         ]
       },
       {
-        "title": "Supply Officer A350",
-        "company": "Airbus",
-        "logo": "/images/logo/Airbus.png",
-        "companyUrl": "https://www.airbus.com/en",
-        "lieu": "Bouguenais (44), FR",
-        "period": "Novembre 2017 - Décembre 2019",
-        "tasks": [
-          "Assurer la disponibilité des pièces pour l’A350 avec une coordination efficace.",
-          "Optimiser les arrêts de chaîne et garantir la continuité de la production.",
-          "Coordination fluide entre fournisseurs et équipes multi-métiers."
+        "type": "methods",
+        "title": "Ma manière de travailler",
+        "items": [
+          {
+            "title": "Approche collaborative",
+            "description": "Définir les bases du projet ensemble, clarifier les attentes et avancer avec une vision partagée."
+          },
+          {
+            "title": "Logique Kanban",
+            "description": "Visualiser les étapes, prioriser, ajuster et faire évoluer le projet sans figer trop tôt les décisions."
+          },
+          {
+            "title": "Responsive & mobile first",
+            "description": "Penser l’interface pour qu’elle soit claire, lisible et efficace sur tous les formats."
+          },
+          {
+            "title": "Qualité technique",
+            "description": "Chercher un bon équilibre entre clarté du code, maintenabilité, performance et expérience utilisateur."
+          },
+          {
+            "title": "Veille continue",
+            "description": "Rester attentive aux évolutions du web pour enrichir ma pratique et proposer des solutions actuelles."
+          }
         ]
       },
       {
-        "title": "Agent logistique",
-        "company": "Saint-Gobain Pam",
-        "logo": "/images/logo/SG.png",
-        "companyUrl": "https://www.saint-gobain.com/fr/",
-        "lieu": "Foug (54), FR",
-        "period": "Janvier 2014 - Octobre 2017",
-        "tasks": [
-          "Gestion proactive des flux et stocks pour une logistique optimisée.",
-          "Mise en place de process pour minimiser les flux parasites.",
-          "Suivi efficace de l’activité des sous-traitants."
-        ]
-      },
-      {
-        "title": "Chargée du service distribution",
-        "company": "Primagaz",
-        "logo": "/images/logo/Primagaz.png",
-        "companyUrl": "https://www.primagaz.fr/",
-        "lieu": "Vandoeuvre (54), FR",
-        "period": "Juillet 2012 - Décembre 2013",
-        "tasks": [
-          "Création et suivi efficace des tournées chauffeurs.",
-          "Analyse des consommations pour optimiser les approvisionnements.",
-          "Gestion proactive des points de rupture pour garantir la satisfaction client."
-        ]
-      },
-      {
-        "title": "Agent d’exploitation et service relation clientèle",
-        "company": "Norbert Dentressangle Distribution",
-        "logo": "/images/logo/ND.svg",
-        "companyUrl": "https://www.dentressangle.com/fr/",
-        "lieu": "Rosières-aux-salines (54), FR",
-        "period": "Septembre 2011 - Juin 2012",
-        "tasks": [
-          "Déploiement efficace des activités en Europe avec suivi rigoureux.",
-          "Suivi et analyse des KPI clients pour améliorer les performances.",
-          "Optimisation des tournées des chauffeurs pour un service fluide et fiable."
+        "type": "diplomas",
+        "title": "Formations & certifications",
+        "items": [
+          {
+            "title": "Formation back-end JavaScript",
+            "year": "2026",
+            "niveau": "Certification",
+            "institution": "Learning Campus",
+            "logo": "/images/logo/Node.js.svg",
+            "lieux": "Full remote, France",
+            "qualification": "Montée en compétences sur Node.js, Express, MongoDB, création d’API REST et documentation Swagger.",
+            "icon": "FaCode"
+          },
+          {
+            "title": "Titre Professionnel Développeur Web et Web Mobile",
+            "year": "2025",
+            "niveau": "Bac +2",
+            "institution": "OpenClassrooms",
+            "logo": "/images/logo/OC.svg",
+            "institutionUrl": "https://openclassrooms.com/",
+            "lieux": "Full remote, France",
+            "qualification": "Création d’applications web et mobiles, intégration, accessibilité, SEO",
+            "icon": "FaCode"
+          },
+          {
+            "title": "Titre Professionnel Responsable production en transport logistique",
+            "year": "2012",
+            "niveau": "Bac +3",
+            "institution": "Institut Supérieur du Transport et de la Logistique International",
+            "logo": "/images/logo/Isteli.png",
+            "institutionUrl": "https://www.isteli.fr/",
+            "lieux": "Jarville-la-Malgrange (54), France",
+            "qualification": "Optimisation de la chaîne logistique et management d’équipe",
+            "icon": "FaWarehouse"
+          }
         ]
       }
     ]
   },
-
-  "skills": {
-    "title": "Mes Compétences",
-    "subtitle": "Technologies, outils et méthodes que je maîtrise",
-    "subtitle1": "Langages & Frameworks",
-    "subtitle2": "Outils & Environnements de développement",
-    "subtitle3": "Méthodologies & Approches",
-    "subtitle4": "Diplômes & Certifications",
-    "content": {
-      "languagesFrameworks": [
-        {
-          "name": "HTML",
-          "logo": "/images/logo/HTML.svg",
-          "level": 95,
-          "description": "Structurer et créer des interfaces accessibles et sémantiques."
+  "projectsPage": {
+    "seo": {
+      "title": "Projets web — Sandrine PHAM | Développeuse front-end freelance",
+      "description": "Découvre les projets web de Sandrine PHAM : sites et applications réalisés en JavaScript et React, orientés expérience utilisateur, performance et SEO."
+    },
+    "title": "Projets",
+    "subtitle": "Une sélection de projets pour illustrer mon approche du web : clarté, expérience utilisateur, structure et adaptation au besoin",
+    "intro": [
+      "Chaque projet présenté ici illustre une facette de ma pratique : répondre à un besoin concret, construire une interface cohérente et faire dialoguer esthétique, lisibilité et logique technique.",
+      "Les projets professionnels montrent ma capacité à concevoir pour un vrai contexte d’usage. Les projets personnels prolongent cette démarche avec plus d’exploration. Les projets de formation permettent de suivre l’évolution de mes bases et de ma méthode."
+    ],
+    "categories": {
+      "professionnels": {
+        "title": "Projets professionnels",
+        "description": "Des réalisations conçues pour répondre à un besoin réel. Ces projets illustrent ma capacité à structurer un site ou une application, concevoir une interface claire et proposer une solution web adaptée à un objectif concret."
+      },
+      "personnels": {
+        "title": "Projets personnels",
+        "description": "Des projets qui me permettent d’explorer de nouvelles idées, d’expérimenter des architectures ou d’améliorer mes méthodes de développement. Ils reflètent mon évolution et ma curiosité technique."
+      },
+      "formations": {
+        "title": "Projets de formation",
+        "description": "Des projets réalisés dans le cadre de mon apprentissage du développement web. Ils constituent le socle technique sur lequel s’appuient mes réalisations actuelles."
+      }
+    },
+    "filters": {
+      "title": "Filtrer les projets"
+    },
+    "toggle": {
+      "show": "Voir les projets de formation",
+      "hide": "Masquer les projets de formation"
+    },
+    "messages": {
+      "loading": "Chargement des projets...",
+      "empty": "Aucun projet ne correspond aux filtres sélectionnés."
+    },
+    "filterPanel": {
+      "ariaLabel": "Filtres de projets",
+      "eyebrow": "Navigation intelligente",
+      "title": "Trouver les projets les plus pertinents",
+      "subtitle": "Filtre les réalisations selon les besoins, la stack ou les outils utilisés pour parcourir plus facilement les projets qui t’intéressent.",
+      "summary": {
+        "label": "Résultats",
+        "foundSingular": "projet trouvé",
+        "foundPlural": "projets trouvés",
+        "totalPrefix": "sur",
+        "totalSuffix": "projets"
+      },
+      "activeFilters": {
+        "title": "Filtres actifs",
+        "reset": "Tout réinitialiser",
+        "removeAriaLabel": "Retirer le filtre"
+      },
+      "categories": {
+        "impactTags": {
+          "label": "Besoins / objectifs",
+          "helper": "Ce que le projet aide à résoudre ou améliorer"
         },
-        {
-          "name": "CSS / Animations",
-          "logo": "/images/logo/CSS.svg",
-          "level": 90,
-          "description": "Maîtrise des animations et transitions CSS pour créer des interfaces fluides, dynamiques et modernes."
+        "stackPrincipale": {
+          "label": "Stack principale",
+          "helper": "Technologies principales utilisées"
         },
-        {
-          "name": "SCSS / Animations",
-          "logo": "/images/logo/Sass.svg",
-          "level": 90,
-          "description": "Utilisation avancée de SCSS pour structurer, optimiser et animer les interfaces avec une approche modulaire et maintenable."
+        "languages": {
+          "label": "Langages",
+          "helper": "Langages utilisés dans le projet"
         },
-
-        {
-          "name": "JavaScript",
-          "logo": "/images/logo/Javascript.svg",
-          "level": 90,
-          "description": "Créer des fonctionnalités dynamiques et réactives."
+        "frameworks": {
+          "label": "Frameworks / bibliothèques",
+          "helper": "Outils front ou back mobilisés"
         },
-        {
-          "name": "ReactJS",
-          "logo": "/images/logo/ReactJS.svg",
-          "level": 85,
-          "description": "Développer des interfaces performantes et modulaires."
-        },
-
-        {
-          "name": "SEO",
-          "logo": "/images/logo/SEO.svg",
-          "level": 85,
-          "description": "Optimiser la visibilité"
-        },
-        {
-          "name": "Accessibilité",
-          "logo": "/images/logo/Accessibility.svg",
-          "level": 85,
-          "description": "Optimiser l’expérience utilisateur pour tous."
-        },
-
-        {
-          "name": "API REST",
-          "logo": "/images/logo/API.svg",
-          "level": 85,
-          "description": "Intégrer et exploiter des données avec efficacité."
-        },
-        {
-          "name": "Redux Toolkit",
-          "logo": "/images/logo/Redux.svg",
-          "level": 75,
-          "description": "Gérer l’état des applications avec rigueur et clarté."
-        },
-        {
-          "name": "Test unitaire",
-          "logo": "/images/logo/TestUnitaire.svg",
-          "level": 70,
-          "description": "Assurer la fiabilité et la robustesse du code."
-        },
-        {
-          "name": "Node.js",
-          "logo": "/images/logo/Node.js.svg",
-          "level": 20,
-          "description": "Faire executer JavaScript côté serveur pour créer des applications performantes"
-        },
-        {
-          "name": "MongoDB",
-          "logo": "/images/logo/MongoDB.svg",
-          "level": 20,
-          "description": "Stocker et gérer des données de manière flexible grâce à une structure orientée documents."
+        "outilsDev": {
+          "label": "Outils de développement",
+          "helper": "Outils utilisés pendant la réalisation"
         }
-      ],
-      "toolsEnvironment": [
-        { "name": "Git", "logo": "/images/logo/Git.svg" },
-        { "name": "GitHub", "logo": "/images/logo/GitHub.svg" },
-        { "name": "Github Pages", "logo": "/images/logo/GithubPages.svg" },
-        { "name": "Vercel", "logo": "/images/logo/Vercel.svg" },
-        { "name": "VS Code", "logo": "/images/logo/VSCode.svg" },
-        { "name": "Figma", "logo": "/images/logo/Figma.svg" },
-        { "name": "Canva", "logo": "/images/logo/Canva.svg" },
-        { "name": "Postman", "logo": "/images/logo/Postman.svg" },
-        { "name": "Lighthouse", "logo": "/images/logo/Lighthouse.svg" },
-        {
-          "name": "Google Analytics",
-          "logo": "/images/logo/GoogleAnalytics.svg"
-        },
-        { "name": "Chrome Devtools", "logo": "/images/logo/ChromeDevtools.svg" }
-      ],
-      "methodologies": [
-        {
-          "name": "Méthode Agile",
-          "description": "Organiser le développement de façon flexible et itérative pour s’adapter rapidement aux besoins."
-        },
-        {
-          "name": "Scrum",
-          "description": "Structurer le travail en sprints pour livrer de la valeur régulièrement et de manière collaborative."
-        },
-        {
-          "name": "Kanban",
-          "description": "Optimiser le flux de travail grâce à une visualisation claire des tâches et des priorités."
-        },
-
-        {
-          "name": "Responsive / Mobile First",
-          "description": "Créer des interfaces adaptées à tous les supports et résolutions."
-        },
-        {
-          "name": "Système de veille",
-          "description": "Se tenir à jour et anticiper les évolutions technologiques."
-        },
-        {
-          "name": "Marketing digital",
-          "description": "Appliquer des bonnes pratiques pour maximiser visibilité et impact."
-        }
-      ],
-      "diplomas": [
-        {
-          "title": "Titre Professionnel Développeur Web et Web Mobile",
-          "niveau": "Bac +2",
-          "institution": "OpenClassrooms",
-          "logo": "/images/logo/OC.svg",
-          "institutionUrl": "https://openclassrooms.com/",
-          "lieux": "Full remote, France",
-          "qualification": "Création d'applications web et mobiles, intégration, accessibilité, SEO",
-          "year": "2025",
-          "icon": "FaCode"
-        },
-        {
-          "title": "Titre Professionnel Responsable production en transport logistique",
-          "niveau": "Bac +3",
-          "institution": "Institut Supérieur du Transport Et de la Logistique International",
-          "logo": "/images/logo/Isteli.png",
-          "institutionUrl": "https://www.isteli.fr/",
-          "lieux": "Jarville-la-Malgrange (54), France",
-          "qualification": "Optimisation de la chaîne logistique et management d’équipe",
-          "year": "2012",
-          "icon": "FaWarehouse"
-        },
-        {
-          "title": "Titre Professionnel Technicien supérieur du transport et de la logistique",
-          "niveau": "Bac +3",
-          "institution": "Institut Supérieur du Transport Et de la Logistique International",
-          "logo": "/images/logo/Isteli.png",
-          "institutionUrl": "https://www.isteli.fr/",
-          "lieux": "Jarville-la-Malgrange (54), France",
-          "qualification": "Gestion professionnelle du transport et de la logistique",
-          "year": "2011",
-          "icon": "FaWarehouse"
-        }
-      ]
+      },
+      "tagAriaPrefix": "Filtrer par",
+      "categoryAriaPrefix": "Filtres",
+      "emptyCategory": "Aucun filtre disponible."
     }
   }
 }

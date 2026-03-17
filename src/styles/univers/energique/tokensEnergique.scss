@@ -23,8 +23,10 @@
   --tertiary-color: #e0e0e0; /* texte clair */
   --tertiary-color-rgb: 224, 224, 224;
 
-  --accent-color: #ffea00; /* jaune néon */
-  --accent-color-rgb: 255, 234, 0;
+  --accent-color: rgba(73, 213, 255, 1); /* jaune néon */
+  --accent-color-rgb: rgba(73, 213, 255, 1);
+
+  --accent-color2: rgb(255, 249, 73); /* jaune néon */
 
   --dark-color: black;
   --dark-color-rgb: 0, 0, 0;
@@ -54,7 +56,7 @@
   --color-main: #e0e0e0; /* vert électrique */
   --color-main-rgb: 0, 255, 0;
 
-  --background-card:#1a103d;
+  --background-card: #1a103d;
 
   /* =============================
       Footer
@@ -78,7 +80,7 @@
      ============================= */
   --shadow-light: 0 2px 8px rgba(255, 0, 255, 0.3);
   --shadow-medium: 0 4px 16px rgba(0, 255, 8, 0.3);
-  --shadow-heavy: 0 8px 32px rgba(255, 234, 0, 0.3);
+  --shadow-heavy: 0 8px 32px rgba(0, 247, 255, 0.3);
 
   /* =============================
      🌐 Styles globaux

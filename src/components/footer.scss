@@ -1,209 +1,246 @@
 @use "../styles/univers/foundation/foundation.scss" as f;
 
 /* =============================
-   🦶 FOOTER — Structure générale
+   FOOTER
 ============================= */
 .footer {
   position: relative;
-  box-sizing: border-box;
-  background-color: var(--primary-color);
-  color: var(--tertiary-color);
   z-index: 50;
-  padding: f.$spacing-l 0;
-  transition: background-color var(--transition-medium),
+  box-sizing: border-box;
+  background-color: var(--background-footer);
+  color: var(--color-footer);
+  transition:
+    background-color var(--transition-medium),
     color var(--transition-medium);
 
-  @media (max-width: f.$mobile) {
-    padding: f.$spacing-s 0;
-  }
-
-  /* --- Séparation visuelle en haut (dégradé dynamique) --- */
   &::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0 0 auto 0;
     width: 100%;
-    height: 3px;
+    height: 2px;
     background: linear-gradient(
       to right,
       var(--accent-color),
       var(--secondary-color)
     );
+    opacity: 0.95;
   }
 
   &__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 f.$spacing-m;
-  }
-
-  /* --- Titres et description --- */
-  &__title {
-    font-size: 1.6rem;
-    margin-bottom: f.$spacing-xs;
-    color: var(--tertiary-color);
-    font-family: var(--font-title);
-
-    @media (max-width: f.$mobile) {
-      margin-bottom: 0;
-    }
-  }
-
-  &__description {
-    font-size: 1rem;
-    color: var(--tertiary-color);
-    opacity: 0.95;
-    max-width: 600px;
-    margin: 0 auto 20px;
+    gap: f.$spacing-m;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: f.$spacing-s;
     text-align: center;
-    font-family: var(--font-body);
+  }
+
+  &__contact,
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    gap: f.$spacing-s;
+  }
+
+  &__eyebrow,
+  &__description,
+  &__rights {
+    margin: 0;
+    color: var(--color-footer);
+  }
+
+  &__eyebrow {
+    font-family: var(--font-subtitle);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.75;
+  }
+
+  &__title {
+    font-family: var(--font-title);
+    font-size: 1.35rem;
+    line-height: 1.15;
+    color: var(--accent-color);
   }
 
   &__subtitle {
-    color: var(--background-main);
-    text-align: center;
-    justify-items: center;
+    color: var(--accent-color);
 
     font-family: var(--font-title);
     font-size: 1.2rem;
-
-    @media (max-width: f.$mobile) {
-      margin-top: 0.5rem;
-      font-size: 1rem;
-    }
+    line-height: 1.3;
   }
 
-  /* --- Contenu principal --- */
-  &__content {
-    display: flex;
-    flex-direction: row;
+  &__description {
+    max-width: 560px;
+    margin-inline: auto;
+    font-size: 0.94rem;
+    line-height: 1.7;
+    opacity: 0.92;
+  }
+
+  &__logo-link {
+    display: inline-flex;
+    justify-content: center;
+  }
+
+  &__logo {
+    display: block;
+    margin: 0 auto 10px;
+  }
+
+  &__contact-block {
+    margin: 0;
+  }
+
+  &__contact-link {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: f.$spacing-m;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 999px;
+    transition:
+      color var(--transition-fast),
+      transform var(--transition-fast),
+      opacity var(--transition-fast),
+      background-color var(--transition-fast),
+      box-shadow var(--transition-fast);
 
-    @media (max-width: f.$mobile) {
-      justify-content: center;
-      gap: f.$spacing-xs;
-      flex-direction: column;
+    svg {
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+
+    &:hover,
+    &:focus-visible {
+      transform: translateY(-1px);
     }
   }
 
-  /* --- Sections --- */
-  &__section {
-    width: 100%;
-    max-width: 300px;
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      align-items: center;
-
-      li {
-        display: flex;
-        align-items: center;
-        gap: f.$spacing-xs;
-        justify-content: center;
-
-        svg {
-          font-size: 1rem;
-          color: var(--accent-color);
-          transition: color var(--transition-fast);
-        }
-
-        a {
-          color: var(--color-footer);
-          text-decoration: none;
-          transition: color var(--transition-fast);
-          font-size: 1.4rem;
-
-          @media (max-width: f.$mobile) {
-            font-size: 1rem;
-          }
-
-          &:hover {
-            color: var(--accent-color);
-          }
-        }
-      }
-    }
-  }
-
-  /* --- Icônes sociales --- */
   &__icons {
     display: flex;
-    gap: f.$spacing-m;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 0.9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: flex;
+    }
+  }
+
+  &__bottom {
+    align-items: center;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem 1rem;
 
     a {
-      font-size: 1.4rem;
-      transition: transform var(--transition-medium),
-        color var(--transition-medium);
-      color: var(--tertiary-color);
+      color: inherit;
+      text-decoration: none;
+      transition:
+        color var(--transition-fast),
+        opacity var(--transition-fast);
 
-      &:hover {
-        color: var(--accent-color);
+      &:hover,
+      &:focus-visible {
+        opacity: 0.75;
       }
     }
   }
 
-  /* --- Droits et mentions --- */
-  &__rights {
-    margin-top: f.$spacing-s;
-    font-size: 0.85rem;
-    opacity: 0.9;
-    text-align: center;
-    font-family: var(--font-subtitle);
-    color: var(--color-footer);
-    @media (max-width: f.$mobile) {
-      margin-top: 0;
-    }
+  &__copyright {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
   }
 
-  /* =============================
-     🎨 VARIATIONS PAR THÈME
+  &__rights {
+    font-family: var(--font-subtitle);
+    font-size: 0.84rem;
+    line-height: 1.5;
+    text-align: center;
+    opacity: 0.82;
+  }
+}
+
+/* =============================
+   TABLETTE
 ============================= */
+@media (min-width: 768px) {
+  .footer {
+    &__container {
+      flex-direction: row;
+      padding: f.$spacing-l f.$spacing-m;
+    }
 
-  /* =============================
-   🍁 THEME — ACCUEILLANT
-   ============================= */
+    &__title {
+      font-size: 1.6rem;
+    }
 
-  .theme-accueillant & {
+    &__description {
+      font-size: 0.98rem;
+    }
+
+    &__subtitle {
+      font-size: 1.5rem;
+    }
+
+    &__contact {
+      justify-content: center;
+      gap: f.$spacing-s;
+    }
+
+    &__links {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0;
+    }
+
+    &__bottom {
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+}
+
+/* =============================
+   THÈMES
+============================= */
+.theme-accueillant {
+  .footer {
     background-color: var(--background-footer);
     color: var(--color-footer);
 
-    &__title,
-    &__description {
-      color: var(--color-footer);
-    }
-
-    &__section ul li a {
-      color: var(--color-footer);
-
-      &:hover {
-        @include f.tag-hover-accueillant;
-      }
-    }
-
-    &__icons a {
-      color: var(--color-footer);
+    &__contact-link,
+    &__icons a,
+    &__rights,
+    &__links a {
       &:hover {
         @include f.tag-hover-accueillant;
       }
     }
   }
+}
 
-  /* =============================
-   ⚡️ THEME — ENERGIQUE
-   ============================= */
-
-  .theme-energique & {
+.theme-energique {
+  .footer {
     background-color: var(--background-footer);
     color: var(--tertiary-color);
 
@@ -216,44 +253,49 @@
       color: var(--primary-color);
     }
 
-    &__section ul li a,
-    &__icons a {
+    &__description,
+    &__contact-link,
+    &__rights {
       color: var(--tertiary-color);
-      &:hover {
-        @include f.hover-energique-tag;
-      }
+    }
+
+    &__icons a,
+    &__links a {
+      background: rgba(var(--primary-color-rgb), 0.06);
+    }
+
+    &__contact-link:hover,
+    &__icons a:hover,
+    &__links a:hover {
+      @include f.hover-energique-tag;
     }
   }
+}
 
-  /* =============================
-   ⚪ THEME — MINIMALISM
-   ============================= */
-
-  .theme-minimalism & {
-    background-color: var(--background-footer);
+.theme-minimaliste {
+  .footer {
     color: var(--color-footer);
 
     &__title,
-    &__description {
-      color: var(--accent-footer);
-    }
-
     &__subtitle {
-      text-decoration: underline;
+      color: var(--accent-color);
     }
 
-    &__section ul li a {
-      color: var(--color-footer);
+    &__description,
+    &__links {
+      color: var(--primary-color);
+    }
+
+    &__icons a,
+    &__rights,
+    &__links a {
       &:hover {
-        color: var(--accent-color);
+        @include f.tag-hover-minimalism;
       }
     }
 
-    &__icons a {
-      color: var(--color-footer);
-      &:hover {
-        color: var(--accent-color);
-      }
+    &__contact-link:hover {
+      @include f.tag-hover-minimalism;
     }
   }
 }

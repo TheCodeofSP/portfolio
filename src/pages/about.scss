@@ -1,9 +1,5 @@
 @use "../styles/univers/foundation/foundation.scss" as f;
 
-/* =============================
-   📄 ABOUT — Structure générale
-============================= */
-
 .about {
   width: 100%;
   display: flex;
@@ -12,129 +8,418 @@
 
   &__header {
     text-align: center;
-    margin-bottom: f.$spacing-s;
   }
 
-  &__story {
+  &__sections {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: f.$spacing-s;
+  }
+
+  &__article {
     position: relative;
-    padding: f.$spacing-s;
+    padding: f.$spacing-xs f.$spacing-m;
     border-radius: 8px;
     transform: translateY(20px);
-    transition: transform 0.6s ease-out;
+    transition:
+      transform 0.6s ease-out,
+      opacity 0.6s ease-out;
     text-align: justify;
 
     &.visible {
       transform: translateY(0);
+      opacity: 1;
     }
 
-    .about__points {
-      margin-top: f.$spacing-m;
-      display: flex;
-      flex-direction: column;
-      gap: f.$spacing-s;
+    .section-title {
+      margin-bottom: f.$spacing-s;
+    }
 
-      .about__point {
-        position: relative;
-        padding: f.$spacing-s;
-        border-left: none;
-        border-radius: 4px;
-        background: transparent;
+    p {
+      margin-bottom: f.$spacing-s;
+      line-height: 1.65;
+    }
+  }
 
-        strong {
-          font-family: var(--font-subtitle);
-        }
+  &__section-header {
+    margin-bottom: f.$spacing-s;
+  }
 
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 4px;
-          height: 100%;
-          border-radius: 4px 0 0 4px;
-        }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  &__intro {
+    font-weight: 600;
+  }
+
+  &__highlight {
+    padding: f.$spacing-s;
+    border-radius: 6px;
+    font-weight: 600;
+    line-height: 1.6;
+    margin-bottom: f.$spacing-m;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  &__commandments {
+    margin-top: f.$spacing-m;
+  }
+
+  &__points--commandments {
+    display: flex;
+    flex-direction: column;
+    gap: f.$spacing-m;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__point {
+    position: relative;
+    padding: f.$spacing-xs 0;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+
+    strong {
+      font-family: var(--font-subtitle);
+      font-size: 1.05rem;
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+    }
+
+    span {
+      line-height: 1.65;
+      font-size: 0.96rem;
+    }
+
+    &:hover {
+      transform: translateX(3px);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -#{f.$spacing-s};
+      left: 0;
+      width: 48px;
+      height: 2px;
+      opacity: 0.25;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .about {
+      &__points--commandments {
+        gap: f.$spacing-xs;
       }
+    }
+  }
+  /* LINKS */
+
+  &__links {
+    margin-top: f.$spacing-m;
+    display: flex;
+    flex-wrap: wrap;
+    gap: f.$spacing-m;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__link-card {
+    max-width: 64ch;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 220px;
+    padding: 1.3rem;
+    border-radius: 18px;
+    text-decoration: none;
+    overflow: hidden;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease,
+      background-color 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      transform: translateY(-4px);
+    }
+  }
+
+  &__link-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  &__link-card h3 {
+    margin: 0;
+    font-family: var(--font-title);
+    font-size: 1.22rem;
+    line-height: 1.15;
+  }
+
+  &__link-meta {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-subtitle);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.75;
+  }
+  &__link-icon {
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  &__link-description {
+    margin: 0;
+    font-size: 0.97rem;
+    line-height: 1.65;
+  }
+
+  &__link-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-subtitle);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+
+    &::after {
+      content: "→";
+      transition: transform 0.2s ease;
+    }
+  }
+
+  &__link-card:hover &__link-cta::after,
+  &__link-card:focus-visible &__link-cta::after {
+    transform: translateX(4px);
+  }
+}
+
+.about {
+  &__link-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  &__link-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    opacity: 0.9;
+  }
+}
+
+@media (min-width: 768px) {
+  .about {
+    &__links {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 }
 
-/* =============================
-     🎨 VARIATIONS PAR THÈME
-============================= */
+@media (min-width: 980px) {
+  .about {
+    &__links {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+}
+/* TABLETTE */
 
-/* =============================
-   🍁 THEME — ACCUEILLANT
-============================= */
+@media (min-width: 768px) {
+  .about__link-card {
+    flex: 1 1 calc(50% - #{f.$spacing-s});
+  }
+}
+
+/* DESKTOP */
+
+@media (min-width: 900px) {
+  .about__link-card {
+    flex: 1 1 calc(33.333% - #{f.$spacing-s});
+  }
+}
+
+/* ACCUEILLANT */
+
 .theme-accueillant {
-  .about__story {
+  .about__article {
     background-color: var(--background-paper);
+  }
 
-    .about__point {
-      background: rgba(var(--primary-color-rgb), 0.05);
+  .about__highlight {
+    background: rgba(var(--primary-color-rgb), 0.06);
+    color: var(--primary-color);
+  }
 
-      &::before {
-        background: linear-gradient(
-          to bottom,
-          var(--accent-color),
-          var(--secondary-color)
-        );
-      }
+  .about__point {
+    strong {
+      color: var(--primary-color);
+    }
 
-      strong {
-        color: var(--primary-color);
-      }
+    span {
+      color: var(--color-main);
+    }
+
+    &::after {
+      background: linear-gradient(to right, var(--accent-color), transparent);
+    }
+  }
+
+  .about__link-card {
+    background: var(--background-paper);
+    border: 1px solid rgba(var(--primary-color-rgb), 0.08);
+    box-shadow: var(--shadow-light);
+
+    &:hover,
+    &:focus-visible {
+      box-shadow: var(--shadow-medium);
+    }
+
+    h3,
+    .about__link-cta {
+      color: var(--primary-color);
+    }
+
+    .about__link-meta {
+      color: var(--secondary-color);
+    }
+
+    .about__link-description {
+      color: var(--color-main);
+    }
+    .about__link-icon {
+      color: var(--secondary-color);
     }
   }
 }
 
-/* =============================
-   ⚡️ THEME — ENERGIQUE
-============================= */
+/* ENERGIQUE */
+
 .theme-energique {
-  .about__story {
+  .about__article {
     background: rgba(var(--background-header-rgb), 0.2);
     box-shadow: var(--shadow-light);
+  }
 
-    .about__point {
-      background: var(--background-header);
+  .about__highlight {
+    background: rgba(var(--accent-color-rgb), 0.12);
+    color: var(--primary-color);
+  }
 
-      &::before {
-        background: linear-gradient(
-          to bottom,
-          var(--primary-color),
-          var(--accent-color)
-        );
-      }
+  .about__point {
+    strong {
+      color: var(--primary-color);
+    }
 
-      strong {
-        color: var(--primary-color);
-      }
+    span {
+      color: var(--color-main);
+    }
+
+    &::after {
+      background: linear-gradient(
+        to right,
+        var(--primary-color),
+        var(--accent-color)
+      );
+    }
+  }
+  .about__link-card {
+    background: var(--background-header);
+    border: 1px solid rgba(var(--primary-color-rgb), 0.18);
+    box-shadow: var(--shadow-light);
+
+    &:hover,
+    &:focus-visible {
+      box-shadow: var(--shadow-medium);
+    }
+
+    h3,
+    .about__link-cta {
+      color: var(--primary-color);
+    }
+
+    .about__link-meta {
+      color: var(--accent-color);
+    }
+
+    .about__link-description {
+      color: var(--color-main);
+    }
+    .about__link-icon {
+      color: var(--accent-color);
     }
   }
 }
+/* MINIMALISM */
 
-/* =============================
-   ⚪ THEME — MINIMALISM
-============================= */
 .theme-minimalism {
-  .about__story {
+  .about__article {
     background-color: var(--background-header);
     box-shadow: var(--shadow-light);
+  }
 
-    .about__point {
-      background: rgba(var(--secondary-color-rgb), 0.05);
+  .about__highlight {
+    background: var(--background-card);
+  }
 
-      &::before {
-        background: linear-gradient(
-          to bottom,
-          var(--secondary-color),
-          var(--accent-color)
-        );
-      }
+  .about__point {
+    strong {
+      color: var(--primary-color);
+    }
 
-      strong {
-        color: var(--primary-color);
-      }
+    span {
+      color: var(--color-main);
+    }
+
+    &::after {
+      background: rgba(var(--secondary-color-rgb), 0.4);
+    }
+  }
+  .about__link-card {
+    background: var(--background-header);
+    box-shadow: var(--shadow-heavy);
+
+    &:hover,
+    &:focus-visible {
+      box-shadow: var(--shadow-medium);
+    }
+
+    h3,
+    .about__link-cta {
+      color: var(--primary-color);
+    }
+
+    .about__link-meta {
+      color: var(--second-accent-color);
+    }
+
+    .about__link-description {
+      color: var(--color-main);
+    }
+
+    .about__link-icon {
+      color: var(--primary-color);
     }
   }
 }

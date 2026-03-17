@@ -45,12 +45,15 @@
   /* =============================
      Main (clair par défaut)
      ============================= */
-  --background-main: linear-gradient(
+  --background-main: #ffffff;
+
+  --background-main-degrade: linear-gradient(
     to bottom,
     #ffffff 20%,
     #dde1e4 50%,
     #000000 100%
   );
+
   --background-main-rgb: 247, 240, 240;
 
   --color-main: #555555;
@@ -70,7 +73,7 @@
   /* =============================
      Footer
      ============================= */
-  --background-footer: #000000;
+  --background-footer: #414040;
   --background-footer-rgb: 0, 0, 0;
 
   --color-footer: #ffffff;

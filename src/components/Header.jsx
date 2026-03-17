@@ -1,9 +1,10 @@
 import Navbar from "./Navbar.jsx";
+import { Link } from "react-router-dom";
 import "./header.scss";
 
-import logoAccueillant from "/images/logo/LogoAccueillant.svg";
-import logoMinimalism from "/images/logo/LogoMinimalism.svg";
-import logoEnergique from "/images/logo/LogoEnergique.svg";
+import logoAccueillant from "/images/logo/LogoBrown.svg";
+import logoMinimalism from "/images/logo/LogoBlack.svg";
+import logoEnergique from "/images/logo/LogoGreen.svg";
 
 const logos = {
   energique: logoEnergique,
@@ -11,33 +12,24 @@ const logos = {
   accueillant: logoAccueillant,
 };
 
-const Header = ({ theme, resetIntro = { resetIntro } }) => {
+const Header = ({ theme }) => {
   const logoSrc = logos[theme] || logos.accueillant;
 
   return (
-    <header className="header" role="banner">
-      <section className="header_container">
-        <button
-          onClick={resetIntro} // <-- ici on appelle resetIntro
-          className="header_logo-link"
-          aria-label="Retour à l’accueil"
-          style={{
-            background: "none",
-            border: "none",
-            padding: 0,
-            cursor: "pointer",
-          }}
-        >
+    <header className="header">
+      <div className="header__container">
+        <Link to="/" className="header__logo-link" aria-label="Retour à l’accueil">
           <img
             src={logoSrc}
-            alt={`Logo du thème ${theme}`}
-            className="header_logo"
+            alt="Sandrine Pham"
+            className="header__logo"
           />
-        </button>
+        </Link>
 
         <Navbar />
-      </section>
+      </div>
     </header>
   );
 };
+
 export default Header;

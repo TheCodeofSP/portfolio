@@ -1,99 +1,102 @@
 @use "../styles/univers/foundation/foundation.scss" as f;
 
-/* =======================================
-   STRUCTURE
-======================================= */
+.slogan-effect {
+  display: inline-flex;
+  max-width: 100%;
 
-.sloganEffect-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .sloganEffect-line {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--color-header);
-  }
-
-  /* Conteneur du texte + curseur */
-  .text-with-cursor {
-    display: inline-flex; /* 👈 le curseur s’aligne au dernier caractère */
+  &__line {
+    display: inline-flex;
     align-items: baseline;
-    white-space: pre-wrap; /* 👈 permet les retours à la ligne naturels */
+    flex-wrap: wrap;
+    white-space: normal;
+    word-break: break-word;
+    font-weight: 700;
   }
 
-  .cursor {
-    margin-left: 2px;
-    animation: blink 1s step-start infinite;
-    font-weight: bold;
+  &__text {
+    display: inline;
+  }
+
+  &__prompt {
+    margin-right: 0.4rem;
+    flex-shrink: 0;
+  }
+
+  &__cursor {
+    display: inline-block;
+    flex-shrink: 0;
+    animation: slogan-blink 1s steps(1) infinite;
   }
 }
 
-@keyframes blink {
+@keyframes slogan-blink {
   50% {
     opacity: 0;
   }
 }
 
-/* =======================================
-   THEMES
-======================================= */
-
-/* 🍁 ACCUEILLANT */
-.sloganEffect-container.accueillant {
-  .sloganEffect-line {
+/* ACCUEILLANT */
+.slogan-effect--accueillant {
+  .slogan-effect__line {
     font-family: var(--font-title);
+    color: var(--color-header);
   }
 
-  .cursor {
-    color: var(--primary-color);
+  .slogan-effect__cursor {
+    width: 2px;
+    height: 1em;
+    margin-left: 3px;
+    background-color: var(--primary-color);
+    border-radius: 1px;
   }
 }
 
-/* ⚡ ENERGIQUE */
-.sloganEffect-container.energique {
-  .sloganEffect-line {
+/* ENERGIQUE */
+.slogan-effect--energique {
+  .slogan-effect__line {
     font-family: "Share Tech Mono", monospace;
-    text-shadow: 0 0 5px var(--accent-color), 0 0 10px var(--accent-color),
-      0 0 15px var(--accent-color);
     color: var(--accent-color);
-    font-size: 1.5rem;
+    text-shadow:
+      0 0 5px var(--accent-color),
+      0 0 10px var(--accent-color);
 
     @include f.title-energique;
   }
 
-  .cursor {
-    display: none;
+  .slogan-effect__cursor {
+    width: 0.55em;
+    height: 0.9em;
+    margin-left: 2px;
+    background-color: var(--accent-color);
+    display: inline-block;
+
+    /* 🔥 le point clé */
+    vertical-align: text-bottom;
+
+    /* glow terminal */
+    box-shadow: 0 0 4px var(--accent-color);
   }
 }
 
-/* ⚪ MINIMALISM */
-.sloganEffect-container.minimalism {
-  .sloganEffect-line {
+/* MINIMALISM */
+.slogan-effect--minimalism {
+  .slogan-effect__line {
     font-family: var(--font-body);
-    animation: zoom-in 0.7s ease-out forwards;
+    color: var(--color-header);
+    animation: slogan-zoom-in 0.7s ease-out forwards;
   }
 
-  .cursor {
+  .slogan-effect__cursor {
     display: none;
   }
 }
 
-/* =======================================
-   ANIMATIONS
-======================================= */
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-@keyframes zoom-in {
+@keyframes slogan-zoom-in {
   0% {
     opacity: 0;
-    transform: scale(0.85);
+    transform: scale(0.92);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);

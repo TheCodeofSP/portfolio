@@ -1,0 +1,33 @@
+@use "../styles/univers/foundation/foundation.scss" as f;
+
+.legal {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.legal__container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: f.$spacing-m;
+}
+
+.legal__block {
+  display: flex;
+  flex-direction: column;
+  gap: f.$spacing-xs;
+
+  h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-family: var(--font-title);
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.65;
+    opacity: 0.92;
+  }
+}

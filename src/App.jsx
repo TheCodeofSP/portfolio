@@ -6,44 +6,31 @@ import "./app.scss";
 function App() {
   const [theme, setTheme] = useState(null);
   const [showIntro, setShowIntro] = useState(true);
-  const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
     const savedTheme = sessionStorage.getItem("theme");
+
     if (savedTheme) {
       setTheme(savedTheme);
-      setShowIntro(false); // passe direct si déjà choisi
+      setShowIntro(false);
     }
   }, []);
 
   const handleThemeSelect = (selectedTheme) => {
     setTheme(selectedTheme);
-
-    // Démarre l'animation fade-out
-    setAnimating(true);
-
-    // Ne supprime pas Intro immédiatement, attends la fin de l'animation
-    setTimeout(() => {
-      setShowIntro(false); // maintenant on retire le composant du DOM
-      setAnimating(false);
-    }, 700); // durée identique au fade-out CSS
+    setShowIntro(false);
   };
 
-  // Nouvelle fonction pour revenir à Intro
   const resetIntro = () => {
+    sessionStorage.removeItem("theme");
+    setTheme(null);
     setShowIntro(true);
-    setAnimating(true);
-    setTheme(null); // reset thème si besoin
-    setTimeout(() => {
-      setAnimating(false);
-    }, 1000);
   };
 
   if (showIntro) {
-    return <Intro onSelectTheme={handleThemeSelect} animating={animating} />;
+    return <Intro onSelectTheme={handleThemeSelect} />;
   }
 
-  // Passer resetIntro au Header via AppRouter ou directement
   return (
     <AppRouter theme={theme} setTheme={setTheme} resetIntro={resetIntro} />
   );

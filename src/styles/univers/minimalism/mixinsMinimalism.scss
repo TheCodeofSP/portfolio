@@ -39,6 +39,15 @@
   transform: scale(1.05);
 }
 
+@mixin tag-hover-minimalism {
+  background-color: transparent;
+  border-color: none;
+  color: var(--accent-color);
+  transform: scale(1.05);
+  transition: all var(--transition-fast);
+}
+
+
 @mixin transistion-minimalism {
   transition: transform var(--transition-medium),
     box-shadow var(--transition-medium),

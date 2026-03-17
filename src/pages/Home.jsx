@@ -1,115 +1,159 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import Slogan from "../components/Slogan.jsx";
 import HighLightCard from "../components/HighlightCard.jsx";
-import useEffectContent from "../hooks/useEffectContent.js";
-import HomeAccueillant from "/images/images/HomeAccueillant.webp";
-import HomeEnergique from "/images/images/HomeEnergique.webp";
-import HomeMinimalism from "/images/images/HomeMinimalism.webp";
-import Scotch from "/images/images/Scotch.webp";
-
+import ProcessSection from "../components/ProcessSection.jsx";
+import TrustStrip from "../components/TrustStrip.jsx";
+import AvailabilityCard from "../components/AvailabilityCard.jsx";
+import FeaturedProject from "../components/FeaturedProject.jsx";
+import useContent from "../hooks/useContent.js";
+import useProjects from "../hooks/useProjects.js";
 import "./home.scss";
 
 const Home = ({ theme }) => {
-  const homeImage =
-    {
-      accueillant: HomeAccueillant,
-      energique: HomeEnergique,
-      minimalism: HomeMinimalism,
-    }[theme] || HomeAccueillant;
+  const { content, loading, error } = useContent();
+  const {
+    projects,
+    loading: projectsLoading,
+    error: projectsError,
+  } = useProjects();
 
-  const { content, loading, error } = useEffectContent();
   const [showContent, setShowContent] = useState(false);
-  const [showPostIt, setShowPostIt] = useState(false);
+  const [showFeaturedProject, setShowFeaturedProject] = useState(false);
 
-  // SEO
+  const ui = content?.ui;
+  const homeContent = content?.home;
+  const seo = homeContent?.seo;
+  const highlights = homeContent?.highlights?.cards || [];
+  const process = homeContent?.process;
+  const trust = homeContent?.trust;
+  const availability = homeContent?.availability;
+
+  const allProjects = useMemo(() => {
+    return [
+      ...(projects?.formations || []),
+      ...(projects?.personnels || []),
+      ...(projects?.professionnels || []),
+    ];
+  }, [projects]);
+
+  const featuredProject = useMemo(() => {
+    return allProjects.find((project) => project.featured) || null;
+  }, [allProjects]);
+
   useEffect(() => {
-    document.title = "Sandrine PHAM — Développeuse Web Front-End | Portfolio";
+    if (!seo) return;
+
+    document.title = seo.title;
+
     const desc = document.querySelector("meta[name='description']");
     if (desc) {
-      desc.setAttribute(
-        "content",
-        "Découvrez le portfolio de Sandrine PHAM, développeuse web front-end spécialisée en React, JavaScript, CSS et conception d'interfaces modernes."
-      );
+      desc.setAttribute("content", seo.description);
     }
-  }, []);
+  }, [seo]);
 
   useEffect(() => {
     const contentTimer = setTimeout(() => setShowContent(true), 200);
-    const postItTimer = setTimeout(() => setShowPostIt(true), 1200);
+    const featuredTimer = setTimeout(() => setShowFeaturedProject(true), 450);
+
     return () => {
       clearTimeout(contentTimer);
-      clearTimeout(postItTimer);
+      clearTimeout(featuredTimer);
     };
   }, []);
 
-  if (loading)
+  if (loading || projectsLoading) {
     return (
       <main className="home">
-        <p>Chargement du contenu...</p>
+        <p>{ui?.loading || "Chargement du contenu..."}</p>
       </main>
     );
+  }
 
-  if (error)
+  if (error || projectsError) {
     return (
       <main className="home">
-        <p>Erreur : {error.message}</p>
+        <p>
+          {ui?.errorPrefix || "Erreur :"} {(error || projectsError)?.message}
+        </p>
       </main>
     );
-
-  const homeContent = content?.home;
-  const highlights = content?.highlights?.cards || [];
+  }
 
   return (
     <main className="home">
-      {/* Présentation */}
-      <section className="home__presentation">
-        <div className="home__presentation-container">
-          <div className="home__postit">
-            <img
-              src={homeImage}
-              alt={`Illustration du thème ${theme}`}
-              className={`home__postit-image ${
-                showPostIt ? "fly-in" : "pre-fly"
-              }`}
-              fetchPriority="high"
-            />
-            {/* Bande de scotch en image */}
-            <img
-              src={Scotch}
-              alt=""
-              className={`tape ${showPostIt ? "tape-in" : "tape-pre"}`}
-              aria-hidden="true"
-            />
-          </div>
-          <div className="home__content" data-show={showContent}>
-            <div className="slogan-wrapper">
-              <Slogan theme={theme} />
-            </div>
-            <div className="home__content-fixed">
-              <p className="home__intro">{homeContent?.content}</p>
-              <p className="home__accroche">{homeContent?.accroche}</p>
-              <div className="home__titles">
+      <section className="home__hero">
+        <div className="home__hero-container">
+          <div className="home__contentIntro">
+            <section className="home__content" data-show={showContent}>
+              <div className="home__slogan-wrapper">
+                <Slogan text={homeContent?.slogan} theme={theme} />
+                {homeContent?.eyebrow && (
+                  <p className="home__eyebrow">{homeContent.eyebrow}</p>
+                )}
+              </div>
+
+              <div className="home__text">
                 <h1 className="home__title">{homeContent?.title}</h1>
                 <p className="home__subtitle">{homeContent?.subtitle}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                <p className="home__intro">{homeContent?.content}</p>
+                <p className="home__accroche">{homeContent?.accroche}</p>
 
-      {/* Highlights dynamiques */}
-      <section className="home__highlights" data-show={showContent}>
-        <h2 className="page-title">{content?.highlights?.title}</h2>
-        <div className="home__highlights-container">
-          {highlights.map((card, index) => (
-            <HighLightCard
-              key={index}
-              number={card.number}
-              title={card.title}
-              description={card.description}
-              ariaLabel={card.ariaLabel}
+                <div className="home__cta-group">
+                  <Link to="/contact" className="home__cta-button">
+                    {homeContent?.cta?.label}
+                  </Link>
+                </div>
+
+                <p className="home__cta-note">{homeContent?.cta?.note}</p>
+              </div>
+            </section>
+
+            <section className="home__featured" data-show={showFeaturedProject}>
+              <FeaturedProject
+                project={featuredProject}
+                theme={theme}
+                showProject={showFeaturedProject}
+              />
+            </section>
+          </div>
+
+          <section className="home__process">
+            <ProcessSection
+              process={process}
+              theme={theme}
+              showContent={showContent}
             />
-          ))}
+          </section>
+
+          <section className="home__trust-strip" data-show={showContent}>
+            <TrustStrip trust={trust} showContent={showContent} />
+          </section>
+
+          <section className="home__highlights" data-show={showContent}>
+            <header className="home__highlights-head">
+              <h2 className="page-title">{homeContent?.highlights?.title}</h2>
+            </header>
+
+            <div className="home__highlights-container">
+              {highlights.map((card, index) => (
+                <HighLightCard
+                  key={index}
+                  number={card.number}
+                  title={card.title}
+                  description={card.description}
+                  ariaLabel={card.ariaLabel}
+                />
+              ))}
+            </div>
+          </section>
+
+          <section className="home__availability">
+            <AvailabilityCard
+              availability={availability}
+              showContent={showContent}
+            />
+          </section>
         </div>
       </section>
     </main>

@@ -1,131 +1,213 @@
-import React, { useState, useMemo } from "react";
+import { useState } from "react";
 import "./projectCard.scss";
 
 export default function ProjectCard({ project }) {
-  const [showFullDesc, setShowFullDesc] = useState(false);
+  const [flipped, setFlipped] = useState(false);
 
   if (!project) return null;
 
-  const toggleDesc = () => setShowFullDesc((prev) => !prev);
+  const toggleCard = () => {
+    setFlipped((prev) => !prev);
+  };
 
-  const imageSrc = project?.image
-    ? `${import.meta.env.BASE_URL}${project.image.slice(1)}`
+  const imageSrc = project.image
+    ? `${import.meta.env.BASE_URL}${project.image.replace(/^\//, "")}`
     : "";
 
-  const sortedTechnologies = useMemo(() => {
-    const sortAlpha = (arr) => [...arr].sort((a, b) => a.localeCompare(b));
+  const mainStack = Array.isArray(project.stackPrincipale)
+    ? project.stackPrincipale.slice(0, 4)
+    : [];
 
-    const languages = sortAlpha(project?.languages ?? []);
-    const frameworks = sortAlpha(project?.frameworks ?? []);
-    const outilsDev = sortAlpha(project?.outilsDev ?? []);
+  const impactTags = Array.isArray(project.impactTags)
+    ? project.impactTags.slice(0, 3)
+    : [];
 
-    // Fusion dans l’ordre voulu, mais classés par catégorie
-    return [...languages, ...frameworks, ...outilsDev];
-  }, [project]);
+  const discreetInfos = [
+    ...new Set([
+      ...(project.languages || []),
+      ...(project.frameworks || []),
+      ...(project.outilsDev || []).slice(0, 4),
+    ]),
+  ].slice(0, 8);
+
+  const frontObjective = project.objectif || project.summary || "";
+  const frontResult = project.clientBenefit || project.impact || "";
 
   return (
     <article
-      className="project-card"
-      itemScope
-      itemType="https://schema.org/CreativeWork"
+      className={`project-card ${flipped ? "is-flipped" : ""}`}
       aria-labelledby={`project-title-${project.id}`}
     >
-      {/* IMAGE */}
-      {imageSrc && (
-        <figure className="project-card__image">
-          <img
-            src={imageSrc}
-            alt={project.alt || `Screenshot du projet ${project.title}`}
-            loading="lazy"
-            width="600"
-            height="300"
-            decoding="async"
-            itemProp="image"
-          />
-          {project.status && (
-            <figcaption className="project-card__status">
-              {project.status}
-            </figcaption>
+      <div className="project-card__inner">
+        <section className="project-card__front" aria-label="Vue principale du projet">
+          {imageSrc && (
+            <figure className="project-card__image">
+              <img
+                src={imageSrc}
+                alt={project.alt || `Screenshot du projet ${project.title}`}
+              />
+              <span
+                className="project-card__image-overlay"
+                aria-hidden="true"
+              />
+            </figure>
           )}
-        </figure>
-      )}
 
-      {/* CONTENU */}
-      <div className="project-card__content">
-        <h3
-          id={`project-title-${project.id}`}
-          className="project-card__title"
-          itemProp="name"
-        >
-          {project.title}
-        </h3>
-
-        {/* DESCRIPTION */}
-        {project.description && (
-          <>
-            <p
-              className={`project-card__description ${
-                showFullDesc ? "full" : ""
-              }`}
-              itemProp="description"
-              id={`desc-${project.id}`}
-            >
-              {project.description}
-            </p>
-
-            {project.description.length > 80 && (
-              <button
-                className="show-more"
-                onClick={toggleDesc}
-                aria-expanded={showFullDesc}
-                aria-controls={`desc-${project.id}`}
-                role="button"
+          <div className="project-card__body">
+            <header className="project-card__header">
+              <h3
+                id={`project-title-${project.id}`}
+                className="project-card__title"
               >
-                {showFullDesc ? "Afficher moins ▴" : "Afficher plus ▾"}
-              </button>
-            )}
-          </>
-        )}
+                {project.title}
+              </h3>
 
-        {/* TECHNOLOGIES */}
-        {sortedTechnologies.length > 0 && (
-          <div className="project-card__technologies">
-            {sortedTechnologies.map((tech) => (
-              <span key={tech} className="tech-tag" itemProp="keywords">
-                {tech}
-              </span>
-            ))}
+              {project.subtitle && (
+                <p className="project-card__subtitle">{project.subtitle}</p>
+              )}
+            </header>
+
+            <div className="project-card__content">
+              {frontObjective && (
+                <section className="project-card__block" aria-label="Objectif">
+                  <p className="project-card__label">Objectif</p>
+                  <p className="project-card__text project-card__text--strong">
+                    {frontObjective}
+                  </p>
+                </section>
+              )}
+
+              {impactTags.length > 0 && (
+                <section className="project-card__block" aria-label="Points clés">
+                  <p className="project-card__label">Points clés</p>
+                  <ul className="project-card__tags" aria-label="Liste des points clés">
+                    {impactTags.map((tag, index) => (
+                      <li
+                        key={`${project.id}-impact-${tag}-${index}`}
+                        className="impact-tag"
+                      >
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+              {frontResult && (
+                <section className="project-card__result" aria-label="Bénéfice">
+                  <p className="project-card__label">Bénéfice</p>
+                  <p className="project-card__text">{frontResult}</p>
+                </section>
+              )}
+            </div>
+
+            <footer className="project-card__footer">
+              <div className="project-card__actions">
+                {project.projet && (
+                  <a
+                    href={project.projet}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn--secondary"
+                    aria-label={`Voir le projet ${project.title}`}
+                  >
+                    Voir le projet
+                  </a>
+                )}
+
+                <button
+                  type="button"
+                  className="btn btn--outline"
+                  onClick={toggleCard}
+                  aria-pressed={flipped}
+                  aria-label={`Afficher la vue technique du projet ${project.title}`}
+                >
+                  Vue technique
+                </button>
+              </div>
+            </footer>
           </div>
-        )}
+        </section>
 
-        {/* ACTIONS */}
-        <div className="project-card__actions">
-          {project.projet && (
-            <a
-              href={project.projet}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              className="btn btn--secondary"
-              aria-label={`Voir le projet ${project.title}`}
-              itemProp="url"
-            >
-              Voir le projet
-            </a>
-          )}
+        <section className="project-card__back" aria-label="Vue technique du projet">
+          <div className="project-card__body">
+            <header className="project-card__header">
+              <h3 className="project-card__title">{project.title}</h3>
+            </header>
 
-          {project.code && (
-            <a
-              href={project.code}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              className="btn btn--outline"
-              aria-label={`Voir le code source du projet ${project.title}`}
-              itemProp="codeRepository"
-            >
-              Code source
-            </a>
-          )}
-        </div>
+            <div className="project-card__content">
+              {project.description && (
+                <section className="project-card__block" aria-label="Présentation">
+                  <p className="project-card__label">Présentation</p>
+                  <p className="project-card__text">{project.description}</p>
+                </section>
+              )}
+
+              {mainStack.length > 0 && (
+                <section className="project-card__block" aria-label="Stack principale">
+                  <p className="project-card__label">Stack principale</p>
+                  <ul className="project-card__tags" aria-label="Liste des technologies principales">
+                    {mainStack.map((tech, index) => (
+                      <li
+                        key={`${project.id}-${tech}-${index}`}
+                        className="tech-tag"
+                      >
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+              {discreetInfos.length > 0 && (
+                <section className="project-card__meta" aria-label="Autres éléments">
+                  <p className="project-card__meta-label">Autres éléments</p>
+                  <p className="project-card__meta-text">
+                    {discreetInfos.join(" · ")}
+                  </p>
+                </section>
+              )}
+            </div>
+
+            <footer className="project-card__footer">
+              <div className="project-card__actions">
+                {project.projet && (
+                  <a
+                    href={project.projet}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn--secondary"
+                    aria-label={`Voir le projet ${project.title}`}
+                  >
+                    Voir le projet
+                  </a>
+                )}
+
+                {project.code && (
+                  <a
+                    href={project.code}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn--outline"
+                    aria-label={`Voir le code source du projet ${project.title}`}
+                  >
+                    Code source
+                  </a>
+                )}
+
+                <button
+                  type="button"
+                  className="btn btn--outline"
+                  onClick={toggleCard}
+                  aria-pressed={flipped}
+                  aria-label={`Revenir à la vue principale du projet ${project.title}`}
+                >
+                  Retour
+                </button>
+              </div>
+            </footer>
+          </div>
+        </section>
       </div>
     </article>
   );

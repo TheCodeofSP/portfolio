@@ -1,76 +1,139 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import "./filter.scss";
+import useContent from "../hooks/useContent.js";
+import useProjects from "../hooks/useProjects.js";
+import {
+  FILTER_CONFIG,
+  buildEmptyFilters,
+  normalizeValues,
+} from "../utils/projectFilters.js";
 
-const Tag = React.memo(({ value, active, onClick }) => (
+const Tag = React.memo(({ value, active, onClick, ariaPrefix }) => (
   <button
     type="button"
-    className={`tag ${active ? "tag--active" : ""}`}
+    className={`filter-tag ${active ? "filter-tag--active" : ""}`}
     onClick={() => onClick(value)}
     aria-pressed={active}
-    aria-label={`Filtrer par ${value}`}
+    aria-label={`${ariaPrefix} ${value}`}
   >
     {value}
   </button>
 ));
 
-const Filter = ({ onFilterChange, projects }) => {
-  const categories = ["languages", "frameworks", "outilsDev"];
+const ActiveFilterPill = React.memo(
+  ({ label, value, onRemove, removeAriaLabel }) => (
+    <button
+      type="button"
+      className="active-filter-pill"
+      onClick={onRemove}
+      aria-label={`${removeAriaLabel} ${label} : ${value}`}
+    >
+      <span className="active-filter-pill__label">{label}</span>
+      <span className="active-filter-pill__value">{value}</span>
+      <span className="active-filter-pill__close">×</span>
+    </button>
+  ),
+);
 
-  const [filtersData, setFiltersData] = useState({
-    languages: [],
-    frameworks: [],
-    outilsDev: [],
-  });
+const FILTER_GROUPS = [
+  {
+    key: "impactTags",
+    type: "single",
+  },
+  {
+    key: "stackPrincipale",
+    type: "single",
+  },
+  {
+    key: "stackTechnique",
+    type: "group",
+    label: "Stack technique",
+    helper: "Langages, frameworks, bibliothèques et outils",
+    children: ["languages", "frameworks", "outilsDev"],
+  },
+];
 
-  const [activeFilters, setActiveFilters] = useState({
-    languages: [],
-    frameworks: [],
-    outilsDev: [],
-  });
+const DEFAULT_OPEN_CATEGORIES = {
+  impactTags: true,
+  stackPrincipale: true,
+  stackTechnique: false,
+};
 
-  const [openCategories, setOpenCategories] = useState({
-    languages: false,
-    frameworks: false,
-    outilsDev: false,
-  });
+const Filter = ({ onFilterChange }) => {
+  const { content } = useContent();
+  const { projects, loading, error } = useProjects();
 
-  /* -----------------------------------
-      🧠 Génération dynamique des tags
-  ------------------------------------ */
+  const allProjects = useMemo(() => {
+    return [
+      ...(projects?.formations || []),
+      ...(projects?.personnels || []),
+      ...(projects?.professionnels || []),
+    ];
+  }, [projects]);
+
+  const filterContent = content?.projectsPage?.filterPanel;
+  const categoryContent = filterContent?.categories || {};
+
+  const [filtersData, setFiltersData] = useState(buildEmptyFilters());
+  const [activeFilters, setActiveFilters] = useState(buildEmptyFilters());
+  const [openCategories, setOpenCategories] = useState(DEFAULT_OPEN_CATEGORIES);
+
   useEffect(() => {
-    if (!projects?.length) return;
+    if (!allProjects.length) {
+      setFiltersData(buildEmptyFilters());
+      return;
+    }
 
-    const newFilters = {};
-    categories.forEach((cat) => {
-      newFilters[cat] = [
-        ...new Set(projects.flatMap((p) => p[cat] || [])),
-      ].sort((a, b) => a.localeCompare(b));
+    const newFilters = buildEmptyFilters();
+
+    FILTER_CONFIG.forEach(({ key }) => {
+      newFilters[key] = [
+        ...new Set(allProjects.flatMap((project) => normalizeValues(project[key]))),
+      ].sort((a, b) => a.localeCompare(b, "fr"));
     });
 
     setFiltersData(newFilters);
-  }, [projects]);
+  }, [allProjects]);
 
-  /* -----------------------------------
-      🎛️ Gestion Toggle Tag
-  ------------------------------------ */
-  const toggleFilter = useCallback(
-    (category, value) => {
-      setActiveFilters((prev) => {
-        const updatedCategory = prev[category].includes(value)
-          ? prev[category].filter((v) => v !== value)
-          : [...prev[category], value];
+  const updateFilters = useCallback(
+    (updatedFilters) => {
+      setActiveFilters(updatedFilters);
 
-        const updatedFilters = { ...prev, [category]: updatedCategory };
+      if (typeof onFilterChange === "function") {
         onFilterChange(updatedFilters);
-        return updatedFilters;
-      });
+      }
     },
-    [onFilterChange]
+    [onFilterChange],
   );
 
-  /* -----------------------------------
-      📂 Ouvrir / fermer une catégorie
-  ------------------------------------ */
+  const toggleFilter = useCallback(
+    (category, value) => {
+      const currentValues = activeFilters[category] || [];
+
+      const updatedCategory = currentValues.includes(value)
+        ? currentValues.filter((item) => item !== value)
+        : [...currentValues, value];
+
+      updateFilters({
+        ...activeFilters,
+        [category]: updatedCategory,
+      });
+    },
+    [activeFilters, updateFilters],
+  );
+
+  const removeFilter = useCallback(
+    (category, value) => {
+      updateFilters({
+        ...activeFilters,
+        [category]: (activeFilters[category] || []).filter(
+          (item) => item !== value,
+        ),
+      });
+    },
+    [activeFilters, updateFilters],
+  );
+
   const toggleCategory = useCallback((category) => {
     setOpenCategories((prev) => ({
       ...prev,
@@ -78,80 +141,298 @@ const Filter = ({ onFilterChange, projects }) => {
     }));
   }, []);
 
-  /* -----------------------------------
-      🔄 Réinitialisation
-  ------------------------------------ */
   const resetFilters = useCallback(() => {
-    const empty = categories.reduce((acc, cat) => ({ ...acc, [cat]: [] }), {});
-    setActiveFilters(empty);
-    onFilterChange(empty);
-  }, [onFilterChange]);
+    updateFilters(buildEmptyFilters());
+  }, [updateFilters]);
 
-  /* -----------------------------------
-      📊 Comptage dynamique
-  ------------------------------------ */
   const filteredCount = useMemo(() => {
-    if (!projects) return 0;
-    return projects.filter((p) =>
-      categories.every((key) =>
-        activeFilters[key].length === 0
-          ? true
-          : p[key]?.some((v) => activeFilters[key].includes(v))
-      )
+    if (!allProjects.length) return 0;
+
+    return allProjects.filter((project) =>
+      FILTER_CONFIG.every(({ key }) => {
+        const currentFilters = activeFilters[key] || [];
+        if (!currentFilters.length) return true;
+
+        const values = normalizeValues(project[key]);
+        return values.some((value) => currentFilters.includes(value));
+      }),
     ).length;
-  }, [projects, activeFilters]);
+  }, [allProjects, activeFilters]);
+
+  const hasActiveFilters = useMemo(() => {
+    return Object.values(activeFilters).some(
+      (values) => Array.isArray(values) && values.length > 0,
+    );
+  }, [activeFilters]);
+
+  const activeFilterEntries = useMemo(() => {
+    return FILTER_CONFIG.flatMap(({ key, label }) =>
+      (activeFilters[key] || []).map((value) => ({
+        key,
+        label: categoryContent[key]?.label || label,
+        value,
+      })),
+    );
+  }, [activeFilters, categoryContent]);
+
+  const renderTags = useCallback(
+    (key, label) => {
+      const options = filtersData[key] || [];
+
+      if (!options.length) {
+        return (
+          <p className="filter-category-card__empty">
+            {filterContent?.emptyCategory || "Aucun filtre disponible."}
+          </p>
+        );
+      }
+
+      return options.map((option) => (
+        <Tag
+          key={`${key}-${option}`}
+          value={option}
+          active={(activeFilters[key] || []).includes(option)}
+          onClick={(value) => toggleFilter(key, value)}
+          ariaPrefix={filterContent?.tagAriaPrefix || `Filtrer par ${label}`}
+        />
+      ));
+    },
+    [filtersData, activeFilters, toggleFilter, filterContent],
+  );
+
+  if (loading) {
+    return (
+      <section className="filter-panel">
+        <p>Chargement des filtres…</p>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="filter-panel">
+        <p>Impossible de charger les projets.</p>
+      </section>
+    );
+  }
 
   return (
-    <div
-      className="filter-container"
+    <section
+      className="filter-panel"
       role="region"
-      aria-label="Filtres de projets"
+      aria-label={filterContent?.ariaLabel || "Filtres de projets"}
     >
-      <div className="filter-categories">
-        {categories.map((cat) => (
-          <div className="filter-category" key={cat}>
+      <header className="filter-panel__hero">
+        <div className="filter-panel__hero-text">
+          <p className="filter-panel__eyebrow">
+            {filterContent?.eyebrow || "Navigation intelligente"}
+          </p>
+
+          <h2 className="filter-panel__title">
+            {filterContent?.title || "Trouver les projets les plus pertinents"}
+          </h2>
+
+          <p className="filter-panel__subtitle">
+            {filterContent?.subtitle ||
+              "Filtre les réalisations selon les besoins, la stack ou les outils utilisés pour parcourir plus facilement les projets qui t’intéressent."}
+          </p>
+        </div>
+
+        <aside
+          className="filter-panel__summary-card"
+          aria-label="Résumé des résultats"
+        >
+          <p className="filter-panel__summary-label">
+            {filterContent?.summary?.label || "Résultats"}
+          </p>
+
+          <p className="filter-panel__summary-count">
+            {filteredCount}
+            <span>
+              {filteredCount > 1
+                ? ` ${filterContent?.summary?.foundPlural || "projets trouvés"}`
+                : ` ${filterContent?.summary?.foundSingular || "projet trouvé"}`}
+            </span>
+          </p>
+
+          {allProjects.length > 0 && (
+            <p className="filter-panel__summary-total">
+              {filterContent?.summary?.totalPrefix || "sur"} {allProjects.length}{" "}
+              {filterContent?.summary?.totalSuffix || "projets"}
+            </p>
+          )}
+        </aside>
+      </header>
+
+      {hasActiveFilters && (
+        <section className="filter-panel__active" aria-label="Filtres actifs">
+          <div className="filter-panel__active-head">
+            <p className="filter-panel__active-title">
+              {filterContent?.activeFilters?.title || "Filtres actifs"}
+            </p>
+
             <button
               type="button"
-              onClick={() => toggleCategory(cat)}
-              className="category-title"
-              aria-expanded={openCategories[cat]}
+              className="filter-panel__reset-inline"
+              onClick={resetFilters}
             >
-              {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              <span className={`arrow ${openCategories[cat] ? "open" : ""}`}>
-                ▼
-              </span>
+              {filterContent?.activeFilters?.reset || "Tout réinitialiser"}
             </button>
-
-            <div
-              className={`checkbox-group ${openCategories[cat] ? "open" : ""}`}
-              role="group"
-              aria-label={`Filtres ${cat}`}
-            >
-              {filtersData[cat]?.map((opt) => (
-                <Tag
-                  key={opt}
-                  value={opt}
-                  active={activeFilters[cat]?.includes(opt)}
-                  onClick={(v) => toggleFilter(cat, v)}
-                />
-              ))}
-            </div>
           </div>
-        ))}
-      </div>
 
-      <div className="filter-actions">
-        <button className="reset-filters" onClick={resetFilters}>
-          Réinitialiser
-        </button>
+          <div className="filter-panel__active-list">
+            {activeFilterEntries.map(({ key, label, value }) => (
+              <ActiveFilterPill
+                key={`${key}-${value}`}
+                label={label}
+                value={value}
+                onRemove={() => removeFilter(key, value)}
+                removeAriaLabel={
+                  filterContent?.activeFilters?.removeAriaLabel ||
+                  "Retirer le filtre"
+                }
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
-        <span className="projects-count">
-          {filteredCount}{" "}
-          {filteredCount > 1 ? "projets trouvés" : "projet trouvé"}
-          {projects?.length ? ` sur ${projects.length}` : ""}
-        </span>
+      <div className="filter-panel__categories">
+        {FILTER_GROUPS.map((group) => {
+          if (group.type === "single") {
+            const config = FILTER_CONFIG.find((item) => item.key === group.key);
+
+            if (!config) return null;
+
+            const key = config.key;
+            const label = categoryContent[key]?.label || config.label;
+            const helper = categoryContent[key]?.helper || config.helper;
+
+            return (
+              <section className="filter-category-card" key={key}>
+                <button
+                  type="button"
+                  onClick={() => toggleCategory(key)}
+                  className="filter-category-card__header"
+                  aria-expanded={!!openCategories[key]}
+                  aria-controls={`filter-panel-${key}`}
+                >
+                  <div className="filter-category-card__header-text">
+                    <span className="filter-category-card__title">{label}</span>
+                    {helper && (
+                      <span className="filter-category-card__helper">
+                        {helper}
+                      </span>
+                    )}
+                  </div>
+
+                  <span
+                    className={`filter-category-card__arrow ${
+                      openCategories[key] ? "open" : ""
+                    }`}
+                    aria-hidden="true"
+                  >
+                    ▼
+                  </span>
+                </button>
+
+                <div
+                  id={`filter-panel-${key}`}
+                  className={`filter-category-card__body ${
+                    openCategories[key] ? "open" : ""
+                  }`}
+                  role="group"
+                  aria-label={`${
+                    filterContent?.categoryAriaPrefix || "Filtres"
+                  } ${label}`}
+                >
+                  {renderTags(key, label)}
+                </div>
+              </section>
+            );
+          }
+
+          const groupLabel = categoryContent[group.key]?.label || group.label;
+          const groupHelper = categoryContent[group.key]?.helper || group.helper;
+
+          return (
+            <section className="filter-category-card" key={group.key}>
+              <button
+                type="button"
+                onClick={() => toggleCategory(group.key)}
+                className="filter-category-card__header"
+                aria-expanded={!!openCategories[group.key]}
+                aria-controls={`filter-panel-${group.key}`}
+              >
+                <div className="filter-category-card__header-text">
+                  <span className="filter-category-card__title">
+                    {groupLabel}
+                  </span>
+                  {groupHelper && (
+                    <span className="filter-category-card__helper">
+                      {groupHelper}
+                    </span>
+                  )}
+                </div>
+
+                <span
+                  className={`filter-category-card__arrow ${
+                    openCategories[group.key] ? "open" : "close"
+                  }`}
+                  aria-hidden="true"
+                >
+                  ▼
+                </span>
+              </button>
+
+              <div
+                id={`filter-panel-${group.key}`}
+                className={`filter-category-card__body filter-category-card__body--stack ${
+                  openCategories[group.key] ? "open" : "close"
+                }`}
+                role="group"
+                aria-label={`${
+                  filterContent?.categoryAriaPrefix || "Filtres"
+                } ${groupLabel}`}
+              >
+                {group.children.map((childKey) => {
+                  const childConfig = FILTER_CONFIG.find(
+                    (item) => item.key === childKey,
+                  );
+
+                  if (!childConfig) return null;
+
+                  const childLabel =
+                    categoryContent[childKey]?.label || childConfig.label;
+                  const childHelper =
+                    categoryContent[childKey]?.helper || childConfig.helper;
+
+                  return (
+                    <div
+                      className="filter-subcategory"
+                      key={`${group.key}-${childKey}`}
+                    >
+                      <div className="filter-subcategory__head">
+                        <p className="filter-subcategory__title">{childLabel}</p>
+                        {childHelper && (
+                          <p className="filter-subcategory__helper">
+                            {childHelper}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="filter-subcategory__tags">
+                        {renderTags(childKey, childLabel)}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
       </div>
-    </div>
+    </section>
   );
 };
 

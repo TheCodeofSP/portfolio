@@ -62,7 +62,7 @@
 
 @mixin btn-hover-energique {
   background-color: var(--accent-color);
-  color: var(--dark-color);
+  color: var(--background-main);
   border: none;
   transform: scale(1.05);
   transition: all var(--transition-fast);
@@ -73,7 +73,7 @@
 @mixin btn-active-energique {
   background-color: var(--accent-color);
   border-color: var(--accent-color);
-  color: var(--dark-color);
+  color: var(--background-main);
   box-shadow: var(--shadow-heavy);
   animation: energique-glitter 1.5s infinite alternate ease-in-out;
 }

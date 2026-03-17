@@ -1,67 +1,85 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import { useEffect } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Home from "../pages/Home";
-import About from "../pages/About";
-import Projects from "../pages/Projects";
-import Skills from "../pages/Skills";
-import Experience from "../pages/Experiences";
-import ThemeSwitcher from "../components/FloatingThemeSwitcher";
+import Header from "../components/Header.jsx";
+import Footer from "../components/Footer.jsx";
+import Home from "../pages/Home.jsx";
+import About from "../pages/About.jsx";
+import Projects from "../pages/Projects.jsx";
+import Skills from "../pages/Skills.jsx";
+import Contact from "../pages/Contact.jsx";
+import ThemeSwitcher from "../components/FloatingThemeSwitcher.jsx";
+import Legal from "../pages/Legal.jsx";
+import Privacy from "../pages/Privacy.jsx";
+import NotFound from "../pages/NotFound.jsx";
+import SiteMap from "../pages/SiteMap.jsx";
+
+const THEME_CLASSES = [
+  "theme-accueillant",
+  "theme-energique",
+  "theme-minimalism",
+];
+
+const THEME_FAVICONS = {
+  accueillant: "/images/logo/SPAccueillant.svg",
+  energique: "/images/logo/SPEnergique.svg",
+  minimalism: "/images/logo/SPMinimalism.svg",
+};
 
 const updateFavicon = (theme) => {
   const favicon = document.getElementById("favicon");
   if (!favicon) return;
 
-  switch (theme) {
-    case "accueillant":
-      favicon.href = "/images/logo/SPAccueillant.svg";
-      break;
-    case "energique":
-      favicon.href = "/images/logo/SPEnergique.svg";
-      break;
-    case "minimalism":
-      favicon.href = "/images/logo/SPMinimalism.svg";
-      break;
-    default:
-      favicon.href = "/images/logo/SPAccueillant.svg";
-  }
+  favicon.href = THEME_FAVICONS[theme] || THEME_FAVICONS.accueillant;
 };
 
 const AppRouter = ({ theme, setTheme, resetIntro }) => {
   useEffect(() => {
-    const root = document.documentElement;
+    if (!theme) return;
 
-    root.classList.remove(
-      "theme-accueillant",
-      "theme-energique",
-      "theme-minimalism"
-    );
+    const html = document.documentElement;
+    const body = document.body;
+    const themeClass = `theme-${theme}`;
 
-    root.classList.add(`theme-${theme}`);
+    html.classList.remove(...THEME_CLASSES);
+    body.classList.remove(...THEME_CLASSES);
+
+    html.classList.add(themeClass);
+    body.classList.add(themeClass);
 
     sessionStorage.setItem("theme", theme);
     updateFavicon(theme);
+
+    return () => {
+      html.classList.remove(...THEME_CLASSES);
+      body.classList.remove(...THEME_CLASSES);
+    };
   }, [theme]);
 
   return (
     <Router>
-      <div className={`app theme-${theme}`}>
+      <div className={`app theme-${theme || "accueillant"}`}>
         <Header theme={theme} resetIntro={resetIntro} />
 
         <main>
-          <Routes>
-            <Route path="/" element={<Home theme={theme} />} />
-            <Route path="/about" element={<About theme={theme} />} />
-            <Route path="/projects" element={<Projects theme={theme} />} />
-            <Route path="/skills" element={<Skills theme={theme} />} />
-            <Route path="/experience" element={<Experience theme={theme} />} />
-          </Routes>
+          <Suspense fallback={<p>Chargement...</p>}>
+            <Routes>
+              <Route path="/" element={<Home theme={theme} />} />
+              <Route path="/about" element={<About theme={theme} />} />
+              <Route path="/projects" element={<Projects theme={theme} />} />
+              <Route path="/skills" element={<Skills theme={theme} />} />
+              <Route path="/contact" element={<Contact theme={theme} />} />
+              <Route path="/legal" element={<Legal theme={theme} />} />
+              <Route path="/privacy" element={<Privacy theme={theme} />} />
+              <Route path="*" element={<NotFound theme={theme} />} />
+              <Route path="/sitemap" element={<SiteMap theme={theme} />} />
+            </Routes>
+          </Suspense>
         </main>
 
         <ThemeSwitcher theme={theme} setTheme={setTheme} />
 
-        <Footer />
+        <Footer theme={theme} />
       </div>
     </Router>
   );

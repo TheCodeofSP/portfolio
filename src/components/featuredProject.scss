@@ -1,0 +1,300 @@
+@use "../styles/univers/foundation/foundation.scss" as f;
+
+.featured-project {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease,
+    box-shadow var(--transition-medium);
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 20px;
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  &__eyebrow {
+    margin: 0;
+    font-size: 0.74rem;
+    font-family: var(--font-subtitle);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.8;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: var(--font-title);
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    line-height: 1.1;
+  }
+
+  &__hook {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  &__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__badge {
+    padding: 0.48rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    line-height: 1.2;
+    font-weight: 600;
+    font-family: var(--font-subtitle);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding-top: 0.2rem;
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.82rem 1rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    font-family: var(--font-subtitle);
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition:
+      transform var(--transition-fast),
+      background-color var(--transition-fast),
+      color var(--transition-fast),
+      border-color var(--transition-fast);
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+
+  &__visual {
+    margin: 0;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+}
+
+/* TABLETTE */
+@media (min-width: 768px) {
+  .featured-project {
+    &__body {
+      padding: 1.2rem;
+    }
+
+    &__actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 960px) {
+  .featured-project {
+    &__body {
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.4rem;
+    }
+
+    &__intro {
+      gap: 1rem;
+    }
+
+    &__visual {
+      justify-self: stretch;
+    }
+  }
+}
+
+/* ACCUEILLANT */
+.theme-accueillant {
+  .featured-project {
+    &__body {
+      background: var(--background-card);
+      border: 1px solid rgba(var(--primary-color-rgb), 0.1);
+      box-shadow: var(--shadow-light);
+    }
+
+    &:hover {
+      @include f.card-hover-accueillant;
+    }
+
+    &__title {
+      color: var(--primary-color);
+    }
+
+    &__eyebrow {
+      color: var(--secondary-color);
+    }
+
+    &__hook {
+      color: var(--color-main);
+    }
+
+    &__badge {
+      background: rgba(var(--primary-color-rgb), 0.08);
+      color: var(--color-main);
+      border: 1px solid rgba(var(--primary-color-rgb), 0.12);
+    }
+
+    &__button--primary {
+      background-color: var(--secondary-color);
+      color: var(--background-main);
+
+      &:hover {
+        @include f.btn-hover-accueillant;
+      }
+    }
+
+    &__button--secondary {
+      background: transparent;
+      color: var(--color-main);
+      border-color: rgba(var(--primary-color-rgb), 0.24);
+
+      &:hover {
+        @include f.btn-hover-accueillant;
+      }
+    }
+  }
+}
+
+/* ENERGIQUE */
+.theme-energique {
+  .featured-project {
+    &__body {
+      background: var(--background-header);
+      border: 1px solid rgba(var(--primary-color-rgb), 0.18);
+      box-shadow: var(--shadow-light);
+    }
+
+    &:hover {
+      @include f.hover-card-energique;
+    }
+
+    &__title,
+    &__eyebrow {
+      color: var(--primary-color);
+    }
+
+    &__hook {
+      color: var(--color-main);
+    }
+
+    &__badge {
+      background: rgba(var(--primary-color-rgb), 0.12);
+      color: var(--primary-color);
+      border: 1px solid rgba(var(--primary-color-rgb), 0.22);
+    }
+
+    &__button--primary {
+      background-color: var(--primary-color);
+      color: var(--background-header);
+      border-color: var(--primary-color);
+
+      &:hover {
+        @include f.btn-hover-energique;
+      }
+    }
+
+    &__button--secondary {
+      background: transparent;
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+
+      &:hover {
+        @include f.btn-hover-energique;
+      }
+    }
+  }
+}
+
+/* MINIMALISM */
+.theme-minimalism {
+  .featured-project {
+    &__body {
+      background: var(--background-card);
+      border: 1px solid rgba(var(--color-header-rgb), 0.1);
+      box-shadow: var(--shadow-light);
+    }
+
+    &:hover {
+      @include f.card-hover-minimalism;
+    }
+
+    &__title,
+    &__eyebrow {
+      color: var(--primary-color);
+    }
+
+    &__hook {
+      color: var(--color-main);
+    }
+
+    &__badge {
+      background: var(--background-main);
+      color: var(--primary-color);
+      border: 1px solid rgba(var(--color-header-rgb), 0.14);
+    }
+
+    &__button--primary {
+      background-color: var(--primary-color);
+      color: var(--light-color);
+
+      &:hover {
+        @include f.btn-hover-minimalism;
+      }
+    }
+
+    &__button--secondary {
+      background: transparent;
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+
+      &:hover {
+        @include f.btn-hover-minimalism;
+      }
+    }
+  }
+}

@@ -1,225 +1,379 @@
 @use "../styles/univers/foundation/foundation.scss" as f;
 
-/* =============================
-   💼 PROJECT CARD - Structure générale
-   ============================= */
 .project-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 350px;
-  height: 100%;
-  min-height: 420px;
-  border-radius: 8px;
-  overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  height: 580px;
+  perspective: 1200px;
 
-  /* =============================
-     🖼️ Image du projet
-     ============================= */
+  &__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+  }
+
+  &.is-flipped &__inner {
+    transform: rotateY(180deg);
+  }
+
+  &__front,
+  &__back {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 16px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  &__back {
+    transform: rotateY(180deg);
+  }
+
   &__image {
     position: relative;
-    height: 7.5rem;
+    flex: 0 0 160px;
+    width: 100%;
+    height: 160px;
+    min-height: 160px;
+    margin: 0;
     overflow: hidden;
-    border-radius: 6px 6px 0 0;
 
     img {
-      width: 350px;
-      height: 200px;
-      object-fit: fill;
-      transition: transform var(--transition-medium);
-      will-change: transform;
-      overflow: hidden;
-    }
-
-    &:hover img {
-      transform: scale(1.05);
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition:
+        transform var(--transition-medium),
+        filter var(--transition-medium);
     }
   }
 
-  /* =============================
-     🧾 Contenu
-     ============================= */
-  &__content {
-    flex: 1;
+  &__image-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &__front:hover &__image img {
+    transform: scale(1.035);
+  }
+
+  &__body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  &__header {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: f.$spacing-xs f.$spacing-s;
+    gap: 0.32rem;
+    padding: f.$spacing-s f.$spacing-s 0;
+  }
+
+  &__content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: f.$spacing-s;
+    min-height: 0;
+    overflow: hidden;
+    padding: f.$spacing-s;
     text-align: left;
+  }
+
+  &__footer {
+    margin-top: auto;
+    padding: 0 f.$spacing-s f.$spacing-s;
   }
 
   &__title {
-    font-size: 1.3rem;
-    margin-bottom: f.$spacing-xs;
+    margin: 0;
     font-family: var(--font-title);
+    font-size: 1.06rem;
+    line-height: 1.28;
   }
 
-  &__description {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    max-height: 4.5rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 0;
-    text-align: justify;
-
-    &.full {
-      max-height: none;
-    }
-  }
-
-  .show-more {
-    background: none;
-    border: none;
-    font-size: 0.85rem;
-    cursor: pointer;
-    padding: 0 0 f.$spacing-s;
+  &__subtitle {
+    margin: 0;
     font-family: var(--font-subtitle);
-    color: var(--accent-color);
-    text-align: left;
-    transition: color var(--transition-fast);
+    font-size: 0.88rem;
+    line-height: 1.35;
+    opacity: 0.82;
   }
 
-  /* =============================
-     🧩 Technologies
-     ============================= */
-  &__technologies {
+  &__block,
+  &__result,
+  &__meta {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__result {
+    margin-top: auto;
+    padding-top: 0.55rem;
+  }
+
+  &__meta {
+    margin-top: auto;
+    padding-top: 0.45rem;
+  }
+
+  &__label,
+  &__meta-label {
+    margin: 0;
+    font-family: var(--font-subtitle);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.76;
+  }
+
+  &__text,
+  &__meta-text {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+  }
+
+  &__text {
+    font-size: 0.9rem;
+    line-height: 1.48;
+  }
+
+  &__text--strong {
+    font-weight: 600;
+  }
+
+  &__meta-text {
+    font-size: 0.8rem;
+    line-height: 1.42;
+    opacity: 0.75;
+  }
+
+  &__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: f.$spacing-xs;
-
-    .tech-tag {
-      padding: 0.1rem 0.2rem;
-      border-radius: 12px;
-      font-family: var(--font-subtitle);
-      font-size: 0.6rem;
-      font-weight: 500;
-      border: 1px solid transparent;
-    }
+    align-items: flex-start;
+    gap: 0.42rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  /* =============================
-     🔗 Boutons d’action
-     ============================= */
+  .impact-tag,
+  .tech-tag {
+    padding: 0.22rem 0.58rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-family: var(--font-subtitle);
+    font-size: 0.71rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
   &__actions {
     display: flex;
+    flex-direction: column;
     gap: f.$spacing-xs;
-    flex-wrap: wrap;
-    padding-top: f.$spacing-s;
+  }
 
-    @media (max-width: f.$mobile) {
-      flex-direction: column;
-    }
+  .btn,
+  button.btn {
+    min-width: 0;
+    flex: 1 1 auto;
+    padding: 0.7rem 0.78rem;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: none;
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--font-subtitle);
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      background-color var(--transition-fast),
+      color var(--transition-fast),
+      border-color var(--transition-fast),
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast),
+      opacity var(--transition-fast);
 
-    a.btn {
-      flex: 1;
-      text-align: center;
-      border-radius: 6px;
-      padding: 0.2rem 0;
-      font-family: var(--font-subtitle);
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
-      border: 1px solid transparent;
-      transition: background-color var(--transition-fast),
-        color var(--transition-fast), border var(--transition-fast);
+    &:hover {
+      transform: translateY(-1px);
     }
   }
 }
 
-/* =============================
-   🧱 Grille de projets
-   ============================= */
-.projects-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: f.$spacing-l;
-  margin-top: f.$spacing-m;
+@media (min-width: 768px) {
+  .project-card {
+    width: 350px;
+    height: 560px;
+
+    &__image {
+      flex-basis: 170px;
+      height: 170px;
+      min-height: 170px;
+    }
+
+    &__title {
+      font-size: 1.14rem;
+    }
+
+    &__actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .btn,
+    button.btn {
+      flex: 1 1 0;
+    }
+  }
 }
 
-/* =============================
-     🎨 VARIATIONS PAR THÈME
-============================= */
-
-/* =============================
-   🍁 THEME — ACCUEILLANT
-   ============================= */
-
+/* ACCUEILLANT */
 .theme-accueillant {
   .project-card {
-    background-color: var(--background-card);
-    color: var(--color-main);
-    box-shadow: var(--shadow-light);
-    border: 2px solid rgba(var(--primary-color-rgb), 0.2);
+    &__front,
+    &__back {
+      background-color: var(--background-card);
+      color: var(--color-main);
+      border: 2px solid rgba(var(--primary-color-rgb), 0.18);
+      box-shadow: var(--shadow-light);
+    }
 
-    &:hover {
+    &:hover &__front,
+    &:hover &__back {
       @include f.card-hover-accueillant;
     }
 
-    &__title {
+    &__title,
+    &__text--strong {
       color: var(--primary-color);
     }
-    &__description {
-      color: var(--color-main);
+
+    &__subtitle,
+    &__label,
+    &__meta-label {
+      color: var(--secondary-color);
+    }
+
+    &__result,
+    &__meta,
+    &__footer {
+      border-top: 1px solid rgba(var(--primary-color-rgb), 0.15);
+    }
+
+    &__badge {
+      background-color: rgba(var(--background-main-rgb), 0.9);
+      color: var(--primary-color);
+      border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .impact-tag {
+      background-color: rgba(var(--secondary-color-rgb), 0.12);
+      color: var(--primary-color);
+      border-color: rgba(var(--secondary-color-rgb), 0.2);
     }
 
     .tech-tag {
-      background-color: var(--color-main);
-      color: var(--background-main);
-    }
-
-    a.btn--secondary {
       background-color: var(--secondary-color);
       color: var(--background-main);
+      border-color: var(--secondary-color);
+    }
+
+    .btn--secondary {
+      background-color: var(--secondary-color);
+      color: var(--background-main);
+
       &:hover {
         @include f.btn-hover-accueillant;
       }
     }
 
-    a.btn--outline {
+    .btn--outline {
       color: var(--color-main);
       border-color: var(--color-main);
+
       &:hover {
         @include f.btn-hover-accueillant;
       }
-    }
-  }
-  .show-more {
-    &:hover {
-      @include f.tag-hover-accueillant;
     }
   }
 }
 
-/* =============================
-   ⚡️ THEME — ENERGIQUE
-   ============================= */
-
+/* ENERGIQUE */
 .theme-energique {
   .project-card {
-    background-color: var(--background-header);
-    box-shadow: var(--shadow-light);
-    color: var(--primary-color);
+    &__front,
+    &__back {
+      background-color: var(--background-header);
+      color: var(--color-main);
+      box-shadow: var(--shadow-light);
+      @include f.transistion-energique;
+    }
 
-    @include f.transistion-energique;
-
-    &:hover {
+    &:hover &__front,
+    &:hover &__back {
       @include f.hover-card-energique;
     }
 
-    &__title {
+    &__title,
+    &__label,
+    &__meta-label {
       color: var(--primary-color);
     }
-    &__description {
-      color: var(--color-main);
+
+    &__text--strong,
+    &__meta-label {
+      color: white
+    }
+
+    &__subtitle {
+      color: var(--secondary-color);
+    }
+
+    &__result,
+    &__meta,
+    &__footer {
+      border-top: 1px solid rgba(var(--primary-color-rgb), 0.2);
+    }
+
+    &__badge {
+      background-color: rgba(var(--background-header-rgb), 0.88);
+      color: var(--primary-color);
+      border: 1px solid rgba(var(--primary-color-rgb), 0.25);
+      box-shadow: 0 0 14px rgba(0, 0, 0, 0.12);
+    }
+
+    .impact-tag {
+      background-color: rgba(var(--primary-color-rgb), 0.12);
+      color: var(--primary-color);
+      border-color: rgba(var(--primary-color-rgb), 0.25);
     }
 
     .tech-tag {
-      background-color: var(--background-header);
-      color: var(--primary-color);
+      background-color: var(--primary-color);
+      color: var(--background-header);
+      border-color: var(--primary-color);
     }
 
-    a.btn--secondary {
+    .btn--secondary {
       color: var(--background-header);
       background-color: var(--primary-color);
       border-color: var(--primary-color);
@@ -228,63 +382,80 @@
         @include f.btn-hover-energique;
       }
     }
-    a.btn--outline {
+
+    .btn--outline {
       color: var(--primary-color);
       border-color: var(--primary-color);
+
       &:hover {
         @include f.btn-hover-energique;
       }
     }
   }
-  .show-more {
-    color: var(--color-main);
-    &:hover {
-      @include f.hover-energique-tag;
-    }
-  }
 }
 
-/* =============================
-   ⚪ THEME — MINIMALISM
-   ============================= */
-
+/* MINIMALISM */
 .theme-minimalism {
   .project-card {
-    background-color: var(--background-header);
-    border: 1px solid rgba(var(--color-header-rgb), 0.1);
-    color: var(--color-main);
-    box-shadow: var(--shadow-light);
+    &__front,
+    &__back {
+      background-color: var(--background-header);
+      color: var(--color-main);
+      border: 1px solid rgba(var(--color-header-rgb), 0.1);
+      box-shadow: var(--shadow-light);
+      @include f.transistion-minimalism;
+    }
 
-    @include f.transistion-minimalism;
-
-    &:hover {
+    &:hover &__front,
+    &:hover &__back {
       @include f.card-hover-minimalism;
     }
 
-    &__title {
+    &__title,
+    &__text--strong,
+    &__label,
+    &__meta-label {
       color: var(--primary-color);
     }
-    &__description {
-      color: var(--color-main);
+
+    &__result,
+    &__meta,
+    &__footer {
+      border-top: 1px solid rgba(var(--color-header-rgb), 0.1);
+    }
+
+    &__badge {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: var(--primary-color);
+      border: 1px solid rgba(var(--color-header-rgb), 0.12);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    .impact-tag {
+      background-color: rgba(var(--secondary-color-rgb), 0.08);
+      color: var(--primary-color);
+      border-color: rgba(var(--color-header-rgb), 0.12);
     }
 
     .tech-tag {
-      background-color: rgba(var(--secondary-color-rgb), 0.05);
-      border-color: rgba(var(--secondary-color-rgb), 0.3);
-      color: var(--color-main);
+      background-color: rgba(var(--secondary-color-rgb), 0.08);
+      color: var(--primary-color);
+      border-color: rgba(var(--secondary-color-rgb), 0.25);
     }
 
-    a.btn--secondary {
+    .btn--secondary {
       background-color: var(--primary-color);
       color: var(--light-color);
+
       &:hover {
         @include f.btn-hover-minimalism;
       }
     }
 
-    a.btn--outline {
-      border-color: var(--primary-color);
+    .btn--outline {
       color: var(--primary-color);
+      border-color: var(--primary-color);
+
       &:hover {
         @include f.btn-hover-minimalism;
       }

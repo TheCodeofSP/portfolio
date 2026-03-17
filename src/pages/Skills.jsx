@@ -1,24 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import { FaCode, FaWarehouse } from "react-icons/fa";
-import useEffectContent from "../hooks/useEffectContent.js";
+import useContent from "../hooks/useContent.js";
 import "./skills.scss";
 
 const Skills = () => {
-  const { content, loading, error } = useEffectContent();
+  const { content, loading, error } = useContent();
   const refs = useRef([]);
   const [visible, setVisible] = useState([]);
 
+  const ui = content?.ui;
+  const skillsData = content?.skills;
+  const seo = skillsData?.seo;
+  const sections = skillsData?.sections || [];
+
   useEffect(() => {
-    document.title = "Compétences — Sandrine PHAM | Développement Front-End";
+    if (!seo) return;
+
+    document.title = seo.title;
 
     const desc = document.querySelector("meta[name='description']");
     if (desc) {
-      desc.setAttribute(
-        "content",
-        "Parcours et compétences front-end de Sandrine PHAM : React, JavaScript, CSS, responsive design, accessibilité, performance, UI moderne."
-      );
+      desc.setAttribute("content", seo.description);
     }
-  }, []);
+  }, [seo]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -30,197 +34,193 @@ const Skills = () => {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
 
-    refs.current.forEach((el) => el && observer.observe(el));
-    return () => refs.current.forEach((el) => el && observer.unobserve(el));
+    refs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      refs.current.forEach((el) => {
+        if (el) observer.unobserve(el);
+      });
+    };
   }, []);
 
-  if (loading)
+  if (loading) {
     return (
       <main className="skills">
-        <p>Chargement du contenu...</p>
+        <p>{ui?.loading || "Chargement du contenu..."}</p>
       </main>
     );
-  if (error)
-    return (
-      <main className="skills">
-        <p>Erreur : {error.message}</p>
-      </main>
-    );
+  }
 
-  const skillsData = content?.skills?.content || {};
-  const languagesFrameworks = skillsData?.languagesFrameworks || [];
-  const tools = skillsData?.toolsEnvironment || [];
-  const methodologies = skillsData?.methodologies || [];
-  const diplomas = skillsData?.diplomas || [];
+  if (error) {
+    return (
+      <main className="skills">
+        <p>
+          {ui?.errorPrefix || "Erreur :"} {error.message}
+        </p>
+      </main>
+    );
+  }
+
+  if (!skillsData) return null;
+
+  const getIcon = (iconName) => {
+    switch (iconName) {
+      case "FaWarehouse":
+        return FaWarehouse;
+      case "FaCode":
+      default:
+        return FaCode;
+    }
+  };
+
+  let globalIndex = 0;
+
+  const renderAnimatedClass = (prefix, index) =>
+    visible.includes(`${prefix}-${index}`) ? "visible" : "";
+
+  const renderSectionItem = (sectionType, item, index) => {
+    if (sectionType === "tools") {
+      return (
+        <li
+          key={index}
+          ref={(el) => (refs.current[index] = el)}
+          data-index={`tool-${index}`}
+          className={`skills__tool ${renderAnimatedClass("tool", index)}`}
+        >
+          <img src={item.logo} alt={item.name} className="skills__logo" />
+          <span>{item.name}</span>
+        </li>
+      );
+    }
+
+    if (sectionType === "stack") {
+      return (
+        <article
+          key={index}
+          ref={(el) => (refs.current[index] = el)}
+          data-index={`stack-${index}`}
+          className={`skills__card skills__card--stack ${renderAnimatedClass("stack", index)}`}
+        >
+          <header className="skills__stack-header">
+            <img src={item.logo} alt={item.name} className="skills__logo" />
+            <div>
+              <h3>{item.name}</h3>
+              <p className="skills__tag">{item.category}</p>
+            </div>
+          </header>
+          <p>{item.description}</p>
+        </article>
+      );
+    }
+
+    if (sectionType === "diplomas") {
+      const Icon = getIcon(item.icon);
+
+      return (
+        <article
+          key={index}
+          ref={(el) => (refs.current[index] = el)}
+          data-index={`diploma-${index}`}
+          className={`skills__card skills__card--diploma ${renderAnimatedClass("diploma", index)}`}
+        >
+          <header className="skills__diploma-header">
+            <Icon className="skills__diploma-icon" />
+            <div>
+              <h3>{item.title}</h3>
+              <p className="skills__diploma-meta">
+                {item.year} · {item.niveau}
+              </p>
+            </div>
+          </header>
+
+          {item.institutionUrl ? (
+            <a
+              href={item.institutionUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="skills__diploma-link"
+            >
+              <img
+                src={item.logo}
+                alt={`${item.institution} logo`}
+                className="skills__diploma-logo"
+              />
+            </a>
+          ) : (
+            <img
+              src={item.logo}
+              alt={`${item.institution} logo`}
+              className="skills__diploma-logo"
+            />
+          )}
+
+          <p className="skills__diploma-institution">{item.institution}</p>
+          <p className="skills__diploma-location">{item.lieux}</p>
+          <p className="skills__diploma-qualification">{item.qualification}</p>
+        </article>
+      );
+    }
+
+    return (
+      <article
+        key={index}
+        ref={(el) => (refs.current[index] = el)}
+        data-index={`${sectionType}-${index}`}
+        className={`skills__card ${renderAnimatedClass(sectionType, index)}`}
+      >
+        <h3>{item.title}</h3>
+        <p>{item.description}</p>
+      </article>
+    );
+  };
 
   return (
     <main className="skills">
-      <div className="container">
+      <div className="skills__container">
         <header className="skills__header header-page">
-          <h1 className="page-title">
-            {content?.skills?.title || "Mes Compétences"}
-          </h1>
-          <p className="page-subtitle">{content?.skills?.subtitle}</p>
+          <h1 className="page-title">{skillsData.title}</h1>
+          <p className="page-subtitle">{skillsData.subtitle}</p>
+
+          {skillsData.intro?.length > 0 && (
+            <section className="skills__intro" aria-label="Introduction">
+              {skillsData.intro.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </section>
+          )}
         </header>
 
         <div className="skills__content">
-          {/* Langages & Frameworks */}
-          <section className="skills__section">
-            <h2 className="section-title">{content?.skills?.subtitle1}</h2>
-            <div className="skills__list">
-              {languagesFrameworks.map((skill, i) => (
-                <div
-                  key={skill.name}
-                  ref={(el) => (refs.current[i] = el)}
-                  data-index={`skill-${i}`}
-                  className={`skills__lf ${
-                    visible.includes(`skill-${i}`) ? "visible" : ""
-                  }`}
-                >
-                  <div className="skills__item-header">
-                    <div className="skills__item-title">
-                      <img
-                        src={skill.logo}
-                        alt={skill.name}
-                        className="skills__item-logo skills-logo"
-                      />
-                      <span className="skills__item-name">{skill.name}</span>
-                    </div>
-                    <span className="skills__item-level">{skill.level}%</span>
+          {sections.map((section, sectionIndex) => {
+            const isTools = section.type === "tools";
+
+            return (
+              <section key={sectionIndex} className="skills__section">
+                <h2 className="section-title">{section.title}</h2>
+
+                {isTools ? (
+                  <ul className="skills__tools">
+                    {section.items.map((item) => {
+                      const index = globalIndex++;
+                      return renderSectionItem(section.type, item, index);
+                    })}
+                  </ul>
+                ) : (
+                  <div className="skills__grid">
+                    {section.items.map((item) => {
+                      const index = globalIndex++;
+                      return renderSectionItem(section.type, item, index);
+                    })}
                   </div>
-                  <div className="skills__item-bar">
-                    <div
-                      className="skills__item-progress"
-                      style={{ width: `${skill.level}%` }}
-                    ></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Outils & Environnement */}
-          <section className="skills__section">
-            <h2 className="section-title">{content?.skills?.subtitle2}</h2>
-
-            <div className="skills__tools skills__row">
-              {tools.map((tool, i) => (
-                <div
-                  key={tool.name}
-                  ref={(el) =>
-                    (refs.current[languagesFrameworks.length + i] = el)
-                  }
-                  data-index={`tool-${i}`}
-                  className={`skills__tool ${
-                    visible.includes(`tool-${i}`) ? "visible" : ""
-                  }`}
-                >
-                  <img
-                    src={tool.logo}
-                    alt={tool.name}
-                    className="skills-logo"
-                  />
-                  <p>{tool.name}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Méthodologies */}
-          <section className="skills__section">
-            <h2 className="section-title">{content?.skills?.subtitle3}</h2>
-            <div className="skills__methodologies skills__row">
-              {methodologies.map((m, i) => (
-                <div
-                  key={i}
-                  ref={(el) =>
-                    (refs.current[
-                      languagesFrameworks.length + tools.length + i
-                    ] = el)
-                  }
-                  data-index={`method-${i}`}
-                  className={`skills__methodology ${
-                    visible.includes(`method-${i}`) ? "visible" : ""
-                  }`}
-                >
-                  <h3>{m.name}</h3>
-                  <p>{m.description}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Diplômes */}
-          <section className="skills__section">
-            <h2 className="section-title">{content?.skills?.subtitle4}</h2>
-            <div className="skills__diplomas skills__row">
-              {diplomas.map((diploma, i) => {
-                const Icon = diploma.icon === "FaCode" ? FaCode : FaWarehouse;
-                return (
-                  <div
-                    key={i}
-                    ref={(el) =>
-                      (refs.current[
-                        languagesFrameworks.length +
-                          tools.length +
-                          methodologies.length +
-                          i
-                      ] = el)
-                    }
-                    data-index={`diploma-${i}`}
-                    className={`skills__diploma ${
-                      visible.includes(`diploma-${i}`) ? "visible" : ""
-                    }`}
-                  >
-                    <div className="skills__diploma-header">
-                      <Icon className="skills__diploma-icon" />
-                      <div>
-                        <h3 className="skills__diploma-title">
-                          {diploma.title}
-                        </h3>
-
-                        <span className="skills__diploma-year">
-                          {diploma.year}
-                        </span>
-                        <span className="skills__diploma-badge">
-                          {diploma.niveau}
-                        </span>
-                      </div>
-                    </div>
-                    <a
-                      href={diploma.institutionUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="skills__diploma-institution"
-                    >
-                      <img
-                        src={diploma.logo}
-                        alt={`${diploma.institution} logo`}
-                        className="skills__diploma-logo"
-                      />
-                    </a>
-
-                    <p className="skills__diploma-location">{diploma.lieux}</p>
-                    {diploma.qualification && (
-                      <p className="skills__diploma-qualification">
-                        {diploma.qualification}
-                      </p>
-                    )}
-                    {diploma.skills && (
-                      <ul className="skills__diploma-skills">
-                        {diploma.skills.map((s, idx) => (
-                          <li key={idx}>{s}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </section>
+                )}
+              </section>
+            );
+          })}
         </div>
       </div>
     </main>

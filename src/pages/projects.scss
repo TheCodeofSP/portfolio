@@ -1,72 +1,237 @@
 @use "../styles/univers/foundation/foundation.scss" as f;
 
-/* =============================
-   📄 PROJECTS — Structure générale
-============================= */
-
 .projects {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: f.$spacing-m;
 
   &__header {
+    width: 100%;
+    max-width: 1100px;
     text-align: center;
     margin-bottom: f.$spacing-s;
+
+    .page-title {
+      font-size: 2rem;
+    }
+
+    .page-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  &__intro {
+    margin: f.$spacing-s auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+
+    p {
+      margin: 0;
+      font-size: 0.96rem;
+      line-height: 1.7;
+      opacity: 0.9;
+    }
   }
 
   &__filters {
     width: 100%;
+    max-width: 1200px;
   }
 
   &__list {
     width: 100%;
     max-width: 1200px;
     display: flex;
+    flex-direction: column;
+    gap: f.$spacing-m;
+  }
+
+  &__category {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: f.$spacing-s;
+  }
+
+  &__category-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.4rem;
+    padding: 0 0 0.2rem;
+  }
+
+  &__category-title {
+    margin: 0;
+    padding-bottom: f.$spacing-xs;
+    border-bottom: 2px solid transparent;
+    font-family: var(--font-title);
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+
+  &__category-description {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    opacity: 0.82;
+  }
+
+  &__row {
+    width: 100%;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: f.$spacing-m;
+    gap: f.$spacing-s;
+  }
 
-    .projects__card-container {
-      flex: 1 1 280px;
-      max-width: 400px;
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
+  &__card-container {
+    flex: 1 1 100%;
+    max-width: 370px;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  &__toggle {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    margin-top: -0.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  &__toggle-button {
+    background: transparent;
+    margin: auto;
+    width: auto;
+    border: 1px solid transparent;
+    font-family: var(--font-subtitle);
+    font-weight: 700;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition:
+      color var(--transition-fast),
+      border var(--transition-fast),
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast);
+
+    &:hover {
+      transform: translateY(-1px);
     }
   }
 }
 
-/* Responsive */
-@media (max-width: f.$tablet) {
+/* TABLETTE */
+@media (min-width: 768px) {
   .projects {
     &__header {
       .page-title {
-        font-size: 2rem;
+        font-size: 2.4rem;
       }
+
       .page-subtitle {
+        font-size: 1.05rem;
+      }
+    }
+
+    &__intro {
+      p {
         font-size: 1rem;
       }
     }
 
     &__list {
-      gap: f.$spacing-s;
+      gap: f.$spacing-l;
+    }
+
+    &__row {
+      gap: f.$spacing-m;
+    }
+
+    &__card-container {
+      flex: 1 1 calc(50% - #{f.$spacing-m});
     }
   }
 }
 
-/* =============================
-     🎨 VARIATIONS PAR THÈME
-============================= */
+/* DESKTOP */
+@media (min-width: 1024px) {
+  .projects {
+    &__category-title {
+      font-size: 1.7rem;
+    }
 
-/* =============================
-   🍁 THEME — accueillant
-   ============================= */
+    &__category-description {
+      font-size: 0.98rem;
+    }
 
-/* =============================
-   ⚡️ THEME — ENERGIQUE
-   ============================= */
+    &__card-container {
+      flex: 1 1 320px;
+    }
+  }
+}
 
-/* =============================
-   ⚪ THEME — MINIMALISM
-   ============================= */
+/* THÈME — ACCUEILLANT */
+.theme-accueillant {
+  .projects {
+    &__category-title {
+      color: var(--primary-color);
+      border-bottom-color: rgba(var(--primary-color-rgb), 0.22);
+    }
+
+    &__toggle-button {
+      color: var(--secondary-color);
+
+      &:hover {
+        color: var(--accent-color);
+      }
+    }
+  }
+}
+
+/* THÈME — ENERGIQUE */
+.theme-energique {
+  .projects {
+    &__category-title {
+      color: var(--primary-color);
+      border-bottom-color: rgba(var(--primary-color-rgb), 0.34);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    &__toggle-button {
+      color: var(--primary-color);
+
+      &:hover {
+        color: var(--accent-color);
+      }
+    }
+  }
+}
+
+/* THÈME — MINIMALISM */
+.theme-minimalism {
+  .projects {
+    &__category-title {
+      color: var(--primary-color);
+      border-bottom-color: rgba(var(--color-header-rgb), 0.14);
+      font-weight: 600;
+    }
+
+    &__toggle-button {
+      background-color: transparent;
+      color: black;
+
+      &:hover {
+        @include f.tag-hover-minimalism;
+      }
+    }
+  }
+}

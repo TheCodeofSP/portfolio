@@ -1,120 +1,214 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./intro.scss";
 import { FaSearch } from "react-icons/fa";
 
-import LogoEnergique from "../../public/images/logo/SPEnergique.svg";
-import LogoAccueillant from "../../public/images/logo/SPAccueillant.svg";
-import LogoMinimalism from "../../public/images/logo/SPMinimalism.svg";
+import LogoEnergique from "/images/logo/SPEnergique.svg";
+import LogoAccueillant from "/images/logo/SPAccueillant.svg";
+import LogoMinimalism from "/images/logo/SPMinimalism.svg";
 
-export default function Intro({ onSelectTheme, animating }) {
+const RESULTS = [
+  {
+    theme: "accueillant",
+    logo: LogoAccueillant,
+    domain: "http://thecodeofsp.fr",
+    title: "Version accueillante",
+    meta: "Pour des projets humains, chaleureux et accessibles",
+    description:
+      "Une approche douce, rassurante et élégante, idéale pour des univers où la relation, la proximité et la clarté occupent une place essentielle.",
+  },
+  {
+    theme: "energique",
+    logo: LogoEnergique,
+    domain: "http://thecodeofsp.fr",
+    title: "Version énergique",
+    meta: "Pour des projets audacieux, créatifs et dynamiques",
+    description:
+      "Une direction visuelle plus vive et plus affirmée, pensée pour des projets qui cherchent à marquer, innover et transmettre une forte personnalité.",
+  },
+  {
+    theme: "minimalism",
+    logo: LogoMinimalism,
+    domain: "http://thecodeofsp.fr",
+    title: "Version minimaliste",
+    meta: "Pour des projets clairs, structurés et contemporains",
+    description:
+      "Une présentation plus épurée, idéale lorsque la lisibilité, la structure et la sobriété doivent renforcer la crédibilité du message.",
+  },
+];
+
+const FULL_TEXT = "Sandrine, développeuse web freelance";
+
+export default function Intro({ onSelectTheme }) {
   const [typingText, setTypingText] = useState("");
-  const fullText = "Sandrine Pham, Développeuse Web";
   const [showResults, setShowResults] = useState(false);
-  const [selectedTheme, setSelectedTheme] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isSkipped, setIsSkipped] = useState(false);
+
+  const timersRef = useRef([]);
+
+  const clearAllTimers = () => {
+    timersRef.current.forEach((timer) => clearTimeout(timer));
+    timersRef.current = [];
+  };
+
+  const revealResultsSequentially = () => {
+    setShowResults(true);
+
+    RESULTS.forEach((_, index) => {
+      const timer = setTimeout(() => {
+        setVisibleCount(index + 1);
+      }, 180 * (index + 1));
+
+      timersRef.current.push(timer);
+    });
+  };
+
+  const skipAnimation = () => {
+    clearAllTimers();
+    setIsSkipped(true);
+    setTypingText(FULL_TEXT);
+    setShowResults(true);
+    setVisibleCount(RESULTS.length);
+  };
 
   useEffect(() => {
     let index = 0;
-    const interval = setInterval(() => {
-      setTypingText(fullText.slice(0, index));
-      index++;
-      if (index > fullText.length) {
-        clearInterval(interval);
-        setTimeout(() => setShowResults(true), 500);
+
+    const typeNext = () => {
+      if (index < FULL_TEXT.length) {
+        setTypingText(FULL_TEXT.slice(0, index + 1));
+        index += 1;
+
+        const timer = setTimeout(typeNext, 28);
+        timersRef.current.push(timer);
+        return;
       }
-    }, 30);
-    return () => clearInterval(interval);
+
+      const timer = setTimeout(() => {
+        revealResultsSequentially();
+      }, 450);
+
+      timersRef.current.push(timer);
+    };
+
+    typeNext();
+
+    return () => clearAllTimers();
   }, []);
 
   const applyTheme = (theme) => {
-    setSelectedTheme(theme);
     setIsTransitioning(true);
+    clearAllTimers();
 
-    // attend la fin de l'animation (ex: 500ms)
     setTimeout(() => {
       sessionStorage.setItem("theme", theme);
       onSelectTheme(theme);
-    }, 500);
+    }, 420);
+  };
+
+  const handleScreenSkip = (event) => {
+    const target = event.target;
+
+    const isInteractive =
+      target.closest("button") ||
+      target.closest("a") ||
+      target.closest(".intro__result-button");
+
+    if (isInteractive || isSkipped) return;
+
+    skipAnimation();
   };
 
   return (
-    <div className="intro-search-page">
-      <div className={`intro-content ${isTransitioning ? "fade-out" : ""}`}>
-      <div className="search-box">
-        <div className="fake-google-bar">
-          <FaSearch className="search-loupe" />
-          <span className="typing-text">{typingText}</span>
-          <span className="cursor">|</span>
-        </div>
-        <div
-          className={` ${showResults ? "visible" : ""} ${
-            animating ? "fade-out-results" : ""
-          }`}
-        >
-          {/* résultats */}
-        </div>
-      </div>
-      <div
-        className={`search-results ${showResults ? "visible" : ""} 
-        }`}
+    <main
+      className={`intro ${isTransitioning ? "intro--fade-out" : ""}`}
+      onClick={handleScreenSkip}
+    >
+      <button
+        type="button"
+        className="intro__skip"
+        onClick={skipAnimation}
+        aria-label="Passer l’animation d’introduction"
       >
-        {" "}
-        <div className="result-accueillant">
-          <button onClick={() => applyTheme("accueillant")} className="lien">
-            <div className="search-item">
-              <img
-                src={LogoAccueillant}
-                alt="logo"
-                className="search-favicon"
-              />
-              <div className="result-header">
-                <span className="lien-title">Sandrine Pham</span>
-                <span className="lien">http://thecodeofsp.fr</span>
-              </div>
-            </div>
-            <p className="result-url">Portfolio version Accueillante</p>
-          </button>
-          <p className="result-description">
-            Découvrez mon portfolio dans une version chaleureuse et élégante,
-            parfaite pour vous projeter sur un projet à dimension humaine :
-            coaching, vitrine, e-commerce…{" "}
+        Cliquer pour passer l&apos;animation
+      </button>
+
+      <div className="intro__container">
+        <header className="intro__hero">
+          <h1 className="intro__title">
+            Chaque Ambition est unique. L’expérience devrait l’être aussi !
+          </h1>
+        </header>
+
+        <section className="intro__search" aria-label="Recherche simulée">
+          <div className="intro__searchbar">
+            <FaSearch className="intro__search-icon" aria-hidden="true" />
+            <span className="intro__typing-text">{typingText}</span>
+
+            {!isSkipped && visibleCount === 0 && (
+              <span className="intro__cursor" aria-hidden="true">
+                |
+              </span>
+            )}
+          </div>
+
+          <p className="intro__eyebrow">Choisis l’univers qui te parle</p>
+          <p className="intro__subtitle">
+            Cette entrée met en scène une idée simple : un site web peut être
+            perçu différemment selon l’univers, le ton et les attentes du
+            projet.
           </p>
-        </div>
-        <div className="result-energique">
-          <button onClick={() => applyTheme("energique")} className="lien">
-            <div className="search-item">
-              <img src={LogoEnergique} alt="logo" className="search-favicon" />
-              <div className="result-header">
-                <span className="lien-title">Sandrine Pham</span>
-                <span className="lien">http://thecodeofsp.fr</span>
-              </div>
-            </div>
-            <p className="result-url">Portfolio version Énergique</p>
-          </button>
-          <p className="result-description">
-            Une présentation énergique et audacieuse de mon portfolio, idéale
-            pour vous projeter sur un projet innovant et créatif : start-up,
-            agence, portfolio…{" "}
-          </p>
-        </div>
-        <div className="result-minimalism">
-          <button onClick={() => applyTheme("minimalism")} className="lien">
-            <div className="search-item">
-              <img src={LogoMinimalism} alt="logo" className="search-favicon" />
-              <div className="result-header">
-                <span className="lien-title">Sandrine Pham</span>
-                <span className="lien">http://thecodeofsp.fr</span>
-              </div>
-            </div>
-            <p className="result-url">Portfolio version Minimaliste</p>
-          </button>
-          <p className="result-description">
-            Version propre et moderne de mon portfolio, parfaite pour vos
-            projets où l’information prime : santé, banque, institutionnel…{" "}
-          </p>
-        </div>
+        </section>
+
+        <section
+          className={`intro__results ${showResults ? "visible" : ""}`}
+          aria-label="Résultats de recherche simulés"
+        >
+          <ul className="intro__results-list">
+            {RESULTS.map((result, index) => (
+              <li
+                key={result.theme}
+                className={`intro__result-item ${
+                  index < visibleCount ? "visible" : ""
+                }`}
+              >
+                <article className="intro__result-card">
+                  <button
+                    type="button"
+                    onClick={() => applyTheme(result.theme)}
+                    className="intro__result-button"
+                    aria-label={`Choisir ${result.title}`}
+                  >
+                    <header className="intro__result-header">
+                      <img
+                        src={result.logo}
+                        alt=""
+                        className="intro__result-logo"
+                        aria-hidden="true"
+                      />
+
+                      <p className="intro__result-meta">
+                        <span className="intro__result-domain">
+                          {result.domain}
+                        </span>
+                        <span className="intro__result-theme">
+                          {result.meta}
+                        </span>
+                      </p>
+                    </header>
+
+                    <h2 className="intro__result-title">{result.title}</h2>
+                    <p className="intro__result-description">
+                      {result.description}
+                    </p>
+                  </button>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
-    </div>
-    </div>
+    </main>
   );
 }

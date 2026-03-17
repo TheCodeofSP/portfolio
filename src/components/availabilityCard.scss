@@ -1,0 +1,205 @@
+@use "../styles/univers/foundation/foundation.scss" as f;
+
+.availability {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+
+  &[data-show="true"] {
+    opacity: 1;
+  }
+
+  &__container {
+    width: 100%;
+    max-width: 1150px;
+    display: flex;
+    flex-direction: column;
+    gap: f.$spacing-s;
+  }
+
+  &__eyebrow {
+    margin: 0;
+    font-size: 0.78rem;
+    font-family: var(--font-subtitle);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.78;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: f.$spacing-s;
+    padding: f.$spacing-s;
+    border-radius: 20px;
+    background: var(--background-card);
+    box-shadow: var(--shadow-light);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  &__status-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  &__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.04);
+  }
+
+  &__status {
+    margin: 0;
+    font-size: 1rem;
+    font-family: var(--font-title);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  &__details {
+    margin: 0;
+    max-width: 760px;
+    line-height: 1.7;
+    opacity: 0.92;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: f.$spacing-s;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__meta-item {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.8rem 1rem;
+    border-radius: 999px;
+    font-size: 0.94rem;
+    font-weight: 600;
+    line-height: 1.35;
+    box-shadow: var(--shadow-light);
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+}
+
+/* TABLETTE */
+@media (min-width: 641px) {
+  .availability {
+    &__card {
+      padding: f.$spacing-m;
+      border-radius: 24px;
+    }
+
+    &__status {
+      font-size: 1.1rem;
+    }
+
+    &__meta {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    &__meta-item {
+      width: auto;
+    }
+  }
+}
+
+/* THEMES */
+
+.theme-accueillant {
+  .availability__card {
+    border: 1px solid color-mix(in srgb, var(--secondary-color) 18%, white);
+  }
+
+  .availability__dot {
+    background: var(--secondary-color);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--secondary-color) 14%, white);
+  }
+
+  .availability__status,
+  .availability__icon {
+    color: var(--secondary-color);
+  }
+
+  .availability__meta-item {
+    background: color-mix(in srgb, var(--secondary-color) 10%, white);
+    border: 1px solid color-mix(in srgb, var(--secondary-color) 18%, white);
+    color: var(--secondary-color);
+  }
+}
+
+.theme-energique {
+  .availability__card {
+    border: 1px solid color-mix(in srgb, var(--primary-color) 28%, white);
+    box-shadow: var(--shadow-medium);
+  }
+
+  .availability__dot {
+    background: var(--primary-color);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--primary-color) 14%, white);
+  }
+
+  .availability__status,
+  .availability__icon {
+    color: var(--primary-color);
+  }
+
+  .availability__meta-item {
+    color: var(--primary-color);
+
+    border: 1px solid color-mix(in srgb, var(--primary-color) 30%, white);
+    box-shadow: var(--shadow-medium);
+    background: var(--background-main);
+    opacity: 1;
+    filter: saturate(1);
+  }
+}
+
+.theme-minimalism {
+  .availability__card {
+    border: 1px solid color-mix(in srgb, var(--primary-color) 12%, white);
+  }
+
+  .availability__dot {
+    background: var(--primary-color);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--primary-color) 8%, white);
+  }
+
+  .availability__status,
+  .availability__icon {
+    color: var(--primary-color);
+  }
+
+  .availability__meta-item {
+    background-color: var(--background-main);
+    border: 1px solid color-mix(in srgb, var(--primary-color) 14%, white);
+    color: var(--primary-color);
+  }
+}

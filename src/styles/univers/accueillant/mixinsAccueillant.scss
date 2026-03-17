@@ -4,7 +4,7 @@
 
 /* 🌈 Hover générique pour lien accueillant */
 @mixin hover-accueillant {
-  color: var(--color-header);
+  color: var(--accent-color);
   font-weight: 700;
   &::before {
     width: 80%;

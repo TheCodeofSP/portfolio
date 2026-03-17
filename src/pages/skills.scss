@@ -1,189 +1,210 @@
 @use "../styles/univers/foundation/foundation.scss" as f;
 
-/* =============================
-   📄 SKILLS — Structure générale
-============================= */
-
 .skills {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: f.$spacing-m;
+  justify-content: center;
+
+  &__container {
+    width: 100%;
+  }
 
   &__header {
     text-align: center;
-    margin-bottom: f.$spacing-s;
+    margin-bottom: f.$spacing-m;
+  }
+
+  &__intro {
+    margin: f.$spacing-s auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: f.$spacing-s;
+
+    p {
+      margin: 0;
+      text-align: center;
+      line-height: 1.65;
+    }
   }
 
   &__content {
     display: flex;
     flex-direction: column;
-    gap: f.$spacing-m;
+    gap: f.$spacing-l;
   }
 
   &__section {
     width: 100%;
-  }
-
-  &__list {
     display: flex;
     flex-direction: column;
-    width: 100%;
     gap: f.$spacing-s;
   }
 
-  &__tools,
-  &__methodologies,
-  &__diplomas {
+  &__grid {
     display: flex;
     flex-wrap: wrap;
     gap: f.$spacing-m;
+    align-items: stretch;
     justify-content: center;
   }
 
-  &__item,
-  &__tool,
-  &__methodology,
-  &__diploma {
-    flex: 1 1 280px;
-    max-width: 350px;
-    padding: f.$spacing-s;
-    border-radius: 8px;
-    box-shadow: var(--shadow-heavy);
-    background: var(--light-color);
-    text-align: center;
+  &__card {
+    flex: 1 1 100%;
+    min-width: 0;
+    padding: f.$spacing-m;
+    border-radius: 12px;
+    background: var(--background-card);
+    box-shadow: var(--shadow-light);
     transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out,
+    transition:
+      transform 0.7s ease,
+      opacity 0.7s ease,
       box-shadow 0.3s ease;
 
     &.visible {
-      opacity: 1;
       transform: translateY(0);
+      opacity: 1;
     }
 
     &:hover {
       box-shadow: var(--shadow-medium);
     }
-  }
 
-    &__tool{
-      @media (max-width: 611px){
-        justify-content: center;
-      }
+    h3 {
+      margin-bottom: f.$spacing-xs;
     }
 
+    p {
+      margin: 0;
+      line-height: 1.6;
+    }
+  }
 
-  &__item-header {
+  &__card--stack {
+    .skills__stack-header {
+      display: flex;
+      align-items: center;
+      gap: f.$spacing-s;
+      margin-bottom: f.$spacing-s;
+    }
+  }
+
+  &__logo {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  &__tag {
+    margin: 0.2rem 0 0;
+    font-size: 0.9rem;
+    opacity: 0.75;
+  }
+
+  &__tools {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: f.$spacing-xs;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: f.$spacing-s;
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
 
-  &__item-title {
-    display: flex;
-    justify-content: space-between;
-    margin-top: f.$spacing-xs;
-    gap: f.$spacing-xs;
+  &__tool {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1rem;
+    border-radius: 999px;
+    background: var(--background-card);
+    box-shadow: var(--shadow-light);
+    transform: translateY(20px);
+    transition:
+      transform 0.7s ease,
+      opacity 0.7s ease,
+      box-shadow 0.3s ease;
+
+    &.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    &:hover {
+      box-shadow: var(--shadow-medium);
+    }
+
+    span {
+      font-weight: 500;
+    }
   }
 
-  &__item-name {
-    font-family: var(--font-subtitle);
-    font-weight: 500;
-    color: var(--primary-color);
-  }
-  &__item-level {
-    font-family: var(--font-subtitle);
-    color: var(--primary-color);
-    font-weight: bold;
-  }
-  &__item-bar {
-    height: 8px;
-    background: rgba(139, 69, 19, 0.1);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  &__item-progress {
-    height: 100%;
-    border-radius: 4px;
-    background: linear-gradient(
-      90deg,
-      var(--primary-color),
-      var(--accent-color)
-    );
-    transition: width 1s ease;
-  }
-
-  &__diploma {
+  &__card--diploma {
     text-align: left;
   }
 
   &__diploma-header {
     display: flex;
-    gap: f.$spacing-m;
-    margin-bottom: f.$spacing-xs;
     align-items: center;
+    gap: f.$spacing-s;
+    margin-bottom: f.$spacing-s;
   }
+
   &__diploma-icon {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--primary-color);
     flex-shrink: 0;
   }
-  &__diploma-title {
-    font-weight: bold;
-    font-size: 1.1rem;
+
+  &__diploma-meta {
+    font-size: 0.95rem;
+    opacity: 0.8;
   }
 
   &__diploma-logo {
-    width: 80px;
+    width: 72px;
     height: auto;
-    display: block;
+    margin-bottom: f.$spacing-s;
   }
+
+  &__diploma-link {
+    display: inline-block;
+  }
+
   &__diploma-institution,
   &__diploma-location,
   &__diploma-qualification {
-    margin: 0.4rem 0;
-    color: var(--color-main);
-    text-underline-offset: 2px;
-    text-align: justify;
-  }
-  &__diploma-skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    list-style: none;
-    padding: 0;
-    margin: 0.5rem 0;
-  }
-  &__diploma-skills li {
-    background: var(--secondary-color);
-    color: var(--background-main);
-    padding: 0.3rem 0.6rem;
-    border-radius: 8px;
-    font-size: 0.8rem;
-  }
-  &__diploma-year {
-    font-weight: 600;
-    color: var(--primary-color);
-    display: block;
+    margin: 0 0 0.45rem;
+    line-height: 1.5;
   }
 }
 
-/* =============================
-     🎨 VARIATIONS PAR THÈME
-============================= */
+/* TABLETTE */
+@media (min-width: 768px) {
+  .skills {
+    &__card {
+      flex: 1 1 calc(50% - #{f.$spacing-m});
+    }
+  }
+}
 
-/* =============================
-   🍁 THEME — ACCUEILLANT
-============================= */
+/* DESKTOP */
+@media (min-width: 1024px) {
+  .skills {
+    &__card {
+      flex: 1 1 calc(33.333% - #{f.$spacing-m});
+    }
+  }
+}
 
+/* ACCUEILLANT */
 .theme-accueillant {
   .skills {
-    &__item,
-    &__tool,
-    &__methodology,
-    &__diploma {
+    &__card,
+    &__tool {
       background-color: var(--background-card);
+
       &:hover {
         @include f.card-hover-accueillant;
       }
@@ -191,87 +212,41 @@
   }
 }
 
-.skills__tool {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.skills-logo {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-}
-
-/* =============================
-   ⚡️ THEME — ENERGIQUE
-============================= */
-
+/* ENERGIQUE */
 .theme-energique {
   .skills {
-    &__item,
-    &__tool,
-    &__methodology,
-    &__diploma {
+    &__card,
+    &__tool {
+      background-color: var(--background-header);
+      box-shadow: var(--shadow-medium);
+
       &:hover {
         @include f.hover-card-energique;
       }
-      background-color: var(--background-header);
-      box-shadow: var(--shadow-medium);
-      font-family: var(--font-subtitle);
     }
 
-    &__item-progress {
-      background: linear-gradient(
-        90deg,
-        var(--primary-color),
-        var(--accent-color)
-      );
-    }
-
-    &__item-name {
-      color: var(--color-main);
-    }
-
-    &__item-level {
+    &__diploma-icon,
+    &__tag {
       color: var(--accent-color);
-      @include f.hover-energique-tag;
-    }
-
-    &__diploma-icon {
-      @include f.hover-energique-tag;
-    }
-
-    &__diploma-skills li {
-      color: var(--color-main);
     }
   }
 }
 
-/* =============================
-   ⚪ THEME — MINIMALISM
-============================= */
-
+/* MINIMALISM */
 .theme-minimalism {
-  .skill {
-    &__item,
-    &__tool,
-    &__methodology,
-    &__diploma {
-      box-shadow: var(--shadow-heavy);
+  .skills {
+    &__card,
+    &__tool {
+      background-color: var(--background-card);
+      box-shadow: var(--shadow-light);
+
       &:hover {
         @include f.card-hover-minimalism;
       }
     }
-    &__item-name {
-      color: var(--dark-color);
-    }
-    &__item-progress {
-      background: linear-gradient(
-        90deg,
-        var(--primary-color),
-        var(--accent-color)
-      );
+
+    &__tag {
+      color: var(--color-main);
     }
   }
 }
