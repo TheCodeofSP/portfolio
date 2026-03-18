@@ -41,8 +41,8 @@
   }
 
   &__image {
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     flex-shrink: 0;
     pointer-events: none;
@@ -185,11 +185,9 @@
         @include f.btn-hover-accueillant;
       }
 
-
       &.active {
         @include f.btn-active-accueillant;
       }
-
     }
   }
 }
@@ -200,6 +198,9 @@
 
 .theme-energique {
   .floating-switcher {
+    &__image {
+      @include f.btn-active-energique;
+    }
     &__toggle {
       background: transparent;
     }
