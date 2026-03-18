@@ -66,7 +66,7 @@
   &__text {
     display: flex;
     flex-direction: column;
-    gap: f.$spacing-xs;
+    gap: f.$spacing-s;
     text-align: center;
     justify-content: center;
   }
@@ -79,6 +79,7 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
     opacity: 0.78;
+    text-align: center;
   }
 
   &__title {

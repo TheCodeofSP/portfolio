@@ -43,7 +43,6 @@ export default function Intro({ onSelectTheme }) {
   const [showResults, setShowResults] = useState(false);
   const [visibleCount, setVisibleCount] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isSkipped, setIsSkipped] = useState(false);
 
   const timersRef = useRef([]);
 
@@ -56,20 +55,15 @@ export default function Intro({ onSelectTheme }) {
     setShowResults(true);
 
     RESULTS.forEach((_, index) => {
-      const timer = setTimeout(() => {
-        setVisibleCount(index + 1);
-      }, 180 * (index + 1));
+      const timer = setTimeout(
+        () => {
+          setVisibleCount(index + 1);
+        },
+        180 * (index + 1),
+      );
 
       timersRef.current.push(timer);
     });
-  };
-
-  const skipAnimation = () => {
-    clearAllTimers();
-    setIsSkipped(true);
-    setTypingText(FULL_TEXT);
-    setShowResults(true);
-    setVisibleCount(RESULTS.length);
   };
 
   useEffect(() => {
@@ -107,33 +101,8 @@ export default function Intro({ onSelectTheme }) {
     }, 420);
   };
 
-  const handleScreenSkip = (event) => {
-    const target = event.target;
-
-    const isInteractive =
-      target.closest("button") ||
-      target.closest("a") ||
-      target.closest(".intro__result-button");
-
-    if (isInteractive || isSkipped) return;
-
-    skipAnimation();
-  };
-
   return (
-    <main
-      className={`intro ${isTransitioning ? "intro--fade-out" : ""}`}
-      onClick={handleScreenSkip}
-    >
-      <button
-        type="button"
-        className="intro__skip"
-        onClick={skipAnimation}
-        aria-label="Passer l’animation d’introduction"
-      >
-        Cliquer pour passer l&apos;animation
-      </button>
-
+    <main className={`intro ${isTransitioning ? "intro--fade-out" : ""}`}>
       <div className="intro__container">
         <header className="intro__hero">
           <h1 className="intro__title">
@@ -146,7 +115,7 @@ export default function Intro({ onSelectTheme }) {
             <FaSearch className="intro__search-icon" aria-hidden="true" />
             <span className="intro__typing-text">{typingText}</span>
 
-            {!isSkipped && visibleCount === 0 && (
+            {visibleCount === 0 && (
               <span className="intro__cursor" aria-hidden="true">
                 |
               </span>

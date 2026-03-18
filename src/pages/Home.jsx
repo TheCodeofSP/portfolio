@@ -95,7 +95,6 @@ const Home = ({ theme }) => {
 
               <div className="home__text">
                 <h1 className="home__title">{homeContent?.title}</h1>
-                <p className="home__subtitle">{homeContent?.subtitle}</p>
                 <p className="home__intro">{homeContent?.content}</p>
                 <p className="home__accroche">{homeContent?.accroche}</p>
 

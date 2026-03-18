@@ -11,21 +11,9 @@
 
   &__header {
     text-align: center;
-    margin-bottom: f.$spacing-m;
+    margin-bottom: f.$spacing-s;
   }
 
-  &__intro {
-    margin: f.$spacing-s auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: f.$spacing-s;
-
-    p {
-      margin: 0;
-      text-align: center;
-      line-height: 1.65;
-    }
-  }
 
   &__content {
     display: flex;
@@ -37,13 +25,12 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: f.$spacing-s;
   }
 
   &__grid {
     display: flex;
     flex-wrap: wrap;
-    gap: f.$spacing-m;
+    gap: f.$spacing-s;
     align-items: stretch;
     justify-content: center;
   }
@@ -51,7 +38,7 @@
   &__card {
     flex: 1 1 100%;
     min-width: 0;
-    padding: f.$spacing-m;
+    padding: f.$spacing-s;
     border-radius: 12px;
     background: var(--background-card);
     box-shadow: var(--shadow-light);
@@ -68,10 +55,6 @@
 
     &:hover {
       box-shadow: var(--shadow-medium);
-    }
-
-    h3 {
-      margin-bottom: f.$spacing-xs;
     }
 
     p {
@@ -165,7 +148,6 @@
   &__diploma-logo {
     width: 72px;
     height: auto;
-    margin-bottom: f.$spacing-s;
   }
 
   &__diploma-link {

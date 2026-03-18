@@ -49,8 +49,7 @@
     "process": {
       "eyebrow": "Process de collaboration",
       "title": "Un projet structuré, de l’idée à la mise en ligne",
-      "intro": "Je travaille avec un cadre clair pour que chaque étape soit comprise, validée et utile à l’avancement de ton projet.",
-      "ctaNote": "De la première prise de contact jusqu’à la livraison, tu sais où on va et comment on y va.",
+      "intro": "De la première prise de contact jusqu’à la livraison, tu sais où on va et comment on y va.",
       "steps": [
         {
           "number": "01",
@@ -197,8 +196,7 @@
       "pageTitle": "Contact",
       "title": "Parlons de ton projet",
       "paragraphs": [
-        "Tu as un site vitrine à créer, une interface à développer ou un projet web à faire évoluer ? Écris-moi via ce formulaire.",
-        "J’accorde une attention particulière à chaque demande, avec une approche claire, structurée et collaborative."
+        "Tu as un site vitrine à créer, une interface à développer ou un projet web à faire évoluer ? Écris-moi via ce formulaire."
       ]
     },
     "form": {
@@ -494,22 +492,19 @@
     },
     "title": "Projets",
     "subtitle": "Une sélection de projets pour illustrer mon approche du web : clarté, expérience utilisateur, structure et adaptation au besoin",
-    "intro": [
-      "Chaque projet présenté ici illustre une facette de ma pratique : répondre à un besoin concret, construire une interface cohérente et faire dialoguer esthétique, lisibilité et logique technique.",
-      "Les projets professionnels montrent ma capacité à concevoir pour un vrai contexte d’usage. Les projets personnels prolongent cette démarche avec plus d’exploration. Les projets de formation permettent de suivre l’évolution de mes bases et de ma méthode."
-    ],
+    "intro": "Les projets professionnels montrent ma capacité à concevoir pour un vrai contexte d’usage. Les projets personnels prolongent cette démarche avec plus d’exploration. Les projets de formation permettent de suivre l’évolution de mes bases et de ma méthode.",
     "categories": {
       "professionnels": {
         "title": "Projets professionnels",
-        "description": "Des réalisations conçues pour répondre à un besoin réel. Ces projets illustrent ma capacité à structurer un site ou une application, concevoir une interface claire et proposer une solution web adaptée à un objectif concret."
+        "description": "Des réalisations conçues pour répondre à un besoin réel."
       },
       "personnels": {
         "title": "Projets personnels",
-        "description": "Des projets qui me permettent d’explorer de nouvelles idées, d’expérimenter des architectures ou d’améliorer mes méthodes de développement. Ils reflètent mon évolution et ma curiosité technique."
+        "description": "Des projets qui me permettent d’explorer de nouvelles idées et reflètent mon évolution et ma curiosité technique."
       },
       "formations": {
         "title": "Projets de formation",
-        "description": "Des projets réalisés dans le cadre de mon apprentissage du développement web. Ils constituent le socle technique sur lequel s’appuient mes réalisations actuelles."
+        "description": "Des projets réalisés dans le cadre de mon apprentissage du développement web."
       }
     },
     "filters": {

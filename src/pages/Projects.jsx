@@ -71,7 +71,8 @@ export default function Projects() {
     filteredProfessionnels.length;
 
   const renderFormationToggle = () => {
-    if (hasActiveFilters || (projects?.formations || []).length === 0) return null;
+    if (hasActiveFilters || (projects?.formations || []).length === 0)
+      return null;
 
     return (
       <section className="projects__toggle">
@@ -98,7 +99,9 @@ export default function Projects() {
       <section id={id} className="projects__category">
         <header className="projects__category-head">
           <h2 className="projects__category-title">{category?.title}</h2>
-          <p className="projects__category-description">{category?.description}</p>
+          <p className="projects__category-description">
+            {category?.description}
+          </p>
         </header>
 
         <div className="projects__row">
@@ -118,11 +121,10 @@ export default function Projects() {
         <h1 className="page-title">{pageData?.title}</h1>
         <p className="page-subtitle">{pageData?.subtitle}</p>
 
-        <section className="projects__intro" aria-label="Introduction">
-          {pageData?.intro?.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
-        </section>
+        <section
+          className="projects__intro"
+          aria-label="Introduction"
+        ></section>
       </header>
 
       <section
@@ -153,7 +155,9 @@ export default function Projects() {
                 id: "projects-formations-section",
               })}
 
-            {shouldShowFormations && filteredFormations.length > 0 && renderFormationToggle()}
+            {shouldShowFormations &&
+              filteredFormations.length > 0 &&
+              renderFormationToggle()}
           </>
         )}
       </section>

@@ -13,6 +13,7 @@ import Legal from "../pages/Legal.jsx";
 import Privacy from "../pages/Privacy.jsx";
 import NotFound from "../pages/NotFound.jsx";
 import SiteMap from "../pages/SiteMap.jsx";
+import ScrollToTop from "../components/ScrollToTop.jsx";
 
 const THEME_CLASSES = [
   "theme-accueillant",
@@ -63,6 +64,7 @@ const AppRouter = ({ theme, setTheme, resetIntro }) => {
 
         <main>
           <Suspense fallback={<p>Chargement...</p>}>
+            <ScrollToTop />
             <Routes>
               <Route path="/" element={<Home theme={theme} />} />
               <Route path="/about" element={<About theme={theme} />} />

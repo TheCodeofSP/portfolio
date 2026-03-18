@@ -55,7 +55,7 @@ const FILTER_GROUPS = [
 
 const DEFAULT_OPEN_CATEGORIES = {
   impactTags: true,
-  stackPrincipale: true,
+  stackPrincipale: false,
   stackTechnique: false,
 };
 

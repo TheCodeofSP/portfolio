@@ -34,7 +34,7 @@ const Skills = () => {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
 
     refs.current.forEach((el) => {
@@ -185,14 +185,6 @@ const Skills = () => {
         <header className="skills__header header-page">
           <h1 className="page-title">{skillsData.title}</h1>
           <p className="page-subtitle">{skillsData.subtitle}</p>
-
-          {skillsData.intro?.length > 0 && (
-            <section className="skills__intro" aria-label="Introduction">
-              {skillsData.intro.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </section>
-          )}
         </header>
 
         <div className="skills__content">

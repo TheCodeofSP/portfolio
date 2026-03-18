@@ -159,7 +159,6 @@ const ProcessSection = ({ process, showContent = true, theme = "accueillant" }) 
           </h2>
 
           {process.intro && <p className="process__intro">{process.intro}</p>}
-          {process.ctaNote && <p className="process__note">{process.ctaNote}</p>}
         </header>
 
         <div className="process__timeline">
