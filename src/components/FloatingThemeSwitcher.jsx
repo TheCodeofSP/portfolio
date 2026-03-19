@@ -109,9 +109,11 @@ export default function FloatingThemeSwitcher({ theme, setTheme }) {
         className="floating-switcher__panel"
         aria-label="Choisir un autre univers visuel"
       >
-        <p className="floating-switcher__panel-title">Choisir autre un univers</p>
+        <p className="floating-switcher__panel-title">
+          Choisir un autre univers
+        </p>
 
-        <ul
+        <div
           className="floating-switcher__options"
           role="radiogroup"
           aria-label="Liste des univers visuels"
@@ -120,25 +122,25 @@ export default function FloatingThemeSwitcher({ theme, setTheme }) {
             const isActive = theme === themeKey;
 
             return (
-              <li key={themeKey} className="floating-switcher__item">
-                <button
-                  type="button"
-                  className={`floating-switcher__option ${isActive ? "active" : ""}`}
-                  onClick={() => handleThemeChange(themeKey)}
-                  role="radio"
-                  aria-checked={isActive}
-                >
-                  <span className="floating-switcher__option-title">
-                    {item.label}
-                  </span>
-                  <span className="floating-switcher__option-description">
-                    {item.shortDescription}
-                  </span>
-                </button>
-              </li>
+              <button
+                key={themeKey}
+                type="button"
+                className={`floating-switcher__option ${isActive ? "active" : ""}`}
+                onClick={() => handleThemeChange(themeKey)}
+                role="radio"
+                aria-checked={isActive}
+                aria-label={`${item.label} — ${item.shortDescription}`}
+              >
+                <span className="floating-switcher__option-title">
+                  {item.label}
+                </span>
+                <span className="floating-switcher__option-description">
+                  {item.shortDescription}
+                </span>
+              </button>
             );
           })}
-        </ul>
+        </div>
       </section>
     </aside>
   );
