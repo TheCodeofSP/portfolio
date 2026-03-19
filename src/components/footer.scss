@@ -32,6 +32,7 @@
     flex-direction: column;
     gap: f.$spacing-m;
     max-width: 1200px;
+    min-height: 280px;
     margin: 0 auto;
     padding: f.$spacing-s;
     text-align: center;
@@ -96,6 +97,8 @@
   &__logo {
     display: block;
     margin: 0 auto 10px;
+    width: 260px;
+    height: 60px;
   }
 
   &__contact-block {

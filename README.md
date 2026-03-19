@@ -119,7 +119,6 @@ src
 │ ├── Navbar
 │ ├── Intro
 │ ├── Slogan
-│ ├── HighlightCard
 │ ├── FloatingThemeSwitcher
 │ └── ProjectCard
 │

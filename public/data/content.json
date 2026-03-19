@@ -12,10 +12,10 @@
     "title": "Sandrine, Développeuse web freelance | Création de sites web sur-mesure",
     "subtitle": "Je conçois des interfaces web modernes, structurées et pensées pour valoriser ton activité.",
     "content": "Je t’accompagne dans la création de sites et d’interfaces web sur-mesure, avec une attention particulière portée à la lisibilité, à l’expérience utilisateur et à la cohérence globale du projet.",
-    "accroche": "Un projet web à construire ensemble ?",
+    "accroche": "Un projet web à construire ?",
     "slogan": "Code tes AMBITIONS !",
     "cta": {
-      "label": "Discutons de ton projet",
+      "label": "Discutons ensemble de ton projet",
       "href": "/contact",
       "note": "Site vitrine, interface web ou besoin sur-mesure : construisons une solution claire, adaptée et durable."
     },
@@ -93,8 +93,8 @@
     },
     "availability": {
       "eyebrow": "Disponibilité actuelle",
-      "status": "Disponible pour de nouveaux projets",
-      "details": "Je peux actuellement étudier de nouvelles demandes et voir avec toi si le projet correspond à mon planning et à ton besoin.",
+      "status": "Disponible pour ton projet",
+      "details": "Je peux actuellement étudier de nouvelles demandes et voir ensemble si le projet correspond à mon planning et à ton besoin.",
       "meta": [
         "Réponse sous 24 à 48h ouvrées",
         "Premier échange pour cadrer le besoin",

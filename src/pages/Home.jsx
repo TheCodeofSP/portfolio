@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Slogan from "../components/Slogan.jsx";
-import HighLightCard from "../components/HighlightCard.jsx";
 import ProcessSection from "../components/ProcessSection.jsx";
 import TrustStrip from "../components/TrustStrip.jsx";
 import AvailabilityCard from "../components/AvailabilityCard.jsx";
@@ -127,24 +126,6 @@ const Home = ({ theme }) => {
 
           <section className="home__trust-strip" data-show={showContent}>
             <TrustStrip trust={trust} showContent={showContent} />
-          </section>
-
-          <section className="home__highlights" data-show={showContent}>
-            <header className="home__highlights-head">
-              <h2 className="page-title">{homeContent?.highlights?.title}</h2>
-            </header>
-
-            <div className="home__highlights-container">
-              {highlights.map((card, index) => (
-                <HighLightCard
-                  key={index}
-                  number={card.number}
-                  title={card.title}
-                  description={card.description}
-                  ariaLabel={card.ariaLabel}
-                />
-              ))}
-            </div>
           </section>
 
           <section className="home__availability">

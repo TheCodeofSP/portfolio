@@ -299,8 +299,8 @@
       "accroche": "Développement d’une application de quiz full-stack avec enregistrement des scores en base de données.",
       "featuredHook": "Une application de quiz interactive à 3 niveaux, conçue pour engager l’utilisateur et démontrer une architecture web full-stack complète.",
       "featuredPoints": [
-        "Expérience de quiz fluide et interactive",
-        "Scores enregistrés en base de données",
+        "Expérience de quiz",
+        "Scores enregistrés",
         "Architecture React · Node.js · MongoDB"
       ],
       "summary": "Créer une application interactive avec front React, backend Node/Express et persistance des données.",
