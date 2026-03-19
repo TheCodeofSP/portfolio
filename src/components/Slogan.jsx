@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SloganEffect from "./SloganEffect.jsx";
 import "./slogan.scss";
 
@@ -8,19 +8,12 @@ const Slogan = ({
   text,
   theme = "accueillant",
   speed = 50,
-  startDelay = 500,
+  startDelay = 0,
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsVisible(true), 150);
-    return () => clearTimeout(timeout);
-  }, []);
-
   if (!text) return null;
 
   return (
-    <p className={`slogan ${isVisible ? "visible" : ""}`}>
+    <p className="slogan visible">
       <span className="slogan__title">
         <SloganEffect
           text={text}

@@ -58,8 +58,9 @@
 
   &__logo {
     display: block;
-    width: auto;
-    height: 1.1rem;
+    width: 260px;
+    height: 80px;
+
     will-change: filter;
     transition:
       filter 0.3s ease,

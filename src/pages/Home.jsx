@@ -1,25 +1,15 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import Slogan from "../components/Slogan.jsx";
 import ProcessSection from "../components/ProcessSection.jsx";
 import TrustStrip from "../components/TrustStrip.jsx";
 import AvailabilityCard from "../components/AvailabilityCard.jsx";
 import FeaturedProject from "../components/FeaturedProject.jsx";
-import useContent from "../hooks/useContent.js";
-import useProjects from "../hooks/useProjects.js";
+import content from "../data/content.json";
+import projects from "../data/projects.json";
 import "./home.scss";
 
 const Home = ({ theme }) => {
-  const { content, loading, error } = useContent();
-  const {
-    projects,
-    loading: projectsLoading,
-    error: projectsError,
-  } = useProjects();
-
-  const [showContent, setShowContent] = useState(false);
-  const [showFeaturedProject, setShowFeaturedProject] = useState(false);
-
   const ui = content?.ui;
   const homeContent = content?.home;
   const seo = homeContent?.seo;
@@ -34,7 +24,7 @@ const Home = ({ theme }) => {
       ...(projects?.personnels || []),
       ...(projects?.professionnels || []),
     ];
-  }, [projects]);
+  }, []);
 
   const featuredProject = useMemo(() => {
     return allProjects.find((project) => project.featured) || null;
@@ -51,40 +41,12 @@ const Home = ({ theme }) => {
     }
   }, [seo]);
 
-  useEffect(() => {
-    const contentTimer = setTimeout(() => setShowContent(true), 200);
-    const featuredTimer = setTimeout(() => setShowFeaturedProject(true), 450);
-
-    return () => {
-      clearTimeout(contentTimer);
-      clearTimeout(featuredTimer);
-    };
-  }, []);
-
-  if (loading || projectsLoading) {
-    return (
-      <main className="home">
-        <p>{ui?.loading || "Chargement du contenu..."}</p>
-      </main>
-    );
-  }
-
-  if (error || projectsError) {
-    return (
-      <main className="home">
-        <p>
-          {ui?.errorPrefix || "Erreur :"} {(error || projectsError)?.message}
-        </p>
-      </main>
-    );
-  }
-
   return (
     <main className="home">
       <section className="home__hero">
         <div className="home__hero-container">
           <div className="home__contentIntro">
-            <section className="home__content" data-show={showContent}>
+            <section className="home__content" data-show="true">
               <div className="home__slogan-wrapper">
                 <Slogan text={homeContent?.slogan} theme={theme} />
                 {homeContent?.eyebrow && (
@@ -107,11 +69,11 @@ const Home = ({ theme }) => {
               </div>
             </section>
 
-            <section className="home__featured" data-show={showFeaturedProject}>
+            <section className="home__featured" data-show="true">
               <FeaturedProject
                 project={featuredProject}
                 theme={theme}
-                showProject={showFeaturedProject}
+                showProject={true}
               />
             </section>
           </div>
@@ -120,19 +82,16 @@ const Home = ({ theme }) => {
             <ProcessSection
               process={process}
               theme={theme}
-              showContent={showContent}
+              showContent={true}
             />
           </section>
 
-          <section className="home__trust-strip" data-show={showContent}>
-            <TrustStrip trust={trust} showContent={showContent} />
+          <section className="home__trust-strip" data-show="true">
+            <TrustStrip trust={trust} showContent={true} />
           </section>
 
           <section className="home__availability">
-            <AvailabilityCard
-              availability={availability}
-              showContent={showContent}
-            />
+            <AvailabilityCard availability={availability} showContent={true} />
           </section>
         </div>
       </section>
