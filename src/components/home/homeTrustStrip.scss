@@ -1,0 +1,189 @@
+@use "../../styles/foundations/foundations.scss" as f;
+@use "../../styles/univers/accueillant/theme.scss" as a;
+@use "../../styles/univers/energique/theme.scss" as e;
+@use "../../styles/univers/minimaliste/theme.scss" as m;
+
+.trust-strip {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  opacity: 0;
+
+  @include f.transition-base(opacity, f.$duration-slow, f.$ease-soft);
+
+  &[data-show="true"] {
+    opacity: 1;
+  }
+
+  &__container {
+    @include f.container(f.$container-l, 0);
+    @include f.content-flow(f.$spacing-s, f.$spacing-s, f.$spacing-s);
+    text-align: center;
+  }
+
+  &__header{
+    margin-top: f.$spacing-m;
+  }
+
+  &__eyebrow {
+    @include f.eyebrow;
+    margin: 0;
+    color: var(--color-text-soft, var(--color-main));
+  }
+
+  &__title {
+    @include f.text-title;
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__list {
+    @include f.content-flow(f.$spacing-s, f.$spacing-s, f.$spacing-s);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    width: 100%;
+    padding: 0.9rem f.$spacing-s;
+    border-radius: var(--radius-badge);
+    font-size: 0.95rem;
+    font-weight: f.$weight-semibold;
+    box-shadow: var(--shadow-light);
+
+    @include f.transition-base(
+      transform box-shadow background-color border-color color,
+      f.$duration-fast,
+      f.$ease-soft
+    );
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    &:hover .trust-strip__icon {
+      transform: scale(1.1);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    font-size: f.$font-size-text;
+
+    @include f.transition-base(transform, f.$duration-fast, f.$ease-soft);
+  }
+
+  &__text {
+    line-height: 1.3;
+    text-align: left;
+  }
+}
+
+/* =============================
+   RESPONSIVE
+============================= */
+
+@include f.mobile-up {
+  .trust-strip {
+    &__list {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    &__item {
+      width: auto;
+      justify-content: center;
+      padding: 0.8rem f.$spacing-s;
+    }
+
+    &__text {
+      text-align: center;
+    }
+  }
+}
+
+/* =============================
+   THEMES
+============================= */
+
+.theme-accueillant {
+  .trust-strip {
+    &__item {
+      background: var(--background-badge);
+      border: var(--border-badge);
+      color: var(--color-badge);
+      box-shadow: var(--shadow-light);
+    }
+
+    &__title {
+      @include a.title-accueillant;
+    }
+
+    &__icon {
+      color: var(--secondary-color);
+    }
+  }
+}
+
+.theme-energique {
+  .trust-strip {
+    &__item {
+      @include e.terminal-chip;
+      font-family: var(--font-ui);
+      color: var(--color-text-soft);
+    }
+
+    &__item:hover .trust-strip__icon {
+      color: var(--accent-color-2);
+    }
+
+    &__eyebrow {
+      @include e.eyebrow-energique;
+    }
+
+    &__title {
+      @include e.title-energique;
+    }
+
+    &__icon {
+      color: var(--accent-color);
+      opacity: 0.9;
+    }
+
+    &__text {
+      color: var(--color-text-soft);
+    }
+  }
+}
+
+.theme-minimaliste {
+  .trust-strip {
+    &__item {
+      @include m.card-process(0.9rem 1rem);
+      @include m.card-hover-minimaliste;
+      color: var(--primary-color);
+      background: var (--background-card);
+      border: 1px solid var(--border-medium);
+    }
+
+    &__title {
+      @include m.title-minimaliste;
+    }
+
+    &__icon {
+      color: var(--accent-color);
+    }
+
+    &__text {
+      color: var(--primary-color);
+    }
+  }
+}

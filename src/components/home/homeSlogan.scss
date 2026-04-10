@@ -1,0 +1,59 @@
+@use "../../styles/foundations/foundations.scss" as f;
+@use "../../styles/univers/accueillant/theme.scss" as a;
+@use "../../styles/univers/energique/theme.scss" as e;
+@use "../../styles/univers/minimaliste/theme.scss" as m;
+
+.slogan {
+  display: block;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(10px);
+
+  @include f.transition-base(
+    opacity transform,
+    var(--transition-slow),
+    ease
+  );
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &__title {
+    display: block;
+    margin: 0;
+
+
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+    font-weight: f.$weight-bold;
+    text-align: center;
+  }
+}
+
+/* =============================
+   RESPONSIVE
+============================= */
+
+
+/* =============================
+   THEMES
+============================= */
+
+.theme-accueillant {
+  .slogan__title {
+    @include a.title-accueillant;
+  }
+}
+
+.theme-energique {
+  .slogan__title {
+    @include e.title-energique;
+  }
+}
+
+.theme-minimaliste {
+  .slogan__title {
+    @include m.title-minimaliste;
+  }
+}

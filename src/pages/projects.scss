@@ -1,0 +1,280 @@
+@use "../styles/foundations/foundations" as f;
+@use "../styles/univers/accueillant/theme" as a;
+@use "../styles/univers/energique/theme" as e;
+@use "../styles/univers/minimaliste/theme" as m;
+
+.projects {
+  @include f.page-layout;
+  align-items: center;
+  gap: f.$spacing-m;
+
+  &__header {
+    @include f.section-layout(f.$spacing-s, f.$spacing-s, f.$spacing-s, center);
+    text-align: center;
+  }
+
+  &__eyebrow {
+    @include f.eyebrow;
+    margin: 0;
+    color: var(--color-text-soft, var(--color-main));
+  }
+
+  &__title {
+    @include f.text-title;
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    line-height: 1.08;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__subtitle {
+    @include f.text-subtitle;
+    margin: 0;
+    font-size: f.$font-size-text;
+    color: var(--color-main);
+  }
+
+  &__description {
+    display: none;
+    margin: 0;
+    font-size: f.$font-size-text;
+    line-height: 1.7;
+    color: var(--color-main);
+    opacity: 0.92;
+  }
+
+  &__filters {
+    width: 100%;
+  }
+
+  &__list {
+    @include f.section-layout(f.$spacing-xl, f.$spacing-xl, f.$spacing-xl);
+    width: 100%;
+  }
+
+  &__category {
+    @include f.section-layout(f.$spacing-s, f.$spacing-s, f.$spacing-s);
+    width: 100%;
+  }
+
+  &__category-head {
+    @include f.content-flow(0.4rem, 0.4rem, 0.4rem);
+    padding: 0 0 0.2rem;
+    text-align: center;
+    align-items: center;
+  }
+
+  &__category-title {
+    @include f.text-title;
+    margin: 0;
+    padding-bottom: f.$spacing-xs;
+    border-bottom: 2px solid transparent;
+    font-size: clamp(1.35rem, 3vw, 1.7rem);
+    line-height: 1.2;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__category-description {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-main);
+    opacity: 0.82;
+  }
+
+  &__row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: f.$spacing-s;
+  }
+
+  &__card-container {
+    position: relative;
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: 370px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  &__card-container .project-card {
+    width: 100%;
+    max-width: none;
+  }
+
+  &__toggle {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: -0.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  &__toggle-button {
+    @include f.button-reset;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: f.$button-height-s;
+    padding: 0.7rem 1.1rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-button);
+    background: transparent;
+    font-family: var(--font-subtitle);
+    font-weight: f.$weight-bold;
+    font-size: 0.92rem;
+
+    @include f.transition-base(
+      transform box-shadow border-color background-color color,
+      var(--transition-fast),
+      ease
+    );
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+
+  &__window-label {
+    display: none;
+  }
+
+  @include f.mobile-up {
+    &__list {
+      gap: f.$spacing-xl;
+    }
+
+    &__row {
+      gap: f.$spacing-m;
+    }
+
+    &__card-container {
+      flex: 1 1 calc(50% - #{f.$spacing-m});
+    }
+  }
+
+  @include f.tablet-up {
+    &__card-container {
+      flex: 1 1 320px;
+    }
+  }
+}
+
+/* =============================
+   THÈME — ACCUEILLANT
+============================= */
+
+.theme-accueillant {
+  .projects {
+    &__title {
+      @include a.a-page-title;
+    }
+
+    &__category-title {
+      @include a.title-accueillant;
+    }
+
+    &__toggle-button {
+      @include a.button-secondary-accueillant;
+      color: var(--secondary-color);
+    }
+  }
+}
+
+/* =============================
+   THÈME — ENERGIQUE
+============================= */
+
+.theme-energique {
+  .projects {
+    &__title,
+    &__category-title {
+      @include e.title-energique;
+    }
+
+    &__eyebrow {
+      @include e.eyebrow-energique;
+    }
+
+    &__category-title {
+      border-bottom-color: rgba(var(--primary-color-rgb), 0.34);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    &__toggle-button {
+      @include e.button-secondary-energique;
+      color: var(--primary-color);
+    }
+
+    &__card-container {
+      @include e.terminal-window(0.85rem, 38px);
+      @include e.card-hover-energique;
+      position: relative;
+      padding: 38px 0 0;
+      overflow: visible;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(var(--primary-color-rgb), 0.06),
+          rgba(var(--accent-color-rgb), 0.025)
+        ),
+        var(--background-card);
+    }
+
+    &__card-container .project-card {
+      width: 100%;
+      max-width: none;
+      height: 580px;
+    }
+
+    &__card-container .project-card__face {
+      border-radius: 0 0 calc(var(--radius-card) - 4px)
+        calc(var(--radius-card) - 4px);
+    }
+
+    &__window-label {
+      display: inline-flex;
+      position: absolute;
+      top: 0.85rem;
+      left: 1rem;
+      z-index: 4;
+      pointer-events: none;
+
+      @include e.window-label-energique;
+      @include f.window-label;
+    }
+  }
+}
+
+/* =============================
+   THÈME — MINIMALISTE
+============================= */
+
+.theme-minimaliste {
+  .projects {
+    &__title,
+    &__category-title {
+      @include m.title-minimaliste;
+    }
+
+    &__category-title {
+      border-bottom-color: rgba(var(--color-header-rgb), 0.14);
+      font-weight: f.$weight-semibold;
+    }
+
+    &__toggle-button {
+      @include m.button-secondary-minimaliste;
+      color: var(--primary-color);
+      background: var(--background-card);
+    }
+  }
+}
+
+.projects .reveal {
+  width: 100%;
+}

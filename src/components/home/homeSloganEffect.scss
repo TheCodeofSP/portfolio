@@ -1,0 +1,98 @@
+@use "../../styles/foundations/foundations.scss" as f;
+@use "../../styles/univers/accueillant/theme.scss" as a;
+@use "../../styles/univers/energique/theme.scss" as e;
+@use "../../styles/univers/minimaliste/theme.scss" as m;
+
+.slogan-effect {
+  display: inline-flex;
+  max-width: 100%;
+
+  &__line {
+    display: inline-flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    white-space: normal;
+    word-break: break-word;
+
+    @include f.text-title;
+
+    font-size: f.$font-size-title;
+    font-weight: f.$weight-black;
+  }
+
+  &__text {
+    display: inline;
+  }
+
+  &__prompt {
+    flex-shrink: 0;
+    margin-right: 0.4rem;
+  }
+
+  &__cursor {
+    display: inline-block;
+    flex-shrink: 0;
+    animation: slogan-blink 1s steps(1) infinite;
+  }
+}
+
+@include f.tablet-up {
+  .slogan-effect {
+    &__line {
+      font-size: f.$font-size-title-large;
+    }
+  }
+}
+
+/* =============================
+   THEMES
+============================= */
+
+/* 🍁 ACCUEILLANT */
+.slogan-effect--accueillant {
+  .slogan-effect__line {
+    @include a.title-accueillant;
+  }
+
+  .slogan-effect__cursor {
+    width: 2px;
+    height: 1em;
+    margin-left: 3px;
+    border-radius: 1px;
+    background-color: var(--primary-color);
+  }
+}
+
+/* ⚡ ENERGIQUE */
+.slogan-effect--energique {
+  .slogan-effect__line {
+    @include e.title-energique;
+    font-size: 0.95em;
+  }
+
+  .slogan-effect__prompt {
+    color: var(--accent-color-2);
+  }
+
+  .slogan-effect__cursor {
+    width: 0.55em;
+    height: 1em;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    background-color: var(--accent-color-2);
+    box-shadow: 0 0 4px var(--accent-color-2);
+  }
+}
+
+.slogan-effect--minimaliste {
+  .slogan-effect__line {
+    @include m.title-minimaliste;
+    animation: none;
+  }
+
+  .slogan-effect__cursor {
+    display: none;
+  }
+}

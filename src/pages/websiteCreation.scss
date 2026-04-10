@@ -1,0 +1,724 @@
+@use "../styles/foundations/foundations" as f;
+@use "../styles/univers/accueillant/theme" as a;
+@use "../styles/univers/energique/theme" as e;
+@use "../styles/univers/minimaliste/theme" as m;
+
+.websiteCreation {
+  @include f.page-layout;
+
+  &__hero {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__container {
+    @include f.section-layout(f.$spacing-xl, f.$spacing-xl, f.$spacing-xl);
+  }
+
+  /* =============================
+     BLOCS PRINCIPAUX
+  ============================= */
+
+  &__intro,
+  &__problem,
+  &__solution,
+  &__pricing,
+  &__comparison,
+  &__process,
+  &__faq,
+  &__availability,
+  &__final-cta,
+  &__section {
+    width: 100%;
+    min-width: 0;
+  }
+
+  &__problem,
+  &__solution,
+  &__pricing,
+  &__comparison,
+  &__faq,
+  &__section {
+    @include f.section-layout(f.$spacing-m, f.$spacing-m, f.$spacing-m);
+  }
+
+  /* =============================
+     HERO
+  ============================= */
+
+  &__intro {
+    @include f.content-flow(f.$spacing-s, f.$spacing-s, f.$spacing-s);
+    margin-inline: auto;
+    text-align: center;
+    align-items: center;
+  }
+
+  &__eyebrow {
+    @include f.eyebrow;
+    margin: 0;
+    text-align: center;
+    color: var(--color-text-soft, var(--color-main));
+  }
+
+  &__title {
+    @include f.text-title;
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.08;
+    text-align: center;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__subtitle {
+    @include f.text-subtitle;
+    margin: 0;
+    font-size: f.$font-size-text;
+    color: var(--color-main);
+  }
+
+  &__description {
+    display: none;
+    margin: 0;
+    font-size: f.$font-size-text;
+    line-height: f.$line-height-relaxed;
+    text-align: center;
+    color: var(--color-main);
+    opacity: 0.92;
+  }
+
+  /* =============================
+     HEADER DE SECTION
+  ============================= */
+
+  &__section-header {
+    @include f.section-header;
+  }
+
+  &__section-title {
+    @include f.text-title;
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.15;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__section-description {
+    margin: 0;
+    max-width: 70ch;
+    line-height: f.$line-height-relaxed;
+    color: var(--color-main);
+    opacity: 0.9;
+  }
+
+  /* =============================
+     LISTE SIMPLE
+  ============================= */
+
+  &__problem-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: f.$spacing-s;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__problem-item {
+    @include f.surface-base(1rem 1.1rem);
+    min-height: 100%;
+    line-height: 1.6;
+    font-weight: f.$weight-medium;
+  }
+
+  /* =============================
+     CARTES
+  ============================= */
+
+  &__solution-grid,
+  &__cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: f.$spacing-m;
+  }
+
+  &__solution-card,
+  &__card-item {
+    @include f.surface-base(1.3rem);
+    @include f.content-flow(f.$spacing-xs, f.$spacing-xs, f.$spacing-xs);
+    height: 100%;
+
+    p {
+      margin: 0;
+      line-height: 1.65;
+      opacity: 0.92;
+    }
+  }
+
+  /* =============================
+     PRICING
+  ============================= */
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: f.$spacing-m;
+  }
+
+  &__card {
+    @include f.surface-base(1.5rem);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: f.$spacing-m;
+    min-height: 100%;
+    border: 1px solid var(--border-subtle);
+  }
+
+  &__card--highlighted {
+    border-width: 2px;
+    transform: translateY(-2px);
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    margin: 0 0 0.6rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-badge);
+    font-size: f.$font-size-2xs;
+    line-height: 1;
+    font-family: var(--font-subtitle);
+    font-weight: f.$weight-bold;
+    letter-spacing: 0.02em;
+  }
+
+  &__card-head {
+    @include f.content-flow(f.$spacing-xs, f.$spacing-xs, f.$spacing-xs);
+  }
+
+  &__card-title {
+    @include f.text-title;
+    margin: 0.6rem 0 0.6rem;
+    font-size: clamp(1.35rem, 2.5vw, 1.6rem);
+    line-height: 1.1;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__card-tagline {
+    margin: 0;
+    font-size: f.$font-size-text;
+    line-height: 1.6;
+    font-weight: f.$weight-semibold;
+    font-family: var(--font-subtitle);
+  }
+
+  &__price {
+    margin: 0;
+    font-size: clamp(1.3rem, 2vw, 1.5rem);
+    font-weight: f.$weight-bold;
+    font-family: var(--font-subtitle);
+    white-space: nowrap;
+  }
+
+  &__asterisk {
+    margin-left: 0.1rem;
+    font-size: 0.9em;
+    vertical-align: super;
+    line-height: 1;
+  }
+
+  &__price-notes {
+    @include f.content-flow(0.2rem, 0.2rem, 0.2rem);
+    gap: 0;
+  }
+
+  &__price-note {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+
+  &__block {
+    @include f.content-flow(f.$spacing-xs, f.$spacing-xs, f.$spacing-xs);
+  }
+
+  &__block-title {
+    margin: 0;
+    font-size: f.$font-size-text;
+    font-weight: f.$weight-bold;
+    font-family: var(--font-subtitle);
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__list-items {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+
+    li {
+      line-height: 1.6;
+    }
+  }
+
+  &__result {
+    @include f.content-flow(f.$spacing-xs, f.$spacing-xs, f.$spacing-xs);
+    padding: 1rem;
+    border-radius: var(--radius-card);
+    background: rgba(0, 0, 0, 0.03);
+
+    p {
+      margin: 0;
+      line-height: 1.6;
+    }
+  }
+  &__window-label {
+    display: none;
+  }
+
+  /* =============================
+     CTA
+  ============================= */
+
+  &__cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    min-height: f.$button-height-m;
+    padding: 0.9rem 1.35rem;
+    text-decoration: none;
+    font-weight: f.$weight-bold;
+    font-family: var(--font-subtitle);
+    margin-top: auto;
+  }
+
+  /* =============================
+     TABLEAU DE COMPARAISON
+  ============================= */
+
+  &__comparison-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-subtle);
+    background: var(--background-card);
+  }
+
+  &__comparison-table {
+    width: 100%;
+    min-width: 620px;
+    border-collapse: collapse;
+    background: var(--background-card);
+
+    th,
+    td {
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-subtle);
+      line-height: 1.5;
+      vertical-align: top;
+    }
+
+    thead th {
+      font-family: var(--font-subtitle);
+      font-weight: f.$weight-bold;
+      color: var(--color-text-strong, var(--color-main));
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    tbody tr:last-child th,
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    tbody th {
+      width: 28%;
+      font-family: var(--font-subtitle);
+      font-weight: f.$weight-bold;
+      color: var(--color-text-strong, var(--color-main));
+    }
+  }
+
+  /* =============================
+     FAQ
+  ============================= */
+
+  &__faq-list {
+    display: grid;
+    gap: f.$spacing-s;
+  }
+
+  &__faq-item {
+    @include f.surface-base(1.2rem);
+    height: 100%;
+    border: 1px solid var(--border-subtle);
+  }
+
+  &__faq-question {
+    margin: 0 0 0.5rem;
+    font-size: f.$font-size-text;
+    line-height: 1.4;
+    font-family: var(--font-subtitle);
+    font-weight: f.$weight-bold;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__faq-answer {
+    margin: 0;
+    line-height: 1.65;
+    opacity: 0.92;
+  }
+
+  /* =============================
+     FINAL CTA
+  ============================= */
+
+  &__final-cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__final-cta-content {
+    @include f.final-cta-content;
+  }
+
+  &__final-cta-title {
+    @include f.text-title;
+    margin: 0 0 1rem;
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+    line-height: 1.2;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__final-cta-actions {
+    @include f.cluster(f.$spacing-s, center, center, wrap);
+  }
+
+  /* =============================
+     WINDOW LABEL
+  ============================= */
+
+  &__window-label {
+    display: none;
+  }
+
+  /* =============================
+     RESPONSIVE
+  ============================= */
+
+  @include f.mobile-up {
+    &__container {
+      gap: f.$spacing-l;
+    }
+
+    &__problem-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    &__list,
+    &__solution-grid,
+    &__cards-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
+    }
+
+    &__card-head {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: f.$spacing-s;
+    }
+
+    &__faq-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
+    }
+  }
+
+  @include f.tablet-up {
+    &__solution-grid,
+    &__cards-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    &__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    &__final-cta-content {
+      padding: 2rem;
+    }
+  }
+}
+
+/* =============================
+   THEMES
+============================= */
+
+.theme-accueillant {
+  .websiteCreation {
+    &__title {
+      @include a.a-page-title;
+    }
+
+    &__problem-item,
+    &__solution-card,
+    &__card-item,
+    &__card,
+    &__faq-item {
+      @include a.card-editoriale;
+      @include a.card-hover-accueillant;
+    }
+
+    &__final-cta-content {
+      @include a.card-editoriale;
+      font-family: var(--font-subtitle);
+      border: 1px solid var(--background-footer);
+    }
+
+    &__final-cta-actions {
+      color: var(--accent-color);
+    }
+
+    &__comparison-table-wrapper {
+      border-color: var(--border-subtle);
+      box-shadow: var(--shadow-light);
+    }
+
+    &__comparison-table thead th {
+      background: rgba(var(--secondary-color-rgb), 0.06);
+    }
+
+    &__result {
+      background: var(--background-badge);
+      border: var(--border-badge);
+      color: var(--color-badge);
+    }
+
+    &__card-tagline,
+    &__price,
+    &__eyebrow {
+      color: var(--secondary-color);
+    }
+
+    &__badge {
+      background: rgba(var(--secondary-color-rgb), 0.12);
+      color: var(--secondary-color);
+    }
+
+    &__card--highlighted {
+      border-color: var(--border-medium);
+      box-shadow: var(--shadow-medium);
+    }
+
+    &__cta-button--primary {
+      @include a.button-accueillant;
+    }
+
+    &__cta-button--secondary {
+      @include a.button-secondary-accueillant;
+    }
+
+
+    &__section-title,
+    &__title,
+    &__card-title,
+    &__final-cta-title {
+      @include a.title-accueillant;
+    }
+  }
+}
+
+.theme-energique {
+  .websiteCreation {
+    &__card {
+      @include e.panel-terminal;
+      @include e.card-hover-energique;
+    }
+
+    &__final-cta-content {
+      @include e.panel-terminal;
+    }
+
+    &__problem-item,
+    &__solution-card,
+    &__card-item,
+    &__faq-item {
+      @include e.terminal-window(1.2rem, 38px);
+      @include e.card-hover-energique;
+      position: relative;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(var(--primary-color-rgb), 0.06),
+          rgba(var(--accent-color-rgb), 0.025)
+        ),
+        var(--background-card);
+    }
+
+    &__comparison-table-wrapper {
+      @include e.terminal-frame;
+      border-radius: var(--radius-panel);
+      overflow: hidden;
+    }
+
+    &__comparison-table {
+      background: var(--background-card);
+
+      thead th {
+        background: rgba(var(--primary-color-rgb), 0.08);
+      }
+    }
+
+    &__result {
+      @include e.terminal-surface;
+      border-radius: var(--radius-card);
+      color: var(--color-main);
+      box-shadow: none;
+    }
+
+    &__window-label {
+      @include e.window-label-energique;
+      @include f.window-label;
+    }
+
+    &__problem-item,
+    &__solution-card,
+    &__card-item,
+    &__faq-item {
+      color: var(--color-main);
+    }
+
+    &__card-tagline,
+    &__price {
+      color: var(--primary-color);
+    }
+
+    &__eyebrow {
+      @include e.eyebrow-energique;
+    }
+
+    &__badge {
+      @include e.terminal-chip;
+      color: var(--accent-color-3);
+      text-shadow:
+        0 0 4px rgba(var(--accent-color-3-rgb), 0.7),
+        0 0 14px rgba(var(--accent-color-3-rgb), 0.35);
+    }
+
+    &__card--highlighted {
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-medium);
+    }
+
+    &__cta-button--primary {
+      @include e.button-energique;
+    }
+
+    &__cta-button--secondary {
+      @include e.button-secondary-energique;
+    }
+
+    &__section-title,
+    &__title,
+    &__card-title,
+    &__final-cta-title {
+      @include e.title-energique;
+    }
+
+    &__block-title,
+    &__faq-question {
+      @include e.terminal-window-title;
+      color: var(--color-header);
+    }
+
+    &__final-cta-content {
+      background: rgba(var(--primary-color-rgb), 0.06);
+    }
+  }
+
+  &__window-label {
+    @include e.window-label-energique;
+    @include f.window-label;
+  }
+}
+
+.theme-minimaliste {
+  .websiteCreation {
+    &__problem-item,
+    &__solution-card,
+    &__card-item,
+    &__card,
+    &__faq-item {
+      @include m.card-process;
+      @include m.card-hover-minimaliste;
+    }
+
+    &__comparison-table-wrapper {
+      @include m.technical-frame;
+      border-radius: var(--radius-panel);
+      overflow: hidden;
+    }
+
+    &__comparison-table thead th {
+      background: rgba(var(--primary-color-rgb), 0.03);
+    }
+
+    &__result {
+      background: rgba(var(--accent-color-rgb), 0.04);
+      border: 1px solid rgba(var(--accent-color-rgb), 0.12);
+    }
+
+    &__card-tagline {
+      color: var(--accent-color-2);
+    }
+
+    &__price,
+    &__eyebrow {
+      color: var(--primary-color);
+    }
+
+    &__badge {
+      background: rgba(var(--primary-color-rgb), 0.08);
+      color: var(--primary-color);
+    }
+
+    &__card--highlighted {
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-medium);
+    }
+
+    &__cta-button--primary {
+      @include m.button-minimaliste;
+    }
+
+    &__cta-button--secondary {
+      @include m.button-secondary-minimaliste;
+    }
+
+    &__section-title,
+    &__title,
+    &__card-title,
+    &__final-cta-title {
+      @include m.title-minimaliste;
+    }
+
+    &__final-cta-content {
+      @include m.card-process;
+      background: var(--background-card);
+    }
+  }
+}
+
+.websiteCreation {
+  .reveal {
+    width: 100%;
+  }
+}

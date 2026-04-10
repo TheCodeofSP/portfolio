@@ -1,0 +1,434 @@
+@use "../styles/foundations/foundations" as f;
+@use "../styles/univers/accueillant/theme" as a;
+@use "../styles/univers/energique/theme" as e;
+@use "../styles/univers/minimaliste/theme" as m;
+
+.freelance-development {
+  @include f.page-layout;
+  justify-content: center;
+
+  &__container {
+    @include f.section-layout(f.$spacing-xl, f.$spacing-xl, f.$spacing-xl);
+  }
+
+  &__hero,
+  &__section,
+  &__availability,
+  &__final-cta {
+    width: 100%;
+    min-width: 0;
+  }
+
+  &__section {
+    @include f.section-layout(f.$spacing-m, f.$spacing-m, f.$spacing-m);
+  }
+
+  &__hero {
+    @include f.content-flow(f.$spacing-s, f.$spacing-s, f.$spacing-s);
+    margin-inline: auto;
+    text-align: center;
+    align-items: center;
+  }
+
+  &__hero-content {
+    @include f.content-flow(f.$spacing-s, f.$spacing-s, f.$spacing-s);
+    margin-inline: auto;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__eyebrow {
+    @include f.eyebrow;
+    margin: 0;
+    color: var(--color-text-soft, var(--color-main));
+  }
+
+  &__title {
+    @include f.text-title;
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.08;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__subtitle {
+    @include f.text-subtitle;
+    margin: 0;
+    font-size: f.$font-size-text;
+    color: var(--color-main);
+  }
+
+  &__description {
+    display: none;
+  }
+
+  &__note,
+  &__profile-content p {
+    margin: 0;
+    line-height: 1.7;
+    opacity: 0.92;
+  }
+
+  &__note {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    text-align: center;
+  }
+
+  &__hero-actions {
+    @include f.cluster(f.$spacing-s, center, center, wrap);
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: f.$button-height-m;
+    padding: 0.9rem 1.35rem;
+    text-decoration: none;
+    font-weight: f.$weight-bold;
+    font-family: var(--font-subtitle);
+  }
+
+  &__section-header {
+    @include f.section-header;
+  }
+
+  &__section-title {
+    @include f.text-title;
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.15;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__grid,
+  &__stack-groups {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: f.$spacing-m;
+  }
+
+  &__card,
+  &__stack-group,
+  &__profile {
+    position: relative;
+    @include f.surface-base(1.3rem);
+    min-height: 100%;
+    border: 1px solid var(--border-subtle);
+    transition:
+      box-shadow var(--transition-fast),
+      border-color var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+
+  &__card,
+  &__stack-group {
+    @include f.content-flow(f.$spacing-xs, f.$spacing-xs, f.$spacing-xs);
+  }
+
+  &__card-title,
+  &__stack-title {
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.3;
+    font-family: var(--font-subtitle);
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__card p,
+  &__stack-group p {
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  &__tags {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  &__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.7rem 0.95rem;
+    border-radius: var(--radius-badge);
+    background: rgba(0, 0, 0, 0.04);
+    font-size: 0.92rem;
+    line-height: 1.2;
+  }
+
+  &__tag-logo {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  &__profile {
+    padding: 1.4rem;
+  }
+
+  &__profile-intro {
+    margin: 0 0 1rem;
+    font-weight: f.$weight-semibold;
+    line-height: 1.7;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__profile-content {
+    @include f.content-flow(0.8rem, 0.8rem, 0.8rem);
+    gap: 0;
+  }
+
+  &__availability {
+    width: 100%;
+  }
+
+  &__final-cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__final-cta-content {
+    @include f.final-cta-content;
+  }
+
+  &__final-cta-title {
+    @include f.text-title;
+    margin: 0 0 1rem;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    line-height: 1.2;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__window-label {
+    display: none;
+  }
+
+  .reveal {
+    width: 100%;
+  }
+}
+
+@include f.mobile-up {
+  .freelance-development {
+    &__container {
+      gap: f.$spacing-l;
+    }
+
+    &__grid,
+    &__stack-groups {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
+    }
+  }
+}
+
+@include f.tablet-up {
+  .freelance-development {
+    &__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    &__final-cta-content {
+      padding: 2rem;
+    }
+  }
+}
+
+/* =============================
+   THEMES
+============================= */
+
+.theme-accueillant {
+  .freelance-development {
+    &__title {
+      @include a.a-page-title;
+    }
+
+    &__card,
+    &__stack-group,
+    &__profile {
+      @include a.card-editoriale;
+      @include a.card-hover-accueillant;
+    }
+
+    &__final-cta-content {
+      @include a.card-editoriale;
+    }
+
+    &__tag {
+      background: rgba(var(--secondary-color-rgb), 0.08);
+      border: 1px solid rgba(var(--secondary-color-rgb), 0.12);
+      color: var(--secondary-color);
+    }
+
+    &__cta--primary {
+      @include a.button-accueillant;
+    }
+
+    &__cta--secondary {
+      @include a.button-secondary-accueillant;
+    }
+
+    &__eyebrow,
+    &__subtitle,
+    &__stack-title {
+      color: var(--secondary-color);
+    }
+
+    &__title,
+    &__section-title,
+    &__final-cta-title {
+      @include a.title-accueillant;
+    }
+
+    &__final-cta-content {
+      @include a.card-editoriale;
+      font-family: var(--font-subtitle);
+      border: 1px solid var(--background-footer);
+    }
+
+    &__hero-actions {
+      color: var(--accent-color);
+    }
+  }
+}
+
+.theme-energique {
+  .freelance-development {
+    &__card,
+    &__stack-group {
+      @include e.terminal-window(1.2rem, 38px);
+      @include e.card-hover-energique;
+      position: relative;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(var(--primary-color-rgb), 0.06),
+          rgba(var(--accent-color-rgb), 0.025)
+        ),
+        var(--background-card);
+    }
+
+    &__profile {
+      @include e.terminal-window(1.3rem, 38px);
+      @include e.card-hover-energique;
+      position: relative;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(var(--primary-color-rgb), 0.06),
+          rgba(var(--accent-color-rgb), 0.025)
+        ),
+        var(--background-card);
+      color: var(--primary-color);
+      border-color: rgba(var(--primary-color-rgb), 0.25);
+    }
+
+    &__final-cta-content {
+      @include e.panel-terminal;
+      background: rgba(var(--primary-color-rgb), 0.06);
+    }
+
+    &__window-label {
+      @include e.window-label-energique;
+      @include f.window-label;
+    }
+
+    &__eyebrow {
+      @include e.eyebrow-energique;
+    }
+
+    &__tag {
+      @include e.terminal-chip;
+      color: var(--color-main);
+    }
+
+    &__cta--primary {
+      @include e.button-energique;
+    }
+
+    &__cta--secondary {
+      @include e.button-secondary-energique;
+    }
+
+    &__profile-intro,
+    &__profile-content p {
+      color: var(--color-main);
+    }
+
+    &__stack-title {
+      color: var(--primary-color);
+    }
+
+    &__final-cta-content {
+      border: 1px solid var(--accent-color);
+      animation: text-glow 3s ease-in-out infinite;
+    }
+
+    &__title,
+    &__section-title,
+    &__final-cta-title {
+      @include e.title-energique;
+    }
+
+    &__card-title,
+    &__stack-title {
+      @include e.terminal-window-title;
+      color: var(--color-header);
+    }
+  }
+}
+
+.theme-minimaliste {
+  .freelance-development {
+    &__card,
+    &__stack-group,
+    &__profile {
+      @include m.card-process;
+      @include m.card-hover-minimaliste;
+    }
+
+    &__final-cta-content {
+      @include m.card-process;
+    }
+
+    &__tag {
+      background: rgba(var(--accent-color-rgb), 0.04);
+      border: 1px solid rgba(var(--accent-color-rgb), 0.12);
+      color: var(--primary-color);
+    }
+
+    &__cta--primary {
+      @include m.button-minimaliste;
+    }
+
+    &__cta--secondary {
+      @include m.button-secondary-minimaliste;
+    }
+
+    &__eyebrow,
+    &__subtitle,
+    &__stack-title {
+      color: var(--primary-color);
+    }
+
+    &__title,
+    &__section-title,
+    &__final-cta-title {
+      @include m.title-minimaliste;
+    }
+
+    &__final-cta-content {
+      background: var(--background-card);
+    }
+  }
+}

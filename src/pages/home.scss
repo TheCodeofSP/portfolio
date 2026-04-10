@@ -1,0 +1,435 @@
+@use "../styles/foundations/foundations" as f;
+@use "../styles/univers/accueillant/theme" as a;
+@use "../styles/univers/energique/theme" as e;
+@use "../styles/univers/minimaliste/theme" as m;
+
+.home {
+  @include f.page-layout(
+    f.$container-l,
+    f.$spacing-s,
+    f.$spacing-s,
+    f.$spacing-m
+  );
+
+  &__hero {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__hero-container {
+    @include f.section-layout;
+  }
+
+  /* =============================
+     BLOCS PRINCIPAUX
+  ============================= */
+
+  &__content,
+  &__featured,
+  &__audience,
+  &__benefits,
+  &__paths,
+  &__section,
+  &__trust-strip,
+  &__availability {
+    @include f.section-layout(f.$spacing-m, f.$spacing-m, f.$spacing-m, center);
+  }
+
+  &__contentIntro {
+    @include f.content-flow(f.$spacing-l, f.$spacing-l, f.$spacing-l);
+  }
+
+  /* =============================
+     HERO
+  ============================= */
+
+  &__content {
+    margin-bottom: 1rem;
+  }
+
+  &__text {
+    @include f.content-flow;
+    text-align: center;
+    justify-content: space-evenly;
+  }
+
+  &__eyebrow {
+    @include f.eyebrow;
+    margin: 0;
+    color: var(--color-text-soft, var(--color-main));
+  }
+
+  &__title {
+    @include f.text-title;
+    margin: 0;
+    font-size: f.$font-size-subtitle;
+    line-height: 1.08;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__subtitle {
+    @include f.text-subtitle;
+    margin: 0;
+    font-size: f.$font-size-text;
+    color: var(--color-main);
+  }
+
+  &__accroche {
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1.65;
+    color: var(--color-main);
+  }
+
+  &__accroche--link {
+    @include f.link-reset;
+    font-family: var(--font-title);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__supporting-text {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  &__cta-note {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+
+  /* =============================
+     CTA
+  ============================= */
+
+  &__cta-group {
+    @include f.content-flow;
+    margin: f.$spacing-xs auto;
+  }
+
+  &__cta-buttons {
+    @include f.cluster(f.$spacing-s, center, center, wrap);
+  }
+
+  &__cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: f.$button-height-m;
+    padding: 0.9rem 1.35rem;
+    text-decoration: none;
+    font-weight: f.$weight-bold;
+    font-family: var(--font-subtitle);
+  }
+
+  /* =============================
+     HEADER DE SECTION
+  ============================= */
+
+  &__section-head {
+    @include f.section-header;
+    text-align: center;
+    margin-top: f.$spacing-m;
+  }
+
+  &__section-eyebrow {
+    @include f.eyebrow;
+    margin: 0;
+    color: var(--color-text-soft, var(--color-main));
+  }
+
+  &__section-title {
+    @include f.text-title;
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  /* =============================
+     LISTES DE CARTES
+  ============================= */
+
+  &__audience-list,
+  &__benefits-list,
+  &__cards-list {
+    @include f.cluster(f.$spacing-s, center, stretch, wrap);
+    width: 100%;
+
+    
+  }
+
+  &__paths-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: f.$spacing-s;
+  }
+
+  /* =============================
+     CARTES
+  ============================= */
+
+  &__audience-card,
+  &__benefit-card,
+  &__card,
+  &__path-card {
+    @include f.surface-base;
+    width: 100%;
+  }
+
+  &__benefit-card,
+  &__card,
+  &__path-card,
+  &__audience-card {
+    @include f.content-flow(f.$spacing-xs, f.$spacing-xs, f.$spacing-xs);
+  }
+
+  &__audience-title,
+  &__benefit-title,
+  &__card-title,
+  &__path-title {
+    @include f.text-title;
+    margin: 0;
+    font-size: 1.05rem;
+  }
+
+  &__audience-description,
+  &__benefit-description,
+  &__card-description,
+  &__path-description {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  &__path-description {
+    line-height: 1.65;
+  }
+
+  &__path-link {
+    @include f.link-reset;
+    display: inline-flex;
+    align-items: center;
+    font-weight: f.$weight-bold;
+    font-family: var(--font-subtitle);
+
+    &::after {
+      content: "→";
+      margin-left: 0.4rem;
+      transition: transform var(--transition-fast) ease;
+    }
+
+    &:hover::after {
+      transform: translateX(3px);
+    }
+  }
+
+  /* =============================
+     TRUST / AVAILABILITY
+  ============================= */
+
+  &__trust-strip {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* =============================
+     WINDOW LABEL
+  ============================= */
+
+  &__window-label {
+    display: none;
+  }
+
+  /* =============================
+     RESPONSIVE
+  ============================= */
+
+  @include f.mobile-up {
+    &__text {
+      margin: 0 auto;
+    }
+
+    &__audience-card,
+    &__benefit-card,
+    &__card {
+      max-width: 260px;
+    }
+
+    &__paths-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @include f.tablet-up {
+    &__content {
+      display: flex;
+      justify-content: space-between;
+      gap: f.$spacing-s;
+    }
+
+    &__contentIntro {
+      flex-direction: row-reverse;
+      gap: f.$spacing-m;
+    }
+
+    &__text {
+      flex: 1 1 50%;
+    }
+
+    &__featured {
+      flex: 1 1 50%;
+    }
+  }
+}
+
+/* =============================
+   THEMES
+============================= */
+
+.theme-accueillant {
+  .home__cta-button--primary {
+    @include a.button-accueillant;
+  }
+
+  .home__cta-button--secondary {
+    @include a.button-secondary-accueillant;
+  }
+
+  .home__audience-card,
+  .home__benefit-card,
+  .home__card,
+  .home__path-card {
+    @include a.card-editoriale;
+    @include a.card-hover-accueillant;
+  }
+
+  .home__section-title,
+  .home__audience-title,
+  .home__benefit-title,
+  .home__card-title,
+  .home__path-title {
+    @include a.title-accueillant;
+  }
+
+  .home__path-link:hover {
+    @include a.hover-accueillant;
+  }
+}
+
+.theme-energique {
+  .home__cta-button--primary {
+    @include e.button-energique;
+  }
+
+  .home__cta-button--secondary {
+    @include e.button-secondary-energique;
+  }
+
+  .home__title {
+    @include e.title-energique;
+  }
+
+  .home__section-title {
+    @include e.title-energique;
+  }
+
+  .home__audience-title,
+  .home__benefit-title,
+  .home__card-title,
+  .home__path-title {
+    @include e.terminal-window-title;
+    color: var(--color-header);
+  }
+
+  .home__audience-card,
+  .home__benefit-card,
+  .home__card,
+  .home__path-card {
+    @include e.terminal-window;
+    @include e.card-hover-energique;
+    position: relative;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(var(--primary-color-rgb), 0.06),
+        rgba(var(--accent-color-rgb), 0.025)
+      ),
+      var(--background-card);
+  }
+
+  .home__window-label {
+    @include e.window-label-energique;
+    @include f.window-label;
+  }
+
+  .home__audience-description,
+  .home__benefit-description,
+  .home__card-description,
+  .home__path-description,
+  .home__subtitle,
+  .home__supporting-text,
+  .home__cta-note {
+    color: var(--color-main);
+  }
+
+  .home__eyebrow {
+    @include e.eyebrow-energique;
+  }
+
+  .home__section-eyebrow {
+    color: var(--accent-color);
+  }
+
+  .home__accroche {
+    font-family: var(--font-subtitle);
+    color: var(--light-color);
+  }
+
+  .home__path-link:hover {
+    @include e.hover-energique;
+  }
+}
+
+.theme-minimaliste {
+  .home__contentIntro {
+    @include f.tablet-up {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .home__cta-button--primary {
+    @include m.button-minimaliste;
+  }
+
+  .home__cta-button--secondary {
+    @include m.button-secondary-minimaliste;
+  }
+
+  .home__audience-card,
+  .home__benefit-card,
+  .home__card,
+  .home__path-card {
+    @include m.card-process;
+    @include m.card-hover-minimaliste;
+  }
+
+  .home__section-title,
+  .home__audience-title,
+  .home__benefit-title,
+  .home__card-title,
+  .home__path-title {
+    @include m.title-minimaliste;
+  }
+
+  .home__path-link:hover {
+    @include m.hover-minimaliste;
+  }
+}

@@ -1,0 +1,227 @@
+@use "../../styles/foundations/foundations.scss" as f;
+@use "../../styles/univers/accueillant/theme.scss" as a;
+@use "../../styles/univers/energique/theme.scss" as e;
+@use "../../styles/univers/minimaliste/theme.scss" as m;
+
+.availability {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+
+  @include f.transition-base(opacity, var(--transition-slow), ease);
+
+  &[data-show="true"] {
+    opacity: 1;
+  }
+
+  &__container {
+    @include f.container(f.$container-l, 0);
+    @include f.content-flow(f.$spacing-s);
+  }
+
+  &__eyebrow {
+    @include f.eyebrow;
+    margin: 0;
+    color: var(--color-text-soft, var(--color-main));
+    margin-top: f.$spacing-m;
+  }
+
+  &__window-label {
+    display: none;
+  }
+
+  &__card {
+    @include f.content-flow(f.$spacing-s);
+    padding: f.$spacing-s;
+    border-radius: var(--radius-panel);
+    background: var(--background-card);
+    box-shadow: var(--shadow-light);
+
+    @include f.transition-base(
+      transform box-shadow border-color background-color,
+      var(--transition-fast),
+      ease
+    );
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  &__status-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  &__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.04);
+  }
+
+  &__status {
+    margin: 0;
+    font-size: 1rem;
+    font-family: var(--font-title);
+    font-weight: f.$weight-bold;
+    line-height: 1.3;
+  }
+
+  &__details {
+    margin: 0;
+    line-height: 1.7;
+    opacity: 0.92;
+  }
+
+  &__meta {
+    @include f.content-flow(f.$spacing-s);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__meta-item {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-badge);
+    font-size: 0.94rem;
+    font-weight: f.$weight-semibold;
+    line-height: 1.35;
+    box-shadow: var(--shadow-light);
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+}
+
+/* =============================
+   RESPONSIVE
+============================= */
+
+@media (min-width: 641px) {
+  .availability {
+    &__card {
+      padding: f.$spacing-m;
+    }
+
+    &__status {
+      font-size: 1.1rem;
+    }
+
+    &__meta {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    &__meta-item {
+      width: auto;
+    }
+  }
+}
+
+/* =============================
+   THEMES
+============================= */
+
+.theme-accueillant {
+  .availability {
+    &__card {
+      @include a.card-editoriale(f.$spacing-s);
+      @include a.card-hover-accueillant;
+      border: 1px solid color-mix(in srgb, var(--secondary-color) 18%, white);
+    }
+
+    &__dot {
+      background: var(--secondary-color);
+      box-shadow: 0 0 0 6px
+        color-mix(in srgb, var(--secondary-color) 14%, white);
+    }
+
+    &__status,
+    &__icon {
+      color: var(--secondary-color);
+    }
+
+    &__meta-item {
+      background: var(--background-badge);
+      color: var(--color-badge);
+      border: var(--border-badge);
+    }
+  }
+}
+
+.theme-energique {
+  .availability {
+    &__card {
+      @include e.terminal-window(f.$spacing-s, 34px);
+      @include e.card-hover-energique;
+      box-shadow: var(--shadow-medium);
+    }
+    &__window-label {
+     @include e.window-label-energique;
+     @include f.window-label;
+    }
+
+    &__dot {
+      background: var(--accent-color-2);
+      box-shadow: 0 0 0 6px rgba(var(--accent-color-2-rgb), 0.12);
+    }
+
+    &__status {
+      @include e.terminal-window-title;
+      color: var(--primary-color);
+    }
+
+    &__details {
+      color: var(--color-main);
+    }
+
+    &__icon {
+      color: var(--accent-color);
+    }
+
+    &__meta-item {
+      @include e.terminal-chip;
+      color: var(--color-main);
+      box-shadow: none;
+    }
+  }
+}
+
+.theme-minimaliste {
+  .availability {
+    &__card {
+      @include m.panel-process(f.$spacing-s);
+      @include m.card-hover-minimaliste;
+      border: 1px solid color-mix(in srgb, var(--primary-color) 12%, white);
+    }
+
+    &__dot {
+      background: var(--primary-color);
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--primary-color) 8%, white);
+    }
+
+    &__status,
+    &__icon {
+      color: var(--primary-color);
+    }
+
+    &__meta-item {
+      background-color: var(--background-main);
+      border: 1px solid color-mix(in srgb, var(--primary-color) 14%, white);
+      color: var(--primary-color);
+    }
+  }
+}

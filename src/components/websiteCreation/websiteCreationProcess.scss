@@ -1,0 +1,580 @@
+@use "../../styles/foundations/foundations.scss" as f;
+@use "../../styles/univers/accueillant/theme.scss" as a;
+@use "../../styles/univers/energique/theme.scss" as e;
+@use "../../styles/univers/minimaliste/theme.scss" as m;
+
+/* =============================
+   BASE
+============================= */
+
+.process {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  opacity: 0;
+
+  @include f.transition-base(opacity, var(--transition-slow), ease);
+
+  &[data-show="true"] {
+    opacity: 1;
+  }
+
+  &__container {
+    @include f.content-flow(f.$spacing-m);
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  &__head {
+    @include f.section-header;
+    text-align: center;
+  }
+
+  &__eyebrow {
+    @include f.eyebrow;
+    margin: 0 auto;
+    color: var(--color-text-soft, var(--color-main));
+  }
+
+  &__title {
+    margin: 0;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__intro {
+    margin: 0 auto;
+    font-size: f.$font-size-text;
+    line-height: f.$line-height-relaxed;
+    text-align: center;
+    opacity: 0.92;
+  }
+
+  &__timeline {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  &__svg {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 52px;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  &__path {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  &__path--base {
+    stroke: currentColor;
+    stroke-width: 1.1;
+    opacity: 0.18;
+  }
+
+  &__path--glow {
+    stroke: var(--process-glow-strong);
+    stroke-width: 1.25;
+    transition: stroke-dashoffset 0.12s linear;
+  }
+
+  &__steps {
+    position: relative;
+    z-index: 1;
+    @include f.content-flow(f.$spacing-s);
+    padding: 0.5rem 0;
+  }
+
+  &__card {
+    position: relative;
+    width: calc(100% - 2.2rem);
+    min-height: 100%;
+    margin-left: 2.2rem;
+    opacity: 0.78;
+    transition:
+      transform var(--transition-medium),
+      opacity var(--transition-medium),
+      box-shadow var(--transition-medium),
+      border-color var(--transition-medium),
+      background-color var(--transition-medium),
+      filter var(--transition-medium);
+
+    &.is-passed {
+      opacity: 1;
+    }
+
+    &.is-active {
+      transform: translateY(-4px);
+    }
+  }
+
+  &__marker {
+    position: absolute;
+    top: 50%;
+    left: -16px;
+    width: 10px;
+    height: 10px;
+    border: 2px solid currentColor;
+    border-radius: 999px;
+    background: var(--background-main);
+    opacity: 0.2;
+    transform: translateY(-50%);
+    transition:
+      transform var(--transition-fast),
+      opacity var(--transition-fast),
+      box-shadow var(--transition-fast),
+      border-color var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+
+  &__card.is-passed &__marker {
+    opacity: 1;
+    border-color: var(--process-glow-strong);
+    box-shadow:
+      0 0 8px var(--process-glow),
+      0 0 18px var(--process-glow-soft);
+  }
+
+  &__card-body {
+    @include f.content-flow(f.$spacing-xs);
+  }
+
+  &__window-label {
+    display: none;
+  }
+
+  &__step-number {
+    margin: 0;
+    font-size: 0.82rem;
+    font-weight: f.$weight-semibold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.68;
+  }
+
+  &__card-title {
+    margin: 0;
+    font-family: var(--font-title);
+    font-size: 1rem;
+    line-height: 1.3;
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__description {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--color-main);
+    opacity: 0.92;
+  }
+}
+
+/* =============================
+   TABLET
+============================= */
+
+@media (min-width: 641px) {
+  .process {
+    &__container {
+      gap: f.$spacing-m;
+    }
+
+    &__intro {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    &__svg {
+      width: 64px;
+    }
+
+    &__card {
+      width: calc(100% - 2.8rem);
+      margin-left: 2.8rem;
+    }
+
+    &__marker {
+      left: -19px;
+      width: 12px;
+      height: 12px;
+    }
+
+    &__card-title {
+      font-size: 1.05rem;
+    }
+
+    &__description {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+/* =============================
+   DESKTOP
+============================= */
+
+@media (min-width: 861px) {
+  .process {
+    &__timeline {
+      min-height: 980px;
+    }
+
+    &__svg {
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    &__path--base {
+      stroke-width: 0.55;
+      opacity: 0.14;
+    }
+
+    &__path--glow {
+      stroke-width: 0.7;
+      filter: drop-shadow(0 0 6px var(--process-glow))
+        drop-shadow(0 0 12px var(--process-glow))
+        drop-shadow(0 0 20px var(--process-glow-soft));
+    }
+
+    &__steps {
+      gap: 2.4rem;
+      padding: 1rem 0;
+    }
+
+    &__card {
+      width: min(100%, 400px);
+      margin-left: 0;
+
+      &:nth-child(odd) {
+        align-self: flex-start;
+      }
+
+      &:nth-child(even) {
+        align-self: flex-end;
+      }
+    }
+
+    &__marker {
+      top: 50%;
+      width: 16px;
+      height: 16px;
+    }
+
+    &__card:nth-child(odd) &__marker {
+      right: -44px;
+      left: auto;
+    }
+
+    &__card:nth-child(even) &__marker {
+      left: -44px;
+      right: auto;
+    }
+
+    &__card-title {
+      font-size: 1.15rem;
+      line-height: 1.3;
+    }
+
+    &__description {
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+  }
+}
+
+/* =============================
+   VARIANTES DE LIGNE DROITE
+   (énergique + minimaliste)
+============================= */
+
+.process[data-theme-variant="energique"],
+.process[data-theme-variant="minimaliste"] {
+  .process__timeline {
+    max-width: 980px;
+  }
+
+  .process__svg {
+    width: 52px;
+  }
+
+  .process__card {
+    width: calc(100% - 2.2rem);
+    margin-left: 2.2rem;
+  }
+
+  .process__marker {
+    left: -1.8rem;
+    right: auto;
+  }
+}
+
+@media (min-width: 641px) {
+  .process[data-theme-variant="energique"],
+  .process[data-theme-variant="minimaliste"] {
+    .process__svg {
+      width: 64px;
+    }
+
+    .process__card {
+      width: calc(100% - 2.8rem);
+      margin-left: 2.8rem;
+    }
+
+.process__marker {
+  left: -19px;
+  right: auto;
+}  }
+}
+
+@media (min-width: 861px) {
+  .process[data-theme-variant="energique"],
+  .process[data-theme-variant="minimaliste"] {
+    .process__timeline {
+      min-height: 980px;
+    }
+
+    .process__svg {
+      inset: 0 auto 0 0;
+      width: 100px;
+      height: 100%;
+    }
+
+    .process__steps {
+      gap: 2rem;
+      padding: 1rem 0;
+    }
+
+    .process__card {
+      align-self: flex-start !important;
+      margin-left: 5.5rem;
+    }
+
+    .process__marker {
+      left: -42px !important;
+      right: auto !important;
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+/* =============================
+   THEME ACCUEILLANT
+============================= */
+
+.theme-accueillant {
+  .process {
+    --process-glow: rgba(231, 127, 103, 0.55);
+    --process-glow-strong: rgba(231, 127, 103, 0.95);
+    --process-glow-soft: rgba(231, 127, 103, 0.28);
+
+    &__title {
+      @include a.title-accueillant;
+    }
+
+    &__card {
+      @include a.card-editoriale(1rem);
+      border: 1px solid color-mix(in srgb, var(--secondary-color) 18%, white);
+      opacity: 1;
+    }
+
+    &__card-body {
+      padding-top: 0;
+    }
+
+    &__window-label {
+      display: none;
+    }
+
+    &__step-number {
+      color: var(--secondary-color);
+    }
+
+    &__card.is-active {
+      box-shadow:
+        var(--shadow-medium),
+        0 0 18px rgba(231, 127, 103, 0.12);
+    }
+  }
+}
+
+/* =============================
+   THEME ENERGIQUE
+   => seul thème avec style "fenêtre"
+============================= */
+
+.theme-energique {
+  .process {
+    --process-glow: var(--accent-color-2);
+    --process-glow-strong: var(--accent-color-2);
+    --process-glow-soft: var(--accent-color-2);
+
+    &__title {
+      @include e.title-energique;
+    }
+
+    &__eyebrow {
+      @include e.eyebrow-energique;
+    }
+
+    &__intro {
+      color: var(--color-main);
+    }
+
+    &__card {
+      @include e.terminal-window(1rem, 44px);
+      color: var(--color-main);
+      border-color: rgba(var(--primary-color-rgb), 0.25);
+      opacity: 0.72;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(var(--primary-color-rgb), 0.06),
+          rgba(var(--accent-color-rgb), 0.025)
+        ),
+        var(--background-card);
+    }
+
+    &__card-body {
+      padding-top: 0;
+    }
+
+    &__window-label {
+      display: inline-flex;
+      position: absolute;
+      top: 0.85rem;
+      left: 1rem;
+      z-index: 3;
+      pointer-events: none;
+
+      @include e.window-label-energique;
+      @include f.window-label;
+    }
+
+    &__step-number {
+      display: none;
+      color: var(--primary-color);
+      opacity: 0.85;
+    }
+
+    &__card-title {
+      @include e.terminal-window-title;
+      color: var(--color-header);
+    }
+
+    &__description {
+      color: var(--color-main);
+    }
+
+    &__card.is-active {
+      box-shadow:
+        var(--shadow-medium),
+        0 0 22px rgba(73, 213, 255, 0.16);
+    }
+
+    &[data-theme-variant="energique"] {
+      .process__path--base {
+        stroke: color-mix(in srgb, var(--primary-color) 55%, white);
+        stroke-width: 1.8;
+        opacity: 0.38;
+        stroke-dasharray: 3 14;
+        stroke-linecap: round;
+      }
+
+      .process__path--glow {
+        stroke: var(--process-glow-strong);
+        stroke-width: 2.4;
+        stroke-linecap: round;
+        filter: drop-shadow(0 0 6px var(--process-glow))
+          drop-shadow(0 0 12px var(--process-glow))
+          drop-shadow(0 0 18px var(--process-glow-soft));
+      }
+    }
+  }
+}
+
+/* =============================
+   THEME MINIMALISTE
+============================= */
+
+.theme-minimaliste {
+  .process {
+    &__title {
+      @include m.title-minimaliste;
+    }
+
+    &__eyebrow {
+      color: var(--color-text-soft);
+    }
+
+    &__card {
+      @include m.card-process(1rem);
+      border: 1px solid color-mix(in srgb, var(--primary-color) 12%, white);
+      opacity: 0.9;
+      filter: none;
+    }
+
+    &__card-body {
+      padding-top: 0;
+    }
+
+    &__window-label {
+      display: none;
+    }
+
+    &__step-number {
+      color: var(--accent-color-2);
+    }
+
+    &__card.is-active {
+      box-shadow: var(--shadow-medium);
+    }
+
+    &[data-theme-variant="minimaliste"] {
+      .process__path--base {
+        stroke: url(#process-gradient-minimal);
+        stroke-width: 2.2;
+        opacity: 1;
+      }
+
+      .process__path--glow {
+        display: none;
+      }
+
+      .process__marker {
+        border-color: var(--primary-color);
+        background: var(--background-main);
+        opacity: 0.5;
+        box-shadow: none;
+      }
+
+      .process__card.is-active::before,
+      .process__card.is-passed::before {
+        border-color: var(--accent-color);
+        opacity: 1;
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+/* =============================
+   ACCESSIBILITY
+============================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .process__path--glow,
+  .process__card,
+  .process__marker {
+    transition: none !important;
+  }
+}
+
+.process__timeline-reveal {
+  width: 100%;
+}

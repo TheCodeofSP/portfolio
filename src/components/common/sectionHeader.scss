@@ -1,0 +1,56 @@
+@use "../../styles/foundations/foundations.scss" as f;
+@use "../../styles/univers/accueillant/theme.scss" as a;
+@use "../../styles/univers/energique/theme.scss" as e;
+@use "../../styles/univers/minimaliste/theme.scss" as m;
+
+.section-header {
+  @include f.content-flow(0.5rem, 0.5rem, 0.5rem);
+  text-align: center;
+
+  &__eyebrow {
+    @include f.eyebrow;
+    margin: 0;
+    color: var(--color-text-soft, var(--color-main));
+  }
+
+  &__title {
+    @include f.text-title;
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-text-strong, var(--color-main));
+  }
+
+  &__description {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--color-main);
+  }
+}
+
+.theme-accueillant {
+  .section-header {
+    &__title {
+      @include a.title-accueillant;
+    }
+  }
+}
+
+.theme-energique {
+  .section-header {
+    &__eyebrow {
+      @include e.eyebrow-energique;
+    }
+
+    &__title {
+      @include e.title-energique;
+    }
+  }
+}
+
+.theme-minimaliste {
+  .section-header {
+    &__title {
+      @include m.title-minimaliste;
+    }
+  }
+}
