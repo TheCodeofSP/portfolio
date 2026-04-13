@@ -7,23 +7,25 @@
    Typography scale
 ============================= */
 
-$font-size-2xs: 0.75rem;
-$font-size-xs: 0.875rem;
+$font-size-2xs: 0.25rem;
+$font-size-xs: 0.50rem;
 $font-size-s: 1rem;
-$font-size-m: 1.125rem;
-$font-size-l: 1.25rem;
-$font-size-xl: 1.5rem;
-$font-size-2xl: 2rem;
-$font-size-3xl: 2.5rem;
-$font-size-4xl: 3rem;
-$font-size-5xl: 4rem;
+$font-size-m: 1.50rem;
+$font-size-l: 2rem;
+$font-size-xl: 2.5rem;
+$font-size-2xl: 3rem;
+$font-size-3xl: 3.5rem;
+$font-size-4xl: 4rem;
+$font-size-5xl: 4.5rem; 
 
 /* Alias pratiques */
 $font-size-text: $font-size-s;
 $font-size-text-large: $font-size-m;
-$font-size-subtitle: $font-size-xl;
-$font-size-title: $font-size-2xl;
+$font-size-subtitle: $font-size-l;
+$font-size-title: $font-size-xl;
 $font-size-title-large: $font-size-4xl;
+
+$font-size-slogan: $font-size-l;
 
 /* =============================
    Line heights

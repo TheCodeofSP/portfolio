@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./homeSloganEffect.scss";
 
 const HomeSloganEffect = ({
@@ -74,6 +74,26 @@ const HomeSloganEffect = ({
   const shouldShowCursor =
     !isMinimalTheme && showCursor && (isTyping || keepCursorAtEnd);
 
+  const { textStart, textEnd } = useMemo(() => {
+    if (!displayedText) {
+      return { textStart: "", textEnd: "" };
+    }
+
+    const lastSpaceIndex = displayedText.lastIndexOf(" ");
+
+    if (lastSpaceIndex === -1) {
+      return {
+        textStart: "",
+        textEnd: displayedText,
+      };
+    }
+
+    return {
+      textStart: displayedText.slice(0, lastSpaceIndex + 1),
+      textEnd: displayedText.slice(lastSpaceIndex + 1),
+    };
+  }, [displayedText]);
+
   return (
     <span className={`slogan-effect slogan-effect--${theme}`}>
       <span className="slogan-effect__line">
@@ -83,11 +103,17 @@ const HomeSloganEffect = ({
           </span>
         )}
 
-        <span className="slogan-effect__text">{displayedText}</span>
+        <span className="slogan-effect__text">
+          {textStart}
 
-        {shouldShowCursor && (
-          <span className="slogan-effect__cursor" aria-hidden="true" />
-        )}
+          <span className="slogan-effect__tail">
+            {textEnd}
+
+            {shouldShowCursor && (
+              <span className="slogan-effect__cursor" aria-hidden="true" />
+            )}
+          </span>
+        </span>
       </span>
     </span>
   );

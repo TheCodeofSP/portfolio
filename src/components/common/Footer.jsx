@@ -18,25 +18,25 @@ const SOCIAL_LINKS = [
   {
     type: "internal",
     to: "/contact",
-    label: "Envoyer un email à Sandrine Pham",
+    label: "Envoyer un email à The Code of SP",
     icon: FaEnvelope,
   },
   {
     type: "external",
-    href: "https://github.com/SandrinePham",
-    label: "Profil GitHub de Sandrine Pham",
+    href: "https://github.com/TheCodeOfSP",
+    label: "Profil GitHub de The Code of SP",
     icon: FaGithub,
   },
   {
     type: "external",
     href: "https://www.linkedin.com/in/sandrinepham69132b145",
-    label: "Profil LinkedIn de Sandrine Pham",
+    label: "Profil LinkedIn de S.P",
     icon: FaLinkedin,
   },
   {
     type: "external",
     href: "https://www.instagram.com/thecodeofsp/",
-    label: "Profil Instagram de Sandrine Pham",
+    label: "Profil Instagram de The Code of SP",
     icon: FaInstagram,
   },
 ];
@@ -56,7 +56,7 @@ const Footer = ({ theme = "accueillant" }) => {
       <div className="footer__container">
         <section className="footer__intro" aria-labelledby="footer-title">
           <h2 id="footer-title" className="footer__title">
-            Sandrine Pham
+            Sandrine.P
           </h2>
 
           <p className="footer__eyebrow">Développeuse web freelance</p>
@@ -78,7 +78,7 @@ const Footer = ({ theme = "accueillant" }) => {
           >
             <img
               src={logoSrc}
-              alt="Logo Sandrine Pham"
+              alt="Logo The Code of SP"
               className="footer__logo"
             />
           </Link>
@@ -130,8 +130,7 @@ const Footer = ({ theme = "accueillant" }) => {
           </nav>
 
           <div className="footer__copyright">
-            <p className="footer__rights">© {currentYear} Sandrine Pham</p>
-            <p className="footer__rights">Tous droits réservés</p>
+            <p className="footer__rights">© {currentYear} The Code of SP - Tous droits réservés</p>
           </div>
         </section>
       </div>
